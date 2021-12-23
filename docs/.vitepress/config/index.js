@@ -8,7 +8,9 @@ const config = {
   description: "记录日常",
   head,
   markdown,
+
   themeConfig: {
+    search: true, //展示搜索
     algolia: {
       appKey: "",
       indexName: "",

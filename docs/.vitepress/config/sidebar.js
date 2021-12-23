@@ -1,7 +1,7 @@
 // const fs = require("fs");
 // const path = require("");
 
-import { getMsg } from "./test";
+import { getMsg } from "./util";
 
 console.log(getMsg()[0]);
 
