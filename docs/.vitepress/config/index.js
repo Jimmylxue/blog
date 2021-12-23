@@ -4,11 +4,10 @@ import nav from "./nav";
 import markdown from "./markdown";
 import lang from "./lang";
 const config = {
-  title: "Blog空间",
-  description: "记录日常",
+  title: "Jimmy的个人空间",
+  description: "学习开发日常记录",
   head,
   markdown,
-
   themeConfig: {
     search: true, //展示搜索
     algolia: {
