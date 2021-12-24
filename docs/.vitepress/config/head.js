@@ -1,5 +1,3 @@
-const head = [
-  ['link', { rel: 'icon', type: 'image/svg+xml', href: '/assets/logo.svg' }],
-]
+const head = [['link', { rel: 'icon', href: '/assets/small.png' }]];
 
-export default head
+export default head;

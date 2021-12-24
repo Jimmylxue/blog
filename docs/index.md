@@ -1,17 +1,29 @@
-# Hello VitePress
+# 大兄弟们聚过来，这事很重要~
 
-hello world
-| Tables | Are | Cool |
-| ------------- |:-------------:| -----:|
-| col 3 is | right-aligned | $1600 |
-| col 2 is | centered | $12 |
-| zebra stripes | are neat | $1 |
+![An image](/assets/bg.jpg)
 
-::: tip
-This is a tip
+::: tip 关于这个网站
+hello 你们好，我是 Jimmy，这个网站是记录开发生涯中遇到一系列有趣的事情、抓狂的 BUG、值得记录的知识。期待你们的加入，和我一起维护这个网站，共同进步。
 :::
 
-::: warning
+## FLAG
+
+2021 对我来说还不错，尝试了一些事情，下面立个 Flag，明年开始做一些短视频，主要是分享开发心得以及个人的生活。欢迎兄弟们监督，如果我完不成这件事，我就是一头猪！
+
+## 联系我
+
+我的个人微信，寻找志同道合的朋友一起交流成长。
+![wechat](/assets/wechat.jpg)
+B 站以及抖音，后期 B 站会输出视频。
+![code](/assets/code.jpg)
+
+## 其他网站
+
+- [gitee](https://gitee.com/jimmyxuexue)
+- [博客网](https://github.com/Jimmylxue/blog)
+- [掘金主页](https://juejin.cn/user/2296218359183918)
+
+<!-- ::: warning
 This is a warning
 :::
 
@@ -21,13 +33,11 @@ This is a dangerous warning
 
 ::: danger STOP
 Danger zone, do not proceed
-:::
+::: -->
 
 <!-- <img :src="$withBase('/bg.jpg')" alt="foo" /> -->
 
-![An image](/assets/bg.jpg)
-
-```html
+<!-- ```html
 <img :src="$withBase('/bg.jpg')" alt="foo" />
 ```
 
@@ -39,4 +49,4 @@ export default {
     }
   }
 }
-```
+``` -->
