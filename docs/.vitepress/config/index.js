@@ -20,7 +20,7 @@ const config = {
     sidebar,
     nav,
     demoblock: lang,
-    logo: '../../assets/small.png',
+    logo: 'http://www.jimmyxuexue.top/small.png',
   },
 };
 

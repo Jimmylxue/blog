@@ -1,17 +1,18 @@
 const nav = [
   { text: '首页', link: '/' },
-  // {
-  //   text: 'About',
-  //   icon: 'reco-message',
-  //   items: [
-  //     {
-  //       text: 'about-author',
-  //       link: '/article/介绍/自我介绍',
-  //     },
-  //   ],
-  // },
   {
-    text: 'Contact',
+    text: '小工具',
+    icon: 'reco-message',
+    items: [
+      {
+        text: '学习时钟',
+        // link: '/article/介绍/自我介绍',
+        link: 'http://www.jimmyxuexue.top:667/study/',
+      },
+    ],
+  },
+  {
+    text: '其他网站',
     icon: 'reco-message',
     items: [
       {
