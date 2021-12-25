@@ -7,3 +7,4 @@ const theme = {
   NotFound,
 };
 export default theme;
+console.log(1);
