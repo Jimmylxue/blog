@@ -23,9 +23,12 @@ jobs:
         with:
           node-version: 14.0.0
 
+      - name: 安装yarn
+        run: npm install -g yarn
+
       # 安装依赖
       - name: 安装依赖
-        run: npm install
+        run: yarn
 
       # 打包
       - name: 打包
