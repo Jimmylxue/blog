@@ -28,7 +28,7 @@ jobs:
         run: npm install
 
       # 打包
-        run: npm run build
+        run: docs:build
 
       # 上传到阿里云
       - name: 发布到阿里云
