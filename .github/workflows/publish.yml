@@ -22,13 +22,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.0.0
-        
+
       # 安装依赖
       - name: 安装依赖
         run: npm install
 
       # 打包
-        run: docs:build
+      - name: 打包
+        run: npm run docs:build
 
       # 上传到阿里云
       - name: 发布到阿里云
@@ -37,12 +38,12 @@ jobs:
           # 私钥
           SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           # SCP参数
-          ARGS: "-avzr --delete"
+          ARGS: '-avzr --delete'
           # 源目录
-          SOURCE: "docs/.vitepress/dist"
+          SOURCE: 'docs/.vitepress/dist'
           # 服务器ip
-          REMOTE_HOST: "1.116.204.114"
+          REMOTE_HOST: '1.116.204.114'
           # 用户
-          REMOTE_USER: "root"
+          REMOTE_USER: 'root'
           # 目标地址
-          TARGET: "/root/vue-in-action"
+          TARGET: '/root/vue-in-action'
