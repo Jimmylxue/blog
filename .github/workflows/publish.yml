@@ -32,7 +32,7 @@ jobs:
 
       # 打包
       - name: 打包
-        run: npm run docs:build
+        run: yarn docs:build
 
       # 上传到阿里云
       - name: 发布到阿里云
