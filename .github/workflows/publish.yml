@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    step:
+    steps:
       # 获取代码
       - name: 迁出代码
         # 使用action库 action/checkout获取大妈
