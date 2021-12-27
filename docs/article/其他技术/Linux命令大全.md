@@ -68,7 +68,7 @@
 - `yum`安装软件
 
   ```
-  yum install mysql # 安装 mysql
+  yum install mysql # 安装mysql
   ```
 
   ![image-20211226225537961](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20211226225537961.png)
