@@ -229,3 +229,45 @@
   ```
 
   兄弟们这个命令非常的危险，尤其是删库跑路的那个命令，如果是公司的服务器这样搞一下是要赔很多钱说不定会被告的，千万不要用！！！
+
+### 其他
+
+- centos8 开放端口
+
+  ```
+  # firewall-cmd --zone=public --add-port=端口/tcp --permanent
+  
+  #开放9999端口
+  firewall-cmd --zone=public --add-port=9999/tcp --permanent
+  #配置立即生效
+  firewall-cmd --reload
+  ```
+
+  当我们开启一个后端服务的时候向外暴露端口，除了云服务器控制面板里面的端口要开启之外，Linux服务器自身的端口也需要向外开启暴露才行。
+
+  因为版本升级到centos8之后，一些配置和7.X的不一样
+
+- Nginx反向代理
+
+	修改配置nginx的 **default.conf** 文件
+
+  ```
+  server {
+      listen 80;
+      server_name 1.116.xxx.xxx;
+      location / {
+          proxy_pass http://1.116.xxx.xxx:3000;
+          proxy_redirect default;
+      }
+      location ~ /wx/ {
+          proxy_pass http://1.116.xxx.xxx:9999;
+          proxy_redirect default;
+      }
+  }
+  ```
+  
+  这样做实现的是
+  
+  -  `http://1.116.xxx.xxx`,请求会发送到`http://1.116.xxx.xxx:3000`
+  - `http://1.116.xxx.xxx/wx`/,请求会发送到`http://1.116.xxx.xxx:9999`
+
