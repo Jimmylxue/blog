@@ -4,7 +4,7 @@ import nav from './nav';
 import markdown from './markdown';
 import lang from './lang';
 const config = {
-  title: '前端加油站',
+  title: '前端加油站🧠',
   description: '学习开发日常记录',
   head,
   markdown,
@@ -20,7 +20,7 @@ const config = {
     sidebar,
     nav,
     demoblock: lang,
-    logo: 'http://www.jimmyxuexue.top/small.png',
+    logo: 'http://www.jimmyxuexue.top/small.png', // 网站nav栏logo
   },
 };
 
