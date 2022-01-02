@@ -14,12 +14,18 @@ hello 你们好，我是 Jimmy😁，这个网站是记录我们开发生涯中�
 
 ## 联系我
 
-我的个人微信，寻找志同道合的朋友一起交流成长。🌻
-![wechat](/assets/wechat.jpg)
+公众号 🚩：Jimmy 前端
+
+分享编程开发干货，欢迎关注 😁
+
+![code](/assets/gzh.jpg)
 
 B 站，知识分享和趣事视频 🚩
 
 ![code](/assets/bilibili.jpg)
+
+我的个人微信，寻找志同道合的朋友一起交流成长。🌻
+![wechat](/assets/wechat.jpg)
 
 ## 其他网站 🚲
 
