@@ -151,3 +151,220 @@ store.add(clickFn) // 已经有了
 这样的写法真是太精妙了，巧妙的用到了函数 **一等公民** 的身份，利用函数作为对象形象存值，这样的写的好处在于就算已经存储了一万个回调函数，它的速度还是一样的快！！！这就是 **忍者秘籍** ！
 
 果然，用函数和用好函数是两回事！😯
+
+:::demo
+
+```vue
+<template>
+  <div class="demo">
+    <iframe
+      src="//player.bilibili.com/player.html?aid=680393211&bvid=BV1gS4y1T7E1&cid=477531971&page=1"
+      scrolling="no"
+      border="0"
+      frameborder="no"
+      framespacing="0"
+      allowfullscreen="true"
+    >
+    </iframe>
+  </div>
+</template>
+<style>
+.demo > iframe {
+  width: 100%;
+  height: 450px;
+}
+</style>
+```
+
+:::
+
+### 关于 this
+
+在我作为 JavaScript 开发者前期一直困扰着我，但随着自己的积累，慢慢的已经懂得了在不同场景下 this 的指向问题，最后通过忍者秘籍的总结，算是彻底搞明白了，this 指向在以下情况下将有所不同:
+
+- 作为一个函数调用(function),直接被调用
+- 作为一个方法(method)被调用
+- 作为一个构造函数(constructor),被实例化
+- 通过`apply()`、`call()`方法
+
+#### 作为函数被调用
+
+当函数作为普通函数被调用时，也分为两种情况
+
+- 在非严格模式下，this 指向 `window`
+- 在严格模式下,this 指向 `undefined`
+
+```js
+function show() {
+  console.log('show:this', this);
+}
+
+show();
+
+function strictShow() {
+  'use strict';
+  console.log('strictShow:this', this);
+}
+
+strictShow();
+```
+
+![image-20220107222840372](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220107222840372.png)
+
+#### 作为方法被调用
+
+当函数时作为一个对象的某个属性时,我们更加习惯称呼这个函数为方法。
+
+当通过方法被调用时，this 指向的时方法的拥有者。
+
+```js
+let obj = {
+  wx: '公众号:Jimmy前端',
+  bilibili: 'Jimmyhao',
+  docs: 'http://www.jimmyxuexue.top:999/',
+  show1() {
+    console.log('show1_this', this);
+  },
+  show2: function () {
+    console.log('show2_this', this);
+  },
+  show3: () => {
+    console.log('show3_this', this);
+  },
+};
+obj.show1();
+obj.show2();
+obj.show3();
+```
+
+![image-20220107223419337](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220107223419337.png)
+
+show1 的写法和 show2 的写法最终的效果是一样的,箭头函数的 this 指向的是它所处环境(它的上一级)的 this
+
+#### 作为构造函数使用
+
+一个构造函数在`new`的过程主要发生了以下几件事:
+
+- 创建一个空对象
+- 该空对象作为 this 参数传递给构造函数,从而成为构造函数的上下文
+- 新构造的对象作为`new`运算符的返回值返回(**在构造函数显示返回对象时会有例外,返回的显示返回的对象**)
+
+```js
+function User() {
+  this.wx = '公众号:Jimmy前端';
+  this.bilibili = 'Jimmyhao';
+  this.docs = '在线文档:http://www.jimmyxuexue.top:999/';
+}
+
+let Jimmy = new User();
+console.log('jimmy', Jimmy);
+```
+
+![image-20220107224114932](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220107224114932.png)
+
+##### 具体例外情况:
+
+- 当构造函数本身返回的非对象时,this 走的还是正常初始化流程
+
+  ```js
+  function User() {
+    this.wx = '公众号:Jimmy前端';
+    this.bilibili = 'Jimmyhao';
+    this.docs = '在线文档:http://www.jimmyxuexue.top:999/';
+    return 1;
+  }
+  let Jimmy = new User();
+  console.log('jimmy', Jimmy);
+  ```
+
+  ![image-20220107224402543](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220107224402543.png)
+
+- 当构造函数返回的是对象时,会忽略掉初始化的流程,直接将返回值作为 new 的结果进行返回
+
+  ```js
+  function User() {
+    this.wx = '公众号:Jimmy前端';
+    this.bilibili = 'Jimmyhao';
+    this.docs = '在线文档:http://www.jimmyxuexue.top:999/';
+    return {
+      name: 'Jimmyxuexue',
+      age: 22,
+    };
+  }
+  let Jimmy = new User();
+  console.log('jimmy', Jimmy);
+  ```
+
+  ![image-20220107224445973](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220107224445973.png)
+
+#### 通过 call 和 apply 显示修改 this
+
+call 和 apply 是可以显示修改 this 绑定的,这两个方法也是开发中非常常用的方法,如果有阅读他人源码时会发现使用的更加之多,二者的具体区别在于:
+
+- call 在修改 this 同时如果需要传参时单个单个传
+
+  ```js
+  let jimmy = {
+    wx: '公众号:Jimmy前端',
+    bilibili: 'Jimmyhao',
+    docs: '在线文档:http://www.jimmyxuexue.top:999/',
+  };
+
+  function show(...args) {
+    console.log(this, args);
+  }
+
+  show.call(jimmy, 1, 2, 3);
+  ```
+
+![image-20220107225038481](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220107225038481.png)
+
+- apply 在修改 this 同时如果需要传参传递的是一个数组
+
+  ```js
+  let jimmy = {
+    wx: '公众号:Jimmy前端',
+    bilibili: 'Jimmyhao',
+    docs: '在线文档:http://www.jimmyxuexue.top:999/',
+  };
+
+  function show(...args) {
+    console.log(this, args);
+  }
+
+  show.apply(jimmy, [1, 2, 3]);
+  ```
+
+  ![image-20220107225159819](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220107225159819.png)
+
+- 如果不传参二者基本无区别
+
+在过去我总是会吧 call 和 apply 两个弄混淆,但是现在有个比较方法的记法:我们可以这样想,apply 比 call 字母更多,所以需要传递更大的东西,数组肯定比单个元素能放的东西更多,所以 apply 传参数是通过数组的方式!
+
+总结下来 this 的指向我们其实只要参考这几个公式,基本就能够像忍者一样非常稳健的找出 this 的所在了.
+
+:::demo
+
+```vue
+<template>
+  <div class="demo">
+    <iframe
+      src="//player.bilibili.com/player.html?aid=295567266&bvid=BV14F411v7Q2&cid=479910067&page=1"
+      scrolling="no"
+      border="0"
+      frameborder="no"
+      framespacing="0"
+      allowfullscreen="true"
+    >
+    </iframe>
+  </div>
+</template>
+<style>
+.demo > iframe {
+  width: 100%;
+  height: 450px;
+}
+</style>
+```
+
+:::
