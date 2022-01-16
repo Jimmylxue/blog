@@ -368,3 +368,279 @@ call 和 apply 是可以显示修改 this 绑定的,这两个方法也是开发�
 ```
 
 :::
+
+### 理解闭包
+
+闭包在 JS 这门语言中真的算是一个八股文级别的知识点，大部分开发者包括我在内，都对闭包这个词存在着恐惧，但是其实我们日常的开发中，无时无刻不在使用这闭包，只是我们不知道！所以闭包的概念是非常重要的。如我们日常频繁使用的回调函数，本质都是闭包！
+
+如果没有闭包，事情将会变得非常复杂 ----- 如果么有闭包，事件处理和动画等包含回调函数的任务，他们的实现将会变得复杂很多。
+
+#### 简单的例子 - 利用闭包实现累加函数
+
+```js
+function addFn() {
+  let count = 0;
+  return () => {
+    return count++;
+  };
+}
+let add = addFn();
+console.log(add()); // 0
+console.log(add()); // 1
+console.log(add()); // 2
+```
+
+以上便是闭包的一个非常简单的应用，大部分的函数，在执行之后都会因为 JS 的垃圾回收机制清空掉一些定义的变量，但是大家发现没有，这个例子的 `count` 值被神奇的记录下来了，而且还一直存在！！！
+
+因为 js 使用的是 **词法作用域** ，所谓词法作用域，也就是说一个函数或者变量的所在作用域是在书写函数的时候就定下来的，而不管这个函数具体在哪里执行，它都可以访问定义这个函数时候所在作用域的一些值。！！！
+
+也正是因为函数是 JS 的一等公民，允许某个函数已返回值或者传参的形式传入，这就导致函数执行位置和定义函数时所在的位置不同，这时候，闭包就产生了！
+
+#### 使用闭包封装私有变量
+
+原生的 JS 是不支持私有变量的，但是通过闭包，我们可以实现一个很接近的私有变量。
+
+```js
+function User() {
+  let fans = 0;
+  this.getFans = () => {
+    return fans;
+  };
+  this.addFans = () => {
+    fans++;
+  };
+}
+
+let jimmy = new User();
+console.log(jimmy.fans); // undefined
+jimmy.getFans(); // 0
+```
+
+getFans 和 addFans 由于作用域规则它是可以访问函数内部的 fans 这个变量的，且只有在构造器内部才能访问它，我们通过使用 jimmy.getFans()本质上也是把函数在外部进行调用了，调用区域和定义的区域发生了差异，这时候闭包就会产生。并且只要这个函数存在，其内部的闭包就会一直存在！！！
+
+#### 回调函数本质上也是闭包
+
+```html
+<div id="box">hello world</div>
+<script>
+  function animate(elementId) {
+    let elem = document.getElementById(elementId);
+    let tick = 0;
+    let timer = setInterval(() => {
+      if (tick < 100) {
+        elem.style.left = elem.style.top = tick + 'px';
+        tick++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 10);
+  }
+  animate('box1');
+</script>
+```
+
+这里 setInterval 的第一个参数传递的是一个回调函数，每次执行都会生成一个闭包，基于闭包，使得回调函数中可以访问到前面定义的 elem tick 这些变量。
+
+也可以这么理解，回调函数的词法作用域能够访问 elem tick 这些变量的，所以回调函数无论被谁调用，在哪儿调用，都能访问到闭包这个区域的作用域上的变量。
+
+如果没有闭包，我们的代码可能就要这么写
+
+```html
+<div id="box">hello world</div>
+<script>
+  function animate(elementId) {
+    let timer = setInterval(() => {
+      if (tick < 100) {
+        // 如果没有了闭包，说明没有了存储值的能力，所以回调函数每次使用都得重新获取一次值，效率非常之低效
+        let elem = document.getElementById(elementId);
+        let tick = 0;
+        elem.style.left = elem.style.top = tick + 'px';
+        tick++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 10);
+  }
+  animate('box1');
+</script>
+```
+
+#### 总结
+
+一道经典的闭包面试题：
+
+**闭包的作用**
+
+- 变量长期驻扎在内存当中（一般函数执行完毕，变量和参数会被销毁）
+- 避免全局变量的污染
+
+**闭包的另外一面**
+
+- 闭包会记住作用域链的全部信息，因此我们不能过度使用。过度使用也会造成性能和效率问题
+
+:::demo
+
+```vue
+<template>
+  <div class="demo">
+    <iframe
+      src="//player.bilibili.com/player.html?aid=978133698&bvid=BV1144y15786&cid=485019585&page=1"
+      scrolling="no"
+      border="0"
+      frameborder="no"
+      framespacing="0"
+      allowfullscreen="true"
+    >
+    </iframe>
+  </div>
+</template>
+<style>
+.demo > iframe {
+  width: 100%;
+  height: 450px;
+}
+</style>
+```
+
+:::
+
+### 未来的函数：生成器
+
+普通的函数，从头运行到尾，最多只会生成一个值。因为普通函数最多只有一个 return
+
+过去我也看了蛮多 JS 类书籍，看到生成器这一块只是学习了它的 API，发现自己在工作中似乎是没有能够使用生成器函数的场景，使用到的还是基于生成器封装的`async await`之类的高级 API，以致于我在怀疑这一块需要深入了解吗？应付面试应该就可以了吧
+
+但是！我看到了这本书上的一句对我来说“惊天动地”的一句话：“生成器经常被作为一种古怪不常用的语言特性，**普通水平**的程序员一般不会使用这个特性。”，这个普通水平好似千斤，重重的压在了我的心头。
+
+#### 生成器的基本知识
+
+生成器在执行时并不会和普通函数一样执行函数内部的内容，生成器函数在执行之后会返回一个迭代对象。而迭代对象内部其实是有`next()`、`throw()`方法的。
+
+迭代器：**iterator**
+
+```js
+function* Book() {
+  console.log('comming!');
+  yield 'bilibili：Jimmyhao';
+  yield '公众号：Jimmy前端';
+}
+let jimmy = Book();
+console.log('jimmy', jimmy);
+```
+
+![image-20220115140103539](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220115140103539.png)
+
+我们通过 next 方法来迭代
+
+```js
+jimmy.next(); // {value: 'bilibili：Jimmyhao', done: false}
+jimmy.next(); // {value: '公众号：Jimmy前端', done: false}
+jimmy.next(); // {value: undefined, done: true}
+```
+
+迭代器每次执行都会返回一个含有迭代信息的对象，分别是值和是否结束的状态。
+
+for-of 循环其实是遍历迭代器的，之所以数组可以使用 for-of，对象不能使用 for-of，是因为数组内部含有 iterator 属性，而对象没有
+
+![image-20220115140610327](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220115140610327.png)
+
+#### 生成器的特点
+
+每当生成器生成（迭代）一个值后，生成器就会非阻塞的挂起，随后耐心的等待下次迭代请求的到达
+
+**使用 yield 操作符将执行权交给另外一个生成器**
+
+```js
+function* AboutMe() {
+  yield 'bilibili:Jimmy前端';
+  yield* Others();
+  yield '公众号：Jimmy前端';
+}
+function* Others() {
+  yield '在线文档：http://www.jimmyxuexue.top:999/';
+}
+
+for (let msg of AboutMe()) {
+  console.log(msg);
+}
+```
+
+![image-20220115141233022](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220115141233022.png)
+
+在迭代器上使用 `yield*` 操作符，程序会跳转到另外一个生成器上执行，当然这个过程也是处于非阻塞的挂起执行
+
+#### 用生成器生成 ID 序列
+
+```js
+function* IdGenerator() {
+  let id = 0;
+  while (true) {
+    yield ++id;
+  }
+}
+const idIterator = IdGenerator();
+let obj1 = { id: idIterator.next().value, msg: 'bilibili：Jimmyhao' };
+let obj2 = { id: idIterator.next().value, msg: '公众号：Jimmyhao' };
+let obj3 = {
+  id: idIterator.next().value,
+  msg: '在线文档：http://www.jimmyxuexue.top:999/',
+};
+```
+
+![image-20220115142530003](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220115142530003.png)
+
+第一眼看是不是也被惊艳到了！居然写出了`while(true){}`这种死循环的操作，在普通函数内部肯定不能这样写的，但是因为是生成器函数，每次请求都会非阻塞的挂起，所以这样写一点问题都没有。
+
+而且这样写的另外一个好处是生成器中包含一个局部变量 id，代表 ID 计数器，这个 id 仅能生成器访问，所以不用担心会有人不小心修改其他代码而不小心改掉了 id 的数值，而且如果有另外的逻辑需要计数操作，只需要再次初始化一个迭代器就可以了。！
+
+#### 与生成器交互
+
+我们可以与生成器进行交互，交互方式就是通过使用 next()方法迭代时进行传值，yield 负责接受值，如：`next('Jimmy')`
+
+```js
+function* Message(name) {
+  const msg = yield 'hello' + name;
+  if (msg === 'xuexue') {
+    console.log('msg is xuexue');
+  }
+  yield 'hello' + name;
+}
+
+let jimmy = Message('jimmy');
+jimmy.next();
+jimmy.next('xuexue');
+```
+
+![image-20220115143706586](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220115143706586.png)
+
+这里如果没有理解 yield 交互的同学一定会很懵逼。第一次执行 next 的时候输出结果是 hellojimmy 这个没什么问题，不理解的地方主要是第二次执行`next('xuexue')`的时候，其实当 next 传值进行交互的时候，迭代位置的 yield 后面的整个内容看成形参，next 传的值作为实参，在这个例子中，`yield ('hello'+name)`中的 `('hello'+name)`是形参，`next('xuexue')`中的 xuexue 是实参，所以会输出`msg is xuexue`
+
+#### 总结
+
+生成器函数真的很有用，主要是它能无阻塞的挂起函数，等到合适的时候再恢复函数执行，执行结束之后继续挂起，这个太棒了，非常的适合 js 这种需要大量使用异步的语言。像 async await 就是它的语法糖。目前我还知道的就是 react 的状态管理 dva 就是需要手动写生成器函数。
+
+:::demo
+
+```vue
+<template>
+  <div class="demo">
+    <iframe
+      src="//player.bilibili.com/player.html?aid=593205697&bvid=BV13q4y117RG&cid=485422553&page=1"
+      scrolling="no"
+      border="0"
+      frameborder="no"
+      framespacing="0"
+      allowfullscreen="true"
+    >
+    </iframe>
+  </div>
+</template>
+<style>
+.demo > iframe {
+  width: 100%;
+  height: 450px;
+}
+</style>
+```
+
+:::
