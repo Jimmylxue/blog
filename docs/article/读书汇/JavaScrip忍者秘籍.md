@@ -309,11 +309,11 @@ call 和 apply 是可以显示修改 this 绑定的,这两个方法也是开发�
     bilibili: 'Jimmyhao',
     docs: '在线文档:http://www.jimmyxuexue.top:999/',
   };
-
+  
   function show(...args) {
     console.log(this, args);
   }
-
+  
   show.call(jimmy, 1, 2, 3);
   ```
 
@@ -644,3 +644,360 @@ jimmy.next('xuexue');
 ```
 
 :::
+
+## 第三部分 钻研对象
+
+现在已经了解的函数的来龙去脉，下面将深入研究对象的特性！
+
+### 使用getter和setter控制对象对象访问
+
+getter和setter可以使用多种方式进行定义
+
+**使用对象字面量定义**
+
+```js
+const userObj = {
+    names:['Jimmy','xuexue','Jack'],
+    get firstUser(){
+        console.log('这里获取了这个数据，上报！')
+        return this.names[0]
+    },
+    set firstUser(user){
+        if(type of user !== 'string'){
+            console.error('类型错误')
+            return
+        }
+        this.namse[0] = user
+    }
+        
+}
+console.log(obj.firstUser)
+console.log(obj.firstUser = 123)
+```
+
+**使用Object.defineProperty定义getter和setter**
+
+以下这个是例子是定义私有变量的例子，有很多的框架的源码都会采用这种方式来定义私有变量的，所以这种命名方式看起来会特别的亲切。以上的例子还使用了闭包的概念。
+
+```js
+function User(){
+    let _level = 0
+    Object.defineProperty(this,'skillLevel',{
+        get:()=>{
+            console.log('这里获取了这个数据，上报!')
+            return _level
+        },
+        set:(value)=>{
+            if(typeof value !== 'number'){
+                console.log('类型错误')
+                return
+            }
+            _level = value
+        }
+    })
+}
+```
+
+#### 计算属性、数据上报、类型校验
+
+以上的两个例子我们分别使用getter和setter做到了 **数据上报**、**数据校验**，getter的一个我认为更加重要作用是 **计算属性** 的应用。
+
+```js
+const Person{
+    surname:'张',
+    subname:'翼德',
+    get fullName(){
+        return this.surname+this.subname
+    }
+    getFullName(){
+        return this.surname+this.subname
+}
+```
+
+以上的例子就非常好的能够展示getter作为计算属性时的好处，虽然 fullName 属性和 getFullName 方法最后返回的内容是一样的，但是一个是属性，另外一个是方法，而fullname顾名思义更像是属性，应该要使用的是计算属性的方式来进行定义的
+
+### 使用代理控制访问
+
+代理可以实现getter和setter的以上的所有内容，上面的getter和setter是属性级别的拦截，代理是对象级别的拦截！功能更加强大。
+
+#### 使用代理记录日志
+
+```js
+let user = {name:'Jimmy'}
+
+function makeProxy(target){
+    return new Proxy(target,{
+        get:(target,key)=>{
+            console.log('这里获取了这个数据，上报!')
+            return target[key]
+        },
+        set:(target,key,value)=>{
+            if(typeof value !== 'string'){
+                console.log('类型错误')
+                return
+            }
+            target[key] = value
+        }
+    })
+}
+```
+
+以上这个例子实现了日志、类型检测，这个的好处在于这是个通用的监听，及时这个对象有100个1000个也是一样的，而如果是普通的、getter、setter写法就得写出特别特别长的数据监听代码了。
+
+#### 使用代理检测性能
+
+使用代理可以在不修改原函数代码的情况来，进行及评估一个函数的调用性能！
+
+```js
+// 检测一个数是否是素数
+function isPrime(number){
+    if(number<2) return false
+    for(let i = 2;i<number;i++){
+        if(number%2 === 0) return false
+    }
+    return true
+}
+
+let isPrimeProxy = new Proxy(isPrime,{
+    apply:(target,thisArg,args)=>{
+        console.time('isPrime')
+        const result = target.apply(thisArg,args)
+        console.timeEnd('isPrime')
+        return result
+    }
+})
+
+isPrimeProxy(1299827)
+```
+
+这个例子真是太酷了，过去用到的只有get和set，知道有apply，但是不知道原来还能这么进行使用。其实除了这个代理还有很多其他的拦截，在红宝书上有非常详细的介绍。
+
+#### 使用代理实现负数组索引
+
+像Python这门语言，它的数组是支持负索引的，有负索引能够非常方便的放我们访问元素，我们也可以使用代理来简单的实现一下。
+
+```js
+function createNegativeArrayProxy(array){
+    if(!Array.isArray(array)){
+        return new TypeError('不是数组类型')
+    }
+    return new Proxy(array,{
+        get:(target,index)=>{
+            index = +index // 相对巧妙的转类型
+            return target[index<0?target.length+index:index]
+        },
+        set:(target,index,value)=>{
+            index = +index
+            return target[index<0?target.length+index:index] = val
+        }
+    })
+}
+
+const users = ['Jimmy','xuexue','Jack']
+let proxyUser = createNegativeArrayProxy(users)
+console.log(users[-1])
+console.log(proxyUser[-1])
+```
+
+这个例子其实也可以使用getter和setter来实现的。通过代理也来实现一遍。
+
+#### 总结
+
+使用getter和setter和代理可以做非常多事情，因为其相当于能够让我们在存值和取值的时候做一些事情，vue的响应式的核心不就是通过这个实现的吗！
+
+代理因为是ES6的东西，所以相对会有一些兼容性，但是还好，性能是比Object.defineProperty高很多的，但是因为创建了一些代理对象，所以和原生的比较性能还是会缺失一点，但是能让我们做更多的事情也值得。
+
+### 数组
+
+之所以把数组放到这里是因为JS中大部分东西皆是对象，数组也不例外。虽然这样会产生诸多不好的副作用，主要是性能方面，但是也有很好的方面，比如数组可以访问方法，与其他对象一样，这样使用起来就特别方便。
+
+#### 数组是对象的优势
+
+**C版本**
+
+```c
+#include <stdio.h>
+#include <math.h> // 涉及数学运算，就得引入一些其他库函数，Number
+
+int main ()
+{
+   printf("值 8.0 ^ 3 = %lf\n", pow(8.0, 3));
+
+   printf("值 3.05 ^ 1.98 = %lf", pow(3.05, 1.98));
+   
+   return(0);
+}
+```
+
+C语言需要使用一些工具库必须单独引入，因为数组就是数组，本质上不是对象，所以不能像JS一样访问原型方法。
+
+**JavaScript版本**
+
+```js
+let arr = [1,2,3,4,5]
+console.log(arr.sort((a,b)=>a-b)
+```
+
+因为JS数组本质上是对象，所以可以使用对象原型链上的一些属性和方法，这个就是优势！一些常用的好用的工具方法直接被封装到数组的构造函数原型上了，可以直接使用。
+
+#### 数组重要的方法
+
+数组的方法越来越多，功能也越来越强大了，这里记录的只是单纯对于我来说，非常容易搞混乱的方法。
+
+**数组两端添加、删除元素**
+
+- push：在数组末尾添加元素
+- unshift：在数组开头添加元素
+- pop：在数组末尾弹出元素
+- shift：在数组开头弹出元素
+
+push=>pop在尾部进行操作、unshift和shift在数组头部操作，这个我比较容易混乱，会忘记哪个是添加哪个是删除，后面想了一个办法，和尾部操作一样，字母更多的那个是添加元素，更少的是删除元素。
+
+**从性能考虑，在数组头部操作更消耗性能还是尾部更消耗性能**
+
+这是一道经典的面试题，答案是在数组头部操作更消耗性能，因为数组在内存中存储的位置是顺序存储的，如果是头部发生改变，那么剩下的元素的位置都会发生调整，而如果是尾部则不会发生调整。
+
+**在数组任意位置添加、删除元素**
+
+这里主要使用的是数组的另外一个强大的方法`splice`，该方法会修改原数组，且会将删除的内容以数组的形式返回！
+
+- 单传递两个参数，代表删除！
+
+  ```js
+  let users = ['jimmy','xuexue','jack','henry']
+  let removeItems = users.splice(1,2) 
+  console.log(removeItems) // ['xuexue', 'jack']
+  console.log(users) // ['jimmy', 'henry']
+  ```
+
+  以上这个例子表示的是，从数组索引为1的位置开始函数，删除两个元素！
+
+- 当传递多个参数，可以表示插入
+
+  ```js
+  let users = ['jimmy','xuexue','jack','henry']
+  let removeItems = users.splice(1,2,'makbaka','woxodixi') 
+  console.log(removeItems) // ['xuexue', 'jack']
+  console.log(users) // ['jimmy', 'makbaka', 'woxodixi', 'henry']
+  ```
+
+  以上这个例子表示的是，从数组索引为1的位置开始函数，删除两个元素！之后再插入makbaka、woxodixi这两个元素。这个就有一些细节了！
+
+  - removeItems 只会返回被删除的元素，插入的元素不会添加进去
+  - 如果是在中间插入，那么之后的元素的索引会往后移动。如：henry就会变成数组的最后一个
+
+### Map
+
+map通常称为字典。当我们需要处理一类映射关系集合时，在JS中、Map才是最佳的使用工具。
+
+#### 别把对象当作Map
+
+比如我们需要处理一个翻译字典，我的第一想法也是使用对象，因为对象用起来太方便和简单了，但是这会有问题的！！！
+
+**会触发原型链查找**
+
+```js
+let dictionaries = {
+    "ja":{
+        "Ninjas for hire":"一段日文"
+    },
+    "zh":{
+        "Ninjas for hire":"忍者出租"
+    }
+}
+console.log(dictionaries.ja['constructor'])  // ƒ Object() { [native code] }
+```
+
+问题已经很明显的暴露出来了，我们访问`ja`对象里面不存在的`constructor`这个英文对应的翻译，按道理字典中没有这个文字应该返回`undefind`才是理想情况，但是却返回了`ƒ Object() { [native code] }`。这个是因为`constructor`是原型对象的属性之一，所以会到原型链上寻找，这个就是罪魁祸首。
+
+**key会被静默转成字符串**
+
+```html
+<div id="first"></div>
+<div id="second"></div>
+<script>
+	let first = document.getElementById('first')
+	let second = document.getElementById('second')
+    let map = {}
+    map[first] = {data:'firstElement'}
+    map[second] = {data:'secondElement'}
+    console.log(map[first]) // {data: 'secondElement'}
+</script>
+```
+
+`map[first]`返回的怎么不是{data:'firstElement'}呢？我们再打印一下map会发生，map存的实际上是
+
+```js
+{
+  [object HTMLDivElement]: {data: 'secondElement'} 
+}
+```
+
+原来不管是存first还是second，对象都会把key转正字符串，DOM对象会被静默的转成`[object HTMLDivElement]`，所以本质上是存到同一个key上了。这就是对象的一个缺点。
+
+争对以上的两个缺点，所以map就能完美的解决。
+
+- map支持对象类型作为key
+- map封装has方法，不会触发原型链的查找
+
+```js
+let map = new Map()
+const currentUrl = location.href
+const firstLink = new URL(currentUrl)
+const secondLink = new URL(currentUrl)
+map.set(firstLink,{text:'first'})
+map.set(secondLink,{text:'scond'})
+console.log(map.has('constructor')) // false
+console.log(map.get(firstLink)) //{text: 'first'}
+console.log(map.get(secondLink)) //{text: 'scond'}
+```
+
+以上的例子可以看出：
+
+- 没有触发原型链查找
+- 支持了对象作为key进行存储
+
+### Set
+
+map是对标对象的一种类型，set是对标数组的一种类型，set是一种集合，集合中的每个元素都是唯一的。set也能避免访问原型链的风险。
+
+#### 并集、交集、差集
+
+使用set可以非常快速的实现并集、交集、差集的操作！
+
+**并集**
+
+```js
+let user1 = ['jimmy','xuexue','henry']
+let user2 = ['henry','Jack']
+const warriors = new Set([...user1,...user2])
+console.log(warriors) // Set(4) {'jimmy', 'xuexue', 'henry', 'Jack'}
+```
+
+**交集**
+
+```js
+let user1 = new Set(['jimmy','xuexue','henry'])
+let user2 = new Set(['henry','Jack'])
+const intersection = new Set(
+	[...user1].filter(user=>user2.has(user))
+)
+console.log(intersection) // Set(1) {'henry'}
+```
+
+**差集**
+
+```js
+let user1 = new Set(['jimmy','xuexue','henry'])
+let user2 = new Set(['henry','Jack'])
+const intersection = new Set(
+	[...user1].filter(user=>!user2.has(user))
+)
+console.log(intersection) // Set(2) {'jimmy', 'xuexue'}
+```
+
+#### 总结
+
+map和set是更加优秀的类型，避免了一些相对恶心的场景出现，而且也封装了更加优雅的API，因为其是集合类型，所以是支持for-of迭代的！
+
+这个是属于一定要掌握的内容，很多大神已经在使用了，比如vue3的源码，都是用到了set和map这些数据类型了。
