@@ -309,11 +309,11 @@ call 和 apply 是可以显示修改 this 绑定的,这两个方法也是开发�
     bilibili: 'Jimmyhao',
     docs: '在线文档:http://www.jimmyxuexue.top:999/',
   };
-
+  
   function show(...args) {
     console.log(this, args);
   }
-
+  
   show.call(jimmy, 1, 2, 3);
   ```
 
@@ -644,3 +644,66 @@ jimmy.next('xuexue');
 ```
 
 :::
+
+
+
+## 第三部分 理解对象
+
+### 原型链
+
+#### 原型链指向的细节
+
+一个对象的原型链指向关系实际上是在一个对象被构建（初始化）时就构建好的，所以就算重写了原型链上的一些属性或者方法，已经实例化过的对象仍能够正常的进行访问。
+
+```js
+function User(){}
+User.prototype.say = ()=>{
+    console.log('关注bilibili：Jimmyhao')
+}
+let jimmy = new User()
+User.prototype = {
+    speak(){
+        console.log('关注公众号：Jimmy前端')
+    }
+}
+let xuexue = new User()
+xuexue.speak() // 关注公众号：Jimmy前端
+jimmy.say() // 关注bilibili：Jimmyhao
+xuexue.say() // xuexue.say is not a function
+jimmy.speak() // jimmy.speak is not a function
+```
+
+以上的这个例子就能够特别好的证明了，一个对象的原型链指向是在构造（实例化）的时候才进行绑定的，改变了原型链，也只有在之后的实例化的对象上次啊会生效，所以这个证明了，其实实例化的时候整个原型链都是会拷贝一份存下来的。所以原型链固然好用，但是不能滥用。
+
+![image-20220116152432606](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220116152432606.png)
+
+以上这个例子是之前`vue2.x`的例子，我们在Vue构造函数上绑定原型都是在`new Vue`之前绑定，而不会在之后绑定。再次加深了以上的理解。
+
+#### instanceof的细节
+
+在已经了解了上个例子之后，我们知道了一个对象原型链上的指向其实是在示例化的时候就绑定了的，就算后期我们再对它进行了重写，之前实例化的对象任然能够使用重写前原型上的方法和属性。
+
+下面要说个和上面相反的例子，就是当我们使用 `instacnceof` 关键字时，事情又变成了另外一个样子。
+
+`instanceof`用户坚持一个函数是否存在于一个示例的原型链中。
+
+```js
+function User(){}
+User.prototype.show = ()=>{
+    console.log('hello world')
+}
+const jimmy = new User()
+console.log(jimmy instanceof User) // true
+User.prototype = {}
+console.log(jimmy instanceof User) // false
+```
+
+what？怎么又变成false了？怎么感觉好像和上面的那个例子冲突了，不是说原型链上的东西都是实例化的时候都绑定好的吗，只有重写之后实例化的对象才会生效了，这是咋回事？通过调试查看这时候的jimmy对象，得到的是以下的结果：
+
+经过对比，添加`User.prototype = {}`这句话前后分别打印jimmy对象，再分析一下二者的区别：
+
+![image-20220116174101366](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220116174101366.png)
+
+啊哈，找到区别了，原来我们的User构造函数原型链上的`show`方法还是存在的，但是它原型链上的`constructor`的`prototype`被改变了，在这个例子也就是User的这个函数的原型上找不到`constructor`为User的函数了，所以返回的是false，这个和前面的例子并没有冲突。
+
+`instanceof`的真正语义是：检查右边函数的原型上是否存在于操作符左侧的对象的原型链上，这样理解就不会觉得奇怪了。
