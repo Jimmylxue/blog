@@ -834,6 +834,32 @@ console.log(proxyUser[-1]);
 
 代理因为是 ES6 的东西，所以相对会有一些兼容性，但是还好，性能是比 Object.defineProperty 高很多的，但是因为创建了一些代理对象，所以和原生的比较性能还是会缺失一点，但是能让我们做更多的事情也值得。
 
+:::demo
+
+```vue
+<template>
+  <div class="demo">
+    <iframe
+      src="//player.bilibili.com/player.html?aid=850895481&bvid=BV18L4y1t7is&cid=492562165&page=1"
+      scrolling="no"
+      border="0"
+      frameborder="no"
+      framespacing="0"
+      allowfullscreen="true"
+    >
+    </iframe>
+  </div>
+</template>
+<style>
+.demo > iframe {
+  width: 100%;
+  height: 450px;
+}
+</style>
+```
+
+:::
+
 ### 数组
 
 之所以把数组放到这里是因为 JS 中大部分东西皆是对象，数组也不例外。虽然这样会产生诸多不好的副作用，主要是性能方面，但是也有很好的方面，比如数组可以访问方法，与其他对象一样，这样使用起来就特别方便。
