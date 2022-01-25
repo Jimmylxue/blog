@@ -309,11 +309,11 @@ call 和 apply 是可以显示修改 this 绑定的,这两个方法也是开发�
     bilibili: 'Jimmyhao',
     docs: '在线文档:http://www.jimmyxuexue.top:999/',
   };
-
+  
   function show(...args) {
     console.log(this, args);
   }
-
+  
   show.call(jimmy, 1, 2, 3);
   ```
 
@@ -1024,3 +1024,290 @@ console.log(intersection); // Set(2) {'jimmy', 'xuexue'}
 map 和 set 是更加优秀的类型，避免了一些相对恶心的场景出现，而且也封装了更加优雅的 API，因为其是集合类型，所以是支持 for-of 迭代的！
 
 这个是属于一定要掌握的内容，很多大神已经在使用了，比如 vue3 的源码，都是用到了 set 和 map 这些数据类型了。
+
+### 正则表达式
+
+正则表达式是一个效率神器，虽然很多开发者（包括我在内）不用正则表达式额能顺利的完成工作，诚然，如果不适用正则表达式，很多情况下就无法使用JS优雅的解决问题。JS也是每一个忍者特工的 **必备武器**！
+
+正则其实也是体验一个程序员编程能力的，我们可以发现哪些大牛，尤其是年龄相对大一点的程序员，他们的正则能力都是十分扎实的，所以正则一定得学好，不说特别牛吧，起码得会用，不要每次都去查文档再用。
+
+#### 为什么要使用正则
+
+一个demo，快速理解为什么要使用正则：
+
+验证美国邮政编码，格式为：99999-9999。
+
+**不使用正则**
+
+```js
+function isThisZipCode(candidate) {
+  if (typeof candidate !== "string" || candidate.length != 10) return false;
+  for (let n = 0; n < candidate.length; n++) {
+    let c = candidate[n];
+    switch (n) {
+      case 0:
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+      case 6:
+      case 7:
+      case 8:
+      case 9:
+        if (c < 0 || c > 9) {
+          return false;
+        }
+        break;
+      case 5:
+        if (c !== "-") {
+          return false;
+        }
+        break;
+    }
+  }
+  return true;
+}
+
+console.log(isThisZipCode("99999-9999"));
+```
+
+**使用正则**
+
+```js
+function isThisZipCode(candidate) {
+  return /^\d{5}-\d{4}$/.test(candidate);
+}
+
+console.log(isThisZipCode("99999-999"));
+```
+
+两者一对比，区别出来了吧，使用正则我们能够使用极其少的代码非常优雅的实现我们想要的效果，这就是忍者的操作！
+
+#### 修饰符
+
+|  符号  | 含义 |
+|  ----  | ----  |
+| i | 不区分大小写 |
+| g | 全局匹配（默认匹配到一个就会终止） |
+| m | 多行匹配（这个对textarea特别有用） |
+| y | 粘性匹配（试图从最后一个匹配的位置开始） |
+| u | 允许使用unicode转义符 |
+
+#### 术语&操作符
+
+**精确匹配、匹配字符集、起止符号**
+
+| 符号  | 含义                                                  |
+| ----- | ----------------------------------------------------- |
+| []    | 字符集操作符号，如[abc]表示匹配abc中任意一个          |
+| [^]   | 反向字符操作符号，如`[^abc]`表示匹配除了abc的任意字符 |
+| [a-z] | 表示匹配字母a到z的字符。也可以是`[1-9]` `[A-Z]  `     |
+| ^     | 开始符号，如/^test/表示匹配test开头的字符             |
+| $     | 结束符号，如/test$/表示匹配test结束的的字符           |
+| \|   | 表示或，如/a\|b/表示匹配a或b |
+
+**重复匹配**
+
+| 符号 | 含义                                                         |
+| ---- | ------------------------------------------------------------ |
+| ?    | 出现0次或一次                                                |
+| +    | 出现1次或多次                                                |
+| *    | 出现0次或多次                                                |
+| {}   | 自定义重复次数，如{2,10}表示出现2次到10次、{4}表示出现4次、{4,}表示至少出现4次 |
+
+**贪婪模式与非贪婪模式**
+
+这些重复匹配的运算符都是可以支持贪婪和非贪婪模式的，默认是贪婪模式的。
+
+贪婪：尽可能匹配最多的东西。
+
+在运算符后面添加一个 **？**即可开启非贪婪模式。
+
+如字符串aaa使用/a+/进行匹配会将三个a都匹配到，而我们使用/a+?/可以禁止贪婪模式，只会匹配到一个a
+
+**预定字符集与元字符**
+
+| 符号 | 含义                                                    |
+| ---- | ------------------------------------------------------- |
+| \t   | 水平制表符号。即tab                                     |
+| \b   | 空格                                                    |
+| \r   | 回车符                                                  |
+| \f   | 换页符                                                  |
+| \h   | 换行符                                                  |
+| .    | 匹配除换行符以外的任意字符                              |
+| \d   | 匹配任意十进制数字，即[0-9]                             |
+| \D   | 匹配除了十进制数字以外的任意字符，即`[^0-9]`            |
+| \w   | 匹配任意字母、数字、下划线，即[0-9a-zA-Z_]              |
+| \W   | 匹配除了字母、数字、下划线以外的字符，即`[^0-9a-zA-Z_]` |
+| \s   | 匹配任意空白符（包括空格、制表、换页符等等）            |
+| \S   | 匹配除了空白符以外的任意字符                            |
+| \b   | 匹配单词边界                                            |
+| \B   | 匹配非单词边界（单词内部）                              |
+
+#### 捕获匹配的片段
+
+一个很好的例子：
+
+利用正则捕获CSS的transform属性
+
+```html
+<div id="square" style="transform: translateY(15px)"></div>
+<script>
+  function getTranslateY(element) {
+    const transformValue = element.style.transform;
+    if (transformValue) {
+      const match = transformValue.match(/translateY\(([^\]]+)\)/);
+      return match ? match[1] : "";
+    }
+    return "";
+  }
+  let square = document.getElementById("square");
+  console.log(getTranslateY(square)); // 15px
+</script>
+```
+
+match方法是String对象的方法，match的返回的结果是一个数组，其数组的第一项是匹配的整个内容，第二个是原子组（括号分组）匹配到的内容。
+
+咋一看`/translateY\(([^\]]+)\)/`好像很复杂，但是拆开看还好，首先就是translateY这个是全量匹配，之后就是原子组中的内容，这里使用到了`\(\)`来转义括号，内部再进行匹配除了右括号的内容，就可以获取到内部的值了！
+
+**match方法在全局模式和非全局模式下的区别**
+
+上个例子知道了match方法非常的好用，但是也说了match的返回的结果是一个数组，其数组的第一项是匹配的整个内容，第二个是原子组（括号分组）匹配到的内容。但是其实这个是非全局匹配下的情况才是这样返回的，如果是全局匹配（加了g），其返回任然是一个数组，且返回全部匹配结果，不会有原子组捕获的结果！
+
+- 非全局模式
+
+    ```js
+    const html = "<div class='test'><b>hello</b> <i>world!</i></div>";
+    const reg1 = /<(\/?)(\w+)([^>]*?)>/;
+    const result = html.match(reg1);
+    console.log(result[0]); // <div class='test'>
+    console.log(result[1]); // ''空
+    console.log(result[2]); // div
+    console.log(result[3]); // class='test'
+    ```
+    
+    因为是非全局模式，所以会这个正则匹配到`<div class='test'>`就会结束匹配，match返回的数组第一项的结果就是这个值。
+    
+    因为正则有三个原子组，所以接下来的数组的第一项、第二项、第三项就是原子组匹配的内容。
+    
+    这个是在非全局模式，所以match的结果会对原子组的匹配做一次收集！！！！
+    
+- 全局模式
+
+    ```html
+    const html = "<div class='test'><b>hello</b> <i>world!</i></div>";
+    const reg1 = /<(\/?)(\w+)([^>]*?)>/g;
+    const result = html.match(reg1);
+    console.log(result[0]); // <div class='test'>
+    console.log(result[1]); // <b>
+    console.log(result[2]); // </b>
+    console.log(result[3]); // <i>
+    console.log(result[4]); // </i>
+    console.log(result[5]); // </div>
+    ```
+
+    因为是全局模式，所以match不会匹配到一个就停止匹配，而是会继续的向下进行匹配，这个模式下match的结果是一个数组，数组的每一项代表的就是全局匹配到的每一项。就不会有非全局模式下对原子组内容的收集了！！！
+
+**exec**
+
+有时候我们就想在全局匹配模式下又能收集原子组的匹配内容，这时候就可以使用正则exex方法，该方法会保留上次调用的结果，每次调用都会是下次匹配以及捕获的结果。
+
+```js
+const html = "<div class='test'><b>hello</b> <i>world!</i></div>";
+const reg1 = /<(\/?)(\w+)([^>]*?)>/g;
+let match,
+  nums = 0;
+while ((match = reg1.exec(html)) !== null) {
+  console.log(match);
+  console.log(match[0]);
+  console.log(match[1]);
+  console.log(match[2]);
+  console.log(match[3]);
+  nums++;
+}
+console.log("总数", nums);  // 6 
+```
+
+#### 反向引用
+
+使用反向引用快速实现单词的转写
+
+```js
+let str = "fontFamily";
+console.log(str.replace(/([A-Z])/g, "-$1").toLocaleLowerCase()); //font-family
+```
+
+在使用replace方法时，我们使用`$1`或者`\1`，就可以表示第一个原子组匹配到的内容，这个就是反向引用，非常优雅的就能解决问题！
+
+#### 未捕获的分组
+
+因为原子组在使用的时候一般情况下都会帮我们收集一次捕获内容，有时候我们并不想收集捕获内容，因为这个收集的过程也是会消耗性能的，所以我们可以使用`(?:)`的形式组织模式收集的方式：
+
+**正常使用**
+
+```js
+let pattern = /((ninja-)+)sword/;
+let str = "ninja-ninja-sword";
+let result = str.match(pattern);
+
+console.log(result.length); // 3
+console.log(result[0]); // ninja-ninja-sword
+console.log(result[1]); // ninja-ninja-
+console.log(result[2]); // ninja-
+```
+
+**使用(?:)禁止分组**
+
+```js
+let pattern = /((?:ninja-)+)sword/;
+let str = "ninja-ninja-sword";
+let result = str.match(pattern);
+
+console.log(result.length); // 2
+console.log(result[0]); // ninja-ninja-sword
+console.log(result[1]); // ninja-ninja-
+```
+
+两者的区别就在于，其内层的圆括号编程了一个被动表达式，只有外层的圆括号会被分组和创建捕获！
+
+**案例**
+
+```js
+let reg = /(?:ninja)-(trick)?-\1/;
+let str1 = "ninja-trick-trick";
+let str2 = "ninja-";
+let str3 = "ninja-trick-ninja";
+
+console.log(reg.test(str1)); // true
+console.log(reg.test(str2)); // false
+console.log(reg.test(str3)); // false
+```
+
+这个例子就特别好理解了，`\1`表示和第一个分组的内容取一样的内容，按道理第一个分组应该是`(?:ninja)`，但是这个括号的内容是`(?:)`也就是屏蔽分组捕获，所以最终这个`\1`表示的是`(trick)`。
+
+#### 其他案例
+
+- 将`foo=1&foo=2&blah=a&foo=3&blah=b`转换为`foo=1,2,3&blah=a,b`
+
+  ```js
+  function compres(source) {
+    const keys = {};
+    source.replace(/([^=&]+)=([^&]*)/g, (full, key, value) => {
+      keys[key] = [keys[key] ? keys[key] + "," : ""] + value;
+      return "";
+    });
+  
+    const result = [];
+    for (let key in keys) {
+      result.push(key + "=" + keys[key]);
+    }
+    return result.join("&");
+  }
+  
+  console.log(compres("foo=1&foo=2&blah=a&foo=3&blah=b")); // foo=1,2,3&blah=a,b
+  ```
+
+#### 总结
+
+正则的内容真的太多了，学起来并不是一两天甚至几个月的事情，主要这玩意儿涉及的一些知识点真的很多，稍微用不到就会忘记，真如我是看了至少三遍的正则，还是不会用，所以我的目标是以后在可以使用正则的场景都逼自己使用正则，而不是停留在舒适区使用其他方式完成需求。
+
