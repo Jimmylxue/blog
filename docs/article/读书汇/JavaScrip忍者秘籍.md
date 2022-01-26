@@ -1337,3 +1337,177 @@ console.log(reg.test(str3)); // false
 
 正则的内容真的太多了，学起来并不是一两天甚至几个月的事情，主要这玩意儿涉及的一些知识点真的很多，稍微用不到就会忘记，真如我是看了至少三遍的正则，还是不会用，所以我的目标是以后在可以使用正则的场景都逼自己使用正则，而不是停留在舒适区使用其他方式完成需求。
 
+### 代码模块化
+
+组织良好的代码总是比庞大的代码更容易理解和维护，所以这个就诞生了模块化，相对于前端来说我们平时可能更加注重 **组件化** 但是我们在实现组件化的代码的时候，也在潜移默化的写研究的 **模块化** 在想着，哪里的代码能进行封装，方便下次复用......
+
+模块是比对象和函数更大的代码单元，可以极大的提高应用程序的开发效率。
+
+#### 历史问题
+
+在ES6之前JS官方并没有给出模块化的技术，但是因为模块化实在是太重要了，一些大牛人员就自己基于JS的 **对象、立即执行函数、闭包** 开发出了模块化技术，**AMD** 和 **CommonJS** 就是典型的解决方案！
+
+#### 自己实现一个模块
+
+前面说了，我们可以自己基于 **对象、立即执行函数、闭包** 实现一个模块！
+
+```js
+const mouseCounterModule = (function () {
+  let numCount = 0;
+  const handleClick = () => {
+    alert(++numCount);
+  };
+  return {
+    countClick: () => {
+      document.addEventListener("click", handleClick);
+    },
+  };
+})();
+```
+
+以上就是我们创建了一个模块，因为立即执行函数，返回了一个对象，对象引用了一个函数内部的方法，形成了闭包，所以立即执行函数内部的值会一直存在，不会被外界的一些变量所污染。
+
+我们立即执行函数返回的那个对象，就是模块的接口
+
+**扩展模块（模块之间相互使用）**
+
+```js
+const mouseCounterModule = (function () {
+  let numCount = 0;
+  const handleClick = () => {
+    alert(++numCount);
+  };
+  return {
+    countClick: () => {
+      document.addEventListener("click", handleClick);
+    },
+  };
+})();
+
+// 这下面的代码时重点！！！！
+(function (module) {
+  let numScroll = 0;
+  const handleScroll = () => {
+    alert(++numScroll);
+  };
+  module.countScroll = handleScroll;
+})(mouseCounterModule);
+
+mouseCounterModule.countScroll();
+```
+
+我们使用扩展模块也是需要使用到  **对象、立即执行函数、闭包** 因为module本身就是对象，所以可以给模块上添加属性来实现扩展，之所以要使用闭包和立即执行函数是为了防止变量的全局污染！！！
+
+我们可以看到自己写的模块其实也有缺点：
+
+- 扩展方法是在完全独立的作用域中扩展的，闭包之间无法相互访问
+- 并不是基于文件的，也是不好维护。
+
+#### AMD
+
+AMD的A代表的是`async`,所以AMD是加载模块是异步加载的，因为这个，所以AMD是明确基于浏览器的，因为浏览器加载文件一定要是异步的，如果是同步加载必定会造成或多或少的阻塞。
+
+**AMD代码**
+
+```js
+define("mouseCountrModule", ["jQuery"], ($) => {
+  let numClick = 0;
+  const handleClick = () => {
+    alert(++numClick);
+  };
+  return {
+    countClick: () => {
+      $(document).on("click", handleClick);
+    },
+  };
+});
+```
+
+AMD提供 **define** 函数用于定义一个模块，并传递三个参数：
+
+- 模块名称
+- 依赖的其他模块
+- 初始化模块的工厂函数
+
+工厂函数会在依赖其他的模块都下载好之后执行，所以工厂函数的形参是能够拿到其他模块导出的变量的。
+
+AMD具有以下的优点：
+
+- 移动依赖处理，无需考虑依赖加载的顺序
+- 异步加载，避免阻塞
+- 在同一个文件中可以定义多个模块
+
+#### CommonJS
+
+CommonJS设计面向的是通用JS环境，普遍的被使用在NodeJS中，有NodeJS开发经验的同学肯定知道，CommonJS模块是基于文件的，且文件是同步加载的（也因为这个所以不适合用在浏览器，会发生阻塞）但是在服务端这个是一点问题都没有。
+
+```js
+// a.js
+const $ = require('jQuery')
+let numClick = 0
+const handleClick = ()=>{
+  alert(++numClick)
+}
+
+module.exports = {
+  countClick:()=>{
+    $(document).on('click',handleClick)
+  }
+}
+
+// b.js
+const mouseClickModule = require('a.js')
+mouseClickModule.countClick()
+```
+
+CommonJS具有以下优势：
+
+- 语法简单。只要定义`module` `module.exports` `exports` 即可，完全可以自己手动实现一个简单的版本
+- Node.JS的默认模块格式，所以我们可以使用npm市场上众多的包
+
+#### UMD
+
+umd的语法有点复杂，它是同时支持amd和CommonJS的，这个在我学习webpack打包项目的时候有专门的一个配置项是配置这个打包之后的格式，可以设置成umd。
+
+#### ESM
+
+ES6的模块结合了AMD和CommonJS的优点，具体如下：
+
+- 与CommonJS类似，模块化语法相对简单，也是基于文件
+- 与AMD类似，ES6模块是支持异步加载的
+
+这个模块化的语法比CommonJS还重要！真正是前端程序员接触最多的，但是因为使用起来也比较简单，相信大家也都会，就简单的带过了。
+
+```js
+// a.js
+import $ form 'jQuery'
+let numClick = 0
+const handleClick = ()=>{
+  alert(++numClick)
+}
+
+export handleClick
+
+// b.js
+import {handleClick} from 'a.js'
+handleClick()
+```
+
+ESM 也是有一些细节的
+
+- 当导入或者导出的变量或者方法名字太长，可以使用`as`进行改名
+
+  ```js
+  import {aaaa as b} from 'a.js'
+  // ---------------------------
+  export {sayHi as sayHello}
+  ```
+
+- `export default`是默认导出，引入默认导出的对象可以自定义名字
+
+- `export`是具名导出，名字一定要一样，且这个会有语法提示，很好用！
+
+#### 总结
+
+模块化现在开发已经离不开，基本都是ESM，很容易上手，就随便带过了，不过过去我清湖AMD具体是什么，还有UMD 还是有收获的！！！
+
