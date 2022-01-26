@@ -499,7 +499,7 @@ var isValidSudoku = function (board) {
     // 处理列
     colGap = [];
     for (let l = 0; l < board.length; l++) {
-      if (board[l][i] !== ".") {
+      if (board[l][i] !== '.') {
         if (colGap.includes(board[l][i])) {
           return false;
         } else {
@@ -512,7 +512,7 @@ var isValidSudoku = function (board) {
       // 处理格子
       let m = parseInt(i / 3),
         n = parseInt(j / 3);
-      if (board[i][j] !== ".") {
+      if (board[i][j] !== '.') {
         if (boxGap[m * 3 + n].includes(board[i][j])) {
           return false;
         } else {
@@ -524,7 +524,7 @@ var isValidSudoku = function (board) {
         rowGap = [];
       }
       if (j <= board[i].length - 1) {
-        if (board[i][j] !== ".") {
+        if (board[i][j] !== '.') {
           if (rowGap.includes(board[i][j])) {
             return false;
           } else {
@@ -614,7 +614,7 @@ var isValidSudoku = function (board) {
  */
 var generateParenthesis = function (n) {
   let arr = []; // 存放结果数组
-  diff(0, 0, n, "");
+  diff(0, 0, n, '');
   /**
    * @param {number} left
    * @param {number} right
@@ -633,13 +633,13 @@ var generateParenthesis = function (n) {
     // 左括号的数量小于数字 n = 3 时，可以递归
     if (left < n) {
       //  n == 3 (( =》 (((
-      diff(left + 1, right, n, str + "(");
+      diff(left + 1, right, n, str + '(');
     }
 
     // 右括号数量小于左括号数量时，可以递归
     if (right < left) {
       //  (() =》 (()) (())( => (())()
-      diff(left, right + 1, n, str + ")");
+      diff(left, right + 1, n, str + ')');
     }
   }
 };
@@ -891,6 +891,32 @@ var combinationSum = function (candidates, target) {
 思想：**回溯**
 :::
 
+:::demo
+
+```vue
+<template>
+  <div class="demo">
+    <iframe
+      src="//player.bilibili.com/player.html?aid=765947112&bvid=BV1Br4y1e7fV&cid=493288637&page=1"
+      scrolling="no"
+      border="0"
+      frameborder="no"
+      framespacing="0"
+      allowfullscreen="true"
+    >
+    </iframe>
+  </div>
+</template>
+<style>
+.demo > iframe {
+  width: 100%;
+  height: 450px;
+}
+</style>
+```
+
+:::
+
 #### 题目
 
 给定一个不含重复数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。
@@ -912,15 +938,15 @@ var combinationSum = function (candidates, target) {
 
 本题是一个全排列题目，这题其实和匹配括号是有点像的，可以使用回溯的方式来进行解决！
 
-- 创建两个数组 一个空数组 一个存放nums
-
-- 每次递归都往第一个数组中存放一个nums中的一个值  nums就减去一个值  之后再次进入递归
-
+- 创建两个数组 一个空数组 一个存放 nums
+- 每次递归都往第一个数组中存放一个 nums 中的一个值 nums 就减去一个值 之后再次进入递归
 - 递归不断执行上面那个过程的
-
-- 当nums为空时 说明已经全部添加完成了 这时候将这个结果存入 结果数组中
-
+- 当 nums 为空时 说明已经全部添加完成了 这时候将这个结果存入 结果数组中
 - 最后将这个结果数组进行返回即可。
+
+**原型图**
+
+![image-20220126203754555](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220126203754555.png)
 
 **效果**
 
@@ -952,6 +978,5 @@ var permute = function (nums) {
   };
   diff([], nums);
 };
-permute([1,2,3])
+permute([1, 2, 3]);
 ```
-
