@@ -950,7 +950,7 @@ var combinationSum = function (candidates, target) {
 
 **效果**
 
-![成绩](https://vitepress-source.oss-cn-beijing.aliyuncs.com/quanpailie.png)
+
 
 #### 源代码
 
