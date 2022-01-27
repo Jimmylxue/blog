@@ -1511,3 +1511,160 @@ ESM 也是有一些细节的
 
 模块化现在开发已经离不开，基本都是ESM，很容易上手，就随便带过了，不过过去我清湖AMD具体是什么，还有UMD 还是有收获的！！！
 
+## 第四部分 洞悉浏览器
+
+对于我来说使用的最多的工具出了写代码的IDE，那就是浏览器了，虽然现在有了Node.js，但是浏览器是大多数JS应用最常被执行的环境了。所以浏览器的一定要玩明白了。
+
+### DOM操作
+
+通过JS是可以快速的操作DOM的，可能是面试题做多了或者说是自己也进步了一点，现在一想到DOM操作，脑子中想到的不是各种API，而是 **性能** ，DOM的操作都是消耗性能的。
+
+一些第三方优秀的框架之所以使用的人多很大一方面就是他们对DOM的操作做到了极致！如Vue使用Vnode，react的虚拟DOM，都是会进行比对，然后找出不同的地方，再在合适的时候进行指定的DOM更新操作而不是全量的DOM更新！
+
+#### 操作不当会引发性能问题
+
+为什么我们修改文本时推荐使用`textContent`、而不是`innerHTML`？好像当修改文本时两个都能正确的操作，但是`innerHTML`做的事情更多，以下例子可见：
+
+**将HTML字符串转成DOM**
+
+```html
+<option>Jimmy</option>
+<option>xuexue</option>
+<table />
+```
+
+当我们要插入这代码的时候，会先进行预解析，将明显的错误给改掉，这里的明显的错误有：
+
+- option标签必须包裹在select标签内
+- table标签不是自闭合标签
+
+所以真正在插入的时候发现页面没有问题，浏览器会解决掉这些问题，这个就是个耗时的时间，所以我们在写的时候一定要确保内容是没有问题的。
+
+**使用DOMfragment**
+
+当我们需要批量执行一些插入类型的DOM操作时，可以使用文档碎片对象来进行操作，其相当于时提供了一个临时存储DOM节点的容器，因为其存在内存中不在页面中，所以做一些操作的时候并不会引起回流、重绘之类的东西。
+
+这个操作是节约性能的一个大杀器，vue3的源码就有使用到这个操作。
+
+#### DOM特性以及属性
+
+理解了这个之后，可以非常快速的获取DOM的属性
+
+```html
+<div data-dz="xuexue"></div>
+<script>
+  const div = document.querySelector("div");
+  div.setAttribute("id", "jimmy");
+  console.log(div.id); // jimmy
+  console.log(div.getAttribute("id")); // jimmy
+  console.log(div["data-dz"]); // undefined
+  console.log(div.getAttribute("data-dz")); // xuexue
+</script>
+```
+
+我们会发现，我们获取div的id可以使用：
+
+- div.getAttribute('id')
+- div.id
+
+以上两个方式都可以获取，我们会发现使用`div.id`是更加快速的获取。
+
+但是一些自定义的属性我们是不可以直接通过点的方法来获取的，这就必须得使用`getAttribute`来进行获取了。
+
+**注意**
+
+在HTML5中，为了遵循规范，建议使用`data-`作为自定义属性的前缀，这是很好的定义方式，也可以区分是自定义的属性还是原生的属性。
+
+#### 样式特性
+
+我们使用JS操作DOM的时候很多情况下都是会对DOM的一些样式进行操作，如一些通过JS操作的动画都是获取元素的style属性，而style属性就是DOM属性上最复杂的一个，因为它不是字符串，而是一个对象。
+
+因为style属性是一个对象，所以如我们获取颜色可以`DOM.style.color`，但是名字并不是全部都可以按照CSS属性名进行获取的。
+
+- 获取`font-size`属性：
+
+  `DOM.style.fontSize`而不是`DOM.style.font-size`，这是个细节，css属性中有使用`-`的属性对应到JS的DOM操作都需要改成驼峰命名的方式。
+
+  之所以JS要重新定义这套驼峰逻辑本质上也是没有办法，因为`-`在js中会被理解成减法运算符，所以只能重写一趟驼峰逻辑。
+
+- 属性值的多样性
+
+  ```html
+  <div style="color: #000"></div>
+  <script>
+    let div = document.querySelector("div");
+    console.log(div.style.color);
+  </script>
+  ```
+
+  这里获取到的颜色在不同的浏览器结果可能是不一样的，结果可能会是`#000`也有可能会是`rgb(0,0,0)`，所以当需要判断颜色的时候需要严谨的写if语句，如：
+
+  ```js
+  if(div.style.color === 'rgb(0,0,0)'||div.style.color === '#000'){
+      alert('颜色为黑色')
+  }
+  ```
+
+**好用的计算样式**
+
+写代码也蛮久的了，我是第一次知道DOM的这个方法，理解了之后可以说这个方法非常之好用，而且是现代浏览器的标准方法！它就是`getComputedStyle`看名字像是计算样式。
+
+```html
+<div style="color: red; font-size: 30px">hello world</div>
+<script>
+  function fetchComputedStyle(element, property) {
+    const computedStyle = getComputedStyle(element);
+    if (computedStyle) {
+      property = property.replace(/([A-Z])/g, "-$1").toLowerCase();
+      return computedStyle.getPropertyValue(property);
+    }
+  }
+  document.addEventListener("DOMContentLoaded", () => {
+    const div = document.querySelector("div");
+    console.log(fetchComputedStyle(div, "color"));
+    console.log(fetchComputedStyle(div, "font-size"));
+  });
+</script>
+```
+
+使用`getComputedStyle`可以获取一个DOM的计算样式对象，之后使用这个对象的`getPropertyValue()`方法传递一个属性，即可获取属性值，确实是很好用，尤其是可以和例子那样加个正则，使其支持CSS的连字符样式属性！！！
+
+#### 避免布局抖动
+
+布局抖动是很容易发生的事情，原因是当我们强制浏览器执行大量的（可能不需要的）重新计算，这个就是造成布局抖动的元凶。这个问题的元凶就在于，每当我们修改DOM的时候，浏览器必须在读取任何布局信息之前先重新计算布局，这就会对性能造成大量的损耗
+
+```html
+<div style="color: red; font-size: 30px" id="div1">hello</div>
+<div style="color: red; font-size: 30px" id="div2">world</div>
+<script>
+  let div1 = document.getElementById("div1");
+  let div2 = document.getElementById("div2");
+  // 读写
+  const div1Width = div1.clientWidth;
+  div1.style.width = div1Width / 2 + "px";
+  // 读写
+  const div2Width = div2.clientWidth;
+  div2.style.width = div2Width / 2 + "px";
+</script>
+```
+
+一连串的读写对性能的损耗是很大的，我们可以优化代码为：
+
+```html
+<div style="color: red; font-size: 30px" id="div1">hello</div>
+<div style="color: red; font-size: 30px" id="div2">world</div>
+<script>
+  let div1 = document.getElementById("div1");
+  let div2 = document.getElementById("div2");
+  // 读
+  const div1Width = div1.clientWidth;
+  const div2Width = div2.clientWidth;
+  // 写
+  div1.style.width = div1Width / 2 + "px";
+  div2.style.width = div2Width / 2 + "px";
+</script>
+```
+
+以上的操作是我们批量的处理读和写，性能上会好很多。
+
+会引起布局抖动的API和属性有蛮多的，其中对于DOM来说，一些涉及宽高、大小之类的属性如果操作不当就会发生问题。
