@@ -1668,3 +1668,256 @@ ESM 也是有一些细节的
 以上的操作是我们批量的处理读和写，性能上会好很多。
 
 会引起布局抖动的API和属性有蛮多的，其中对于DOM来说，一些涉及宽高、大小之类的属性如果操作不当就会发生问题。
+
+### 事件
+
+JS是单线程+事件驱动的，所以事件是一个非常重要的知识点，事件写好可以极大的优化代码结构，让代码更加的优雅，性能能高！
+
+#### 深入理解事件循环
+
+这里记录了比较多理论的知识，代码相对不好演示，建议小伙伴们自己去看个书。
+
+事件循环前面很简答的记录过一次，在过去，我以为我明白的差不多了，但是当读完书之后才发现自己只是处于一知半解的水平，而且对于自己想的答案并不自信，很多东西之前知道又忘记了，所以这里系统的复习一下：
+
+事件循环比较重要的是我们需要知道两个重要的任务队列： **红任务**，**微任务**。
+
+宏任务的例子有很多，几乎所有的页面事件、网络事件、定时器事件等等。
+
+微任务的例子过去我只知道一个Promise，其实还有DOM发生变化等等（其实这个我也还是不清晰）。
+
+**模型图**
+
+事件循环的基本原则：
+
+- 一次只会执行一个任务
+- 一个任务开始后直到运行完成，不会被其他任务中断
+- 再一次迭代中，事件循环将首先检查宏任务队列
+  - 如果有宏任务在等待状态，则会立即执行宏任务。
+  - 如果没有宏任务，则跳过这个阶段
+- 宏任务阶段结束之后会立即转向微任务队列，开始轮询执行微任务，直到微任务全部执行完毕（微任务队列为空），之后会再次转向执行宏任务。
+
+注意点：
+
+- 两类任务都是独立于事件循环的，这意味着添加任务的行为是发生在事件循环之外的（如果不这样也很好理解，在执行JS的时候有的任务会被忽略）
+- 浏览器通常会尝试每秒渲染60次页面（60FPS）,这意味着浏览器会尝试在16ms内渲染一帧
+- 要注意事件处理函数发生的频率以及执行耗时，如鼠标移动事件，如果操作不当会导致页面卡顿，造成用户体验拉跨。所以要注意防抖和节流的使用。
+
+#### 计时器
+
+计时器几乎现在开发离不开了，用它可以很好的做一些调试，页面动画、等其他高阶操作，但是它同样也有着很多的使用细节：
+
+- 计时器的时间表示的是 **至少** 指定的时长之后执行回调函数里面的操作
+
+  ```js
+  let count = 0;
+  for (let i = 0; i < 1000000000; i++) {
+    count++;
+  }
+  setTimeout(() => {
+    console.log('执行结束了');
+  }, 100);
+  ```
+
+  以上定时器的时间肯定不是100毫秒就执行，因为setTimeout的处理函数会被放入到宏任务队列中，主线程的代码执行需要花费时间。所以要清晰 **至少** 的这个概念。
+
+#### 通过DOM代理事件
+
+通过DOM代理事件这种操作非常的好用！可以极大的减轻我们的代码量，让代码更加的优化，要使用我们需要将两个恶心的词记清楚：**捕获**、**冒泡**。
+
+这个知识点我应该是看了不下五遍，现在终于是能分清楚什么是捕获什么是冒泡了，结合生活实际，冒泡可以想象成烧开水过程，水开了之后气泡从中间向外扩散，捕获可以理解成我们要在某个事件发生之前先捕获到这个事情。用这个方式去记应该就能比较好的分清楚哪个对应哪个了。
+
+**addEventLinstener**的细节
+
+之前在第一部分内容对比过addEventLinstener和onclick之类属性绑定的所具有的优势，其实还有其他的优势，使用addEventLinstener我们可以指定事件传播方式（冒泡还是捕获）
+
+addEventLinstener其实是可以接收参数的，过去我们常常只写两个参数就行了是吗，因为第三个参数是有默认值的，如`div.addEventListener('click',()=>{},true)`第三个参数就是用来表示是事件是冒泡还是捕获
+
+- true：启动捕获模式
+- false：启动冒泡模式
+
+W3C更倾向于默认冒泡，所以默认是冒泡事件，即默认false。
+
+**冒泡**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #out {
+        width: 200px;
+        height: 200px;
+        background-color: skyblue;
+      }
+      #inner {
+        width: 100px;
+        height: 100px;
+        background-color: slateblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="out">
+      <div id="inner"></div>
+    </div>
+  </body>
+  <script>
+    document.body.addEventListener("click", () => {
+      console.log("body");
+    });
+    document.getElementById("out").addEventListener("click", () => {
+      console.log("out");
+    });
+    document.getElementById("inner").addEventListener("click", () => {
+      console.log("inner");
+    });
+  </script>
+</html>
+```
+
+当我们点击innerdiv的时候，会输出inner、out、body，由内向外，就是冒泡事件，没啥毛病。
+
+**捕获**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #out {
+        width: 200px;
+        height: 200px;
+        background-color: skyblue;
+      }
+      #inner {
+        width: 100px;
+        height: 100px;
+        background-color: slateblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="out">
+      <div id="inner"></div>
+    </div>
+  </body>
+  <script>
+    document.body.addEventListener("click", () => {
+      console.log("body");
+    },true);
+    document.getElementById("out").addEventListener("click", () => {
+      console.log("out");
+    },true);
+    document.getElementById("inner").addEventListener("click", () => {
+      console.log("inner");
+    },true);
+  </script>
+</html>
+```
+
+这回还是一样的操作，但是输出的内容是相反的，是body、out、inner，是捕获的过程。
+
+**混合使用**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #out {
+        width: 200px;
+        height: 200px;
+        background-color: skyblue;
+      }
+      #inner {
+        width: 100px;
+        height: 100px;
+        background-color: slateblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="out">
+      <div id="inner"></div>
+    </div>
+  </body>
+  <script>
+    document.body.addEventListener("click", () => {
+      console.log("body");
+    },true);
+    document.getElementById("out").addEventListener("click", () => {
+      console.log("out");
+    });
+    document.getElementById("inner").addEventListener("click", () => {
+      console.log("inner");
+    },true);
+  </script>
+</html>
+```
+
+还是一样点击innerdiv，因为out已经被我们改成了冒泡模式，所以最终的结果是，body、inner、out
+
+**使用代理模式优化代码**
+
+还是上面的例子，当我们如果一个类型的每个div都要添加点击事件然后做处理，其实代码是可以稍微优化一下的，借助代理（委托）的思路实现：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #out {
+        width: 200px;
+        height: 200px;
+        background-color: skyblue;
+      }
+      #inner {
+        width: 100px;
+        height: 100px;
+        background-color: slateblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="out">
+      <div id="inner"></div>
+    </div>
+  </body>
+  <script>
+    document.body.addEventListener("click", (e) => {
+      switch (e.target.id) {
+        case "out":
+          console.log("点到outer上了");
+          break;
+        case "inner":
+          console.log("点到inner上了");
+          break;
+        default:
+          console.log("啥也不是！！！");
+      }
+    });
+  </script>
+</html>
+```
+
+使用委托，我们非常清爽的写出了代码，结构非常的清晰，比注册三个事件循环还是好很多的。
+
+#### 总结
+
+事件循环的概念还是非常重要的，加深了理解，另外我清晰了冒泡和捕获的概念，知道了原来默认支持的是冒泡事件。以及如果使用委托相对优雅的写一些特殊的代码。
