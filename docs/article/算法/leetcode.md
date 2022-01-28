@@ -1037,11 +1037,11 @@ permute([1, 2, 3]);
 
 **原型图**
 
-![image-20220126203754555](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220126203754555.png)
+![image-20220127212353493](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220127212353493.png)
 
 **效果**
 
-![成绩](https://vitepress-source.oss-cn-beijing.aliyuncs.com/res1.png)
+![image-20220127212410423](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220127212410423.png)
 
 #### 源代码
 
