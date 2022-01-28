@@ -12,22 +12,22 @@
 
 ```vue
 <template>
-  <div class="demo">
-    <iframe
-      src="//player.bilibili.com/player.html?aid=465391686&bvid=BV1pL411V7me&cid=476632469&page=1"
-      scrolling="no"
-      border="0"
-      frameborder="no"
-      framespacing="0"
-      allowfullscreen="true"
-    >
-    </iframe>
-  </div>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=465391686&bvid=BV1pL411V7me&cid=476632469&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
 </template>
 <style>
 .demo > iframe {
-  width: 100%;
-  height: 450px;
+	width: 100%;
+	height: 450px;
 }
 </style>
 ```
@@ -105,22 +105,22 @@
 
 ```vue
 <template>
-  <div class="demo">
-    <iframe
-      src="//player.bilibili.com/player.html?aid=935351395&bvid=BV18T4y127j1&cid=474874163&page=1"
-      scrolling="no"
-      border="0"
-      frameborder="no"
-      framespacing="0"
-      allowfullscreen="true"
-    >
-    </iframe>
-  </div>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=935351395&bvid=BV18T4y127j1&cid=474874163&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
 </template>
 <style>
 .demo > iframe {
-  width: 100%;
-  height: 450px;
+	width: 100%;
+	height: 450px;
 }
 </style>
 ```
@@ -158,10 +158,10 @@
 
     ```js
     let a = 1,
-      b = 2;
-    let temp = a;
-    a = b;
-    b = a;
+    	b = 2
+    let temp = a
+    a = b
+    b = a
     ```
 
 #### 链表也是一样，只是链表的数据结构有所不同
@@ -187,23 +187,23 @@
  * @return {ListNode}
  */
 var swapPairs = function (head) {
-  let demo = head;
-  let index = 0;
-  let temp = new ListNode(null);
-  while (demo) {
-    if (index % 2 === 0) {
-      temp.val = demo.val;
-      if (demo.next) {
-        demo.val = demo.next.val;
-      }
-    } else {
-      demo.val = temp.val;
-    }
-    index++;
-    demo = demo.next;
-  }
-  return head;
-};
+	let demo = head
+	let index = 0
+	let temp = new ListNode(null)
+	while (demo) {
+		if (index % 2 === 0) {
+			temp.val = demo.val
+			if (demo.next) {
+				demo.val = demo.next.val
+			}
+		} else {
+			demo.val = temp.val
+		}
+		index++
+		demo = demo.next
+	}
+	return head
+}
 ```
 
 #### 总结
@@ -224,22 +224,22 @@ var swapPairs = function (head) {
 
 ```vue
 <template>
-  <div class="demo">
-    <iframe
-      src="//player.bilibili.com/player.html?aid=765364749&bvid=BV1Zr4y1m74w&cid=475644754&page=1"
-      scrolling="no"
-      border="0"
-      frameborder="no"
-      framespacing="0"
-      allowfullscreen="true"
-    >
-    </iframe>
-  </div>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=765364749&bvid=BV1Zr4y1m74w&cid=475644754&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
 </template>
 <style>
 .demo > iframe {
-  width: 100%;
-  height: 450px;
+	width: 100%;
+	height: 450px;
 }
 </style>
 ```
@@ -290,22 +290,22 @@ var swapPairs = function (head) {
 
 ```vue
 <template>
-  <div class="demo">
-    <iframe
-      src="//player.bilibili.com/player.html?aid=850413721&bvid=BV1aL4y1t75Q&cid=477449479&page=1"
-      scrolling="no"
-      border="0"
-      frameborder="no"
-      framespacing="0"
-      allowfullscreen="true"
-    >
-    </iframe>
-  </div>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=850413721&bvid=BV1aL4y1t75Q&cid=477449479&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
 </template>
 <style>
 .demo > iframe {
-  width: 100%;
-  height: 450px;
+	width: 100%;
+	height: 450px;
 }
 </style>
 ```
@@ -387,22 +387,22 @@ var swapPairs = function (head) {
 
 ```vue
 <template>
-  <div class="demo">
-    <iframe
-      src="//player.bilibili.com/player.html?aid=423008586&bvid=BV1r3411e7Fx&cid=480740745&page=1"
-      scrolling="no"
-      border="0"
-      frameborder="no"
-      framespacing="0"
-      allowfullscreen="true"
-    >
-    </iframe>
-  </div>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=423008586&bvid=BV1r3411e7Fx&cid=480740745&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
 </template>
 <style>
 .demo > iframe {
-  width: 100%;
-  height: 450px;
+	width: 100%;
+	height: 450px;
 }
 </style>
 ```
@@ -492,50 +492,50 @@ var swapPairs = function (head) {
  * @return {boolean}
  */
 var isValidSudoku = function (board) {
-  let rowGap = [];
-  let colGap = [];
-  let boxGap = [[], [], [], [], [], [], [], [], []];
-  for (let i = 0; i < board.length; i++) {
-    // 处理列
-    colGap = [];
-    for (let l = 0; l < board.length; l++) {
-      if (board[l][i] !== '.') {
-        if (colGap.includes(board[l][i])) {
-          return false;
-        } else {
-          colGap.push(board[l][i]);
-        }
-      }
-    }
+	let rowGap = []
+	let colGap = []
+	let boxGap = [[], [], [], [], [], [], [], [], []]
+	for (let i = 0; i < board.length; i++) {
+		// 处理列
+		colGap = []
+		for (let l = 0; l < board.length; l++) {
+			if (board[l][i] !== '.') {
+				if (colGap.includes(board[l][i])) {
+					return false
+				} else {
+					colGap.push(board[l][i])
+				}
+			}
+		}
 
-    for (let j = 0; j < board[i].length; j++) {
-      // 处理格子
-      let m = parseInt(i / 3),
-        n = parseInt(j / 3);
-      if (board[i][j] !== '.') {
-        if (boxGap[m * 3 + n].includes(board[i][j])) {
-          return false;
-        } else {
-          boxGap[m * 3 + n].push(board[i][j]);
-        }
-      }
-      // 处理行
-      if (j === 0) {
-        rowGap = [];
-      }
-      if (j <= board[i].length - 1) {
-        if (board[i][j] !== '.') {
-          if (rowGap.includes(board[i][j])) {
-            return false;
-          } else {
-            rowGap.push(board[i][j]);
-          }
-        }
-      }
-    }
-  }
-  return true;
-};
+		for (let j = 0; j < board[i].length; j++) {
+			// 处理格子
+			let m = parseInt(i / 3),
+				n = parseInt(j / 3)
+			if (board[i][j] !== '.') {
+				if (boxGap[m * 3 + n].includes(board[i][j])) {
+					return false
+				} else {
+					boxGap[m * 3 + n].push(board[i][j])
+				}
+			}
+			// 处理行
+			if (j === 0) {
+				rowGap = []
+			}
+			if (j <= board[i].length - 1) {
+				if (board[i][j] !== '.') {
+					if (rowGap.includes(board[i][j])) {
+						return false
+					} else {
+						rowGap.push(board[i][j])
+					}
+				}
+			}
+		}
+	}
+	return true
+}
 ```
 
 ## 括号生成
@@ -552,22 +552,22 @@ var isValidSudoku = function (board) {
 
 ```vue
 <template>
-  <div class="demo">
-    <iframe
-      src="//player.bilibili.com/player.html?aid=680331744&bvid=BV1cS4y1T7mX&cid=473737161&page=1"
-      scrolling="no"
-      border="0"
-      frameborder="no"
-      framespacing="0"
-      allowfullscreen="true"
-    >
-    </iframe>
-  </div>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=680331744&bvid=BV1cS4y1T7mX&cid=473737161&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
 </template>
 <style>
 .demo > iframe {
-  width: 100%;
-  height: 450px;
+	width: 100%;
+	height: 450px;
 }
 </style>
 ```
@@ -613,38 +613,38 @@ var isValidSudoku = function (board) {
  * @return {string[]}
  */
 var generateParenthesis = function (n) {
-  let arr = []; // 存放结果数组
-  diff(0, 0, n, '');
-  /**
-   * @param {number} left
-   * @param {number} right
-   * @param {number} n
-   * @param {string} str
-   */
-  function diff(left, right, n, str) {
-    // 什么时候应该退出呢？
-    // 左括号的数量+右括号的数量 === N*2 就应该退出递归
-    if (left + right === n * 2) {
-      arr.push(str);
-      return;
-    }
+	let arr = [] // 存放结果数组
+	diff(0, 0, n, '')
+	/**
+	 * @param {number} left
+	 * @param {number} right
+	 * @param {number} n
+	 * @param {string} str
+	 */
+	function diff(left, right, n, str) {
+		// 什么时候应该退出呢？
+		// 左括号的数量+右括号的数量 === N*2 就应该退出递归
+		if (left + right === n * 2) {
+			arr.push(str)
+			return
+		}
 
-    // 什么时候应该递归？
-    // 左括号的数量小于数字 n = 3 时，可以递归
-    if (left < n) {
-      //  n == 3 (( =》 (((
-      diff(left + 1, right, n, str + '(');
-    }
+		// 什么时候应该递归？
+		// 左括号的数量小于数字 n = 3 时，可以递归
+		if (left < n) {
+			//  n == 3 (( =》 (((
+			diff(left + 1, right, n, str + '(')
+		}
 
-    // 右括号数量小于左括号数量时，可以递归
-    if (right < left) {
-      //  (() =》 (()) (())( => (())()
-      diff(left, right + 1, n, str + ')');
-    }
-  }
-};
+		// 右括号数量小于左括号数量时，可以递归
+		if (right < left) {
+			//  (() =》 (()) (())( => (())()
+			diff(left, right + 1, n, str + ')')
+		}
+	}
+}
 
-generateParenthesis(3); // ["((()))","(()())","(())()","()(())","()()()"]
+generateParenthesis(3) // ["((()))","(()())","(())()","()(())","()()()"]
 ```
 
 ## 组合总和
@@ -661,22 +661,22 @@ generateParenthesis(3); // ["((()))","(()())","(())()","()(())","()()()"]
 
 ```vue
 <template>
-  <div class="demo">
-    <iframe
-      src="//player.bilibili.com/player.html?aid=678071060&bvid=BV1Bm4y1D7jJ&cid=482357628&page=1"
-      scrolling="no"
-      border="0"
-      frameborder="no"
-      framespacing="0"
-      allowfullscreen="true"
-    >
-    </iframe>
-  </div>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=678071060&bvid=BV1Bm4y1D7jJ&cid=482357628&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
 </template>
 <style>
 .demo > iframe {
-  width: 100%;
-  height: 450px;
+	width: 100%;
+	height: 450px;
 }
 </style>
 ```
@@ -740,24 +740,24 @@ candidates 中的 同一个 数字可以 无限制重复被选取 。如果至�
  * @return {number[][]}
  */
 var combinationSum = function (candidates, target) {
-  let res = [];
-  let temp = [];
-  candidates.sort((a, b) => a - b);
-  handleBack(candidates, 0, target);
-  function handleBack(arr, start, target) {
-    if (target === 0) {
-      res.push([...temp]);
-      return;
-    }
-    for (let i = start; i < arr.length; i++) {
-      if (arr[i] > target) break;
-      temp.push(arr[i]); // 添加一个值 分别将每个值都相加 放入递归函数中执行
-      handleBack(arr, i, target - arr[i]); // 将添加一个值的情况进入回溯递归
-      temp.pop(); // 再去掉这个值 因为这个数组 后面还要加入其他的值  这个非常的关键！！！
-    }
-  }
-  return res;
-};
+	let res = []
+	let temp = []
+	candidates.sort((a, b) => a - b)
+	handleBack(candidates, 0, target)
+	function handleBack(arr, start, target) {
+		if (target === 0) {
+			res.push([...temp])
+			return
+		}
+		for (let i = start; i < arr.length; i++) {
+			if (arr[i] > target) break
+			temp.push(arr[i]) // 添加一个值 分别将每个值都相加 放入递归函数中执行
+			handleBack(arr, i, target - arr[i]) // 将添加一个值的情况进入回溯递归
+			temp.pop() // 再去掉这个值 因为这个数组 后面还要加入其他的值  这个非常的关键！！！
+		}
+	}
+	return res
+}
 ```
 
 ## 组合总和 Ⅱ
@@ -774,22 +774,22 @@ var combinationSum = function (candidates, target) {
 
 ```vue
 <template>
-  <div class="demo">
-    <iframe
-      src="//player.bilibili.com/player.html?aid=678073980&bvid=BV1zm4y1D7k8&cid=482993426&page=1"
-      scrolling="no"
-      border="0"
-      frameborder="no"
-      framespacing="0"
-      allowfullscreen="true"
-    >
-    </iframe>
-  </div>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=678073980&bvid=BV1zm4y1D7k8&cid=482993426&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
 </template>
 <style>
 .demo > iframe {
-  width: 100%;
-  height: 450px;
+	width: 100%;
+	height: 450px;
 }
 </style>
 ```
@@ -858,29 +858,29 @@ candidates 中的每个元素在每个组合中只能使用 一次 。
  * @return {number[][]}
  */
 var combinationSum = function (candidates, target) {
-  let res = [];
-  let temp = [];
-  candidates.sort((a, b) => a - b);
-  handleBack(candidates, 0, target);
-  function handleBack(arr, start, target) {
-    if (target === 0) {
-      res.push([...temp]);
-      return;
-    }
-    for (let i = start; i < arr.length; i++) {
-      if (arr[i] > target) break;
-      if (i > start && arr[i] === arr[i - 1]) {
-        // 当前要减的值和上一个值相同时，不需要处理
-        continue;
-      } else {
-        temp.push(arr[i]);
-        handleBack(arr, i + 1, target - arr[i]);
-        temp.pop();
-      }
-    }
-  }
-  return res;
-};
+	let res = []
+	let temp = []
+	candidates.sort((a, b) => a - b)
+	handleBack(candidates, 0, target)
+	function handleBack(arr, start, target) {
+		if (target === 0) {
+			res.push([...temp])
+			return
+		}
+		for (let i = start; i < arr.length; i++) {
+			if (arr[i] > target) break
+			if (i > start && arr[i] === arr[i - 1]) {
+				// 当前要减的值和上一个值相同时，不需要处理
+				continue
+			} else {
+				temp.push(arr[i])
+				handleBack(arr, i + 1, target - arr[i])
+				temp.pop()
+			}
+		}
+	}
+	return res
+}
 ```
 
 ## 全排列
@@ -895,22 +895,22 @@ var combinationSum = function (candidates, target) {
 
 ```vue
 <template>
-  <div class="demo">
-    <iframe
-      src="//player.bilibili.com/player.html?aid=765947112&bvid=BV1Br4y1e7fV&cid=493288637&page=1"
-      scrolling="no"
-      border="0"
-      frameborder="no"
-      framespacing="0"
-      allowfullscreen="true"
-    >
-    </iframe>
-  </div>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=765947112&bvid=BV1Br4y1e7fV&cid=493288637&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
 </template>
 <style>
 .demo > iframe {
-  width: 100%;
-  height: 450px;
+	width: 100%;
+	height: 450px;
 }
 </style>
 ```
@@ -950,8 +950,6 @@ var combinationSum = function (candidates, target) {
 
 **效果**
 
-
-
 #### 源代码
 
 ```js
@@ -960,25 +958,25 @@ var combinationSum = function (candidates, target) {
  * @return {number[][]}
  */
 var permute = function (nums) {
-  if (nums.length === 1) {
-    return [nums];
-  }
-  let res = [];
-  const diff = (path, parameter) => {
-    if (parameter.length === 0) {
-      res.push(path);
-      return;
-    }
-    for (let i = 0; i < parameter.length; i++) {
-      let item = parameter[i];
-      parameter.splice(i, 1);
-      diff([...path, item], parameter);
-      parameter.splice(i, 0, item);
-    }
-  };
-  diff([], nums);
-};
-permute([1, 2, 3]);
+	if (nums.length === 1) {
+		return [nums]
+	}
+	let res = []
+	const diff = (path, parameter) => {
+		if (parameter.length === 0) {
+			res.push(path)
+			return
+		}
+		for (let i = 0; i < parameter.length; i++) {
+			let item = parameter[i]
+			parameter.splice(i, 1)
+			diff([...path, item], parameter)
+			parameter.splice(i, 0, item)
+		}
+	}
+	diff([], nums)
+}
+permute([1, 2, 3])
 ```
 
 ## 全排列 Ⅱ
@@ -987,6 +985,32 @@ permute([1, 2, 3]);
 难度：**中级**
 
 思想：**回溯**
+:::
+
+:::demo
+
+```vue
+<template>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=851006005&bvid=BV1GL4y1x7RP&cid=494084751&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
+</template>
+<style>
+.demo > iframe {
+	width: 100%;
+	height: 450px;
+}
+</style>
+```
+
 :::
 
 #### 题目
@@ -1005,7 +1029,6 @@ permute([1, 2, 3]);
 输入：nums = [1,2,3]
 输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
 
-
 提示：
 
 1 <= nums.length <= 8
@@ -1013,25 +1036,23 @@ permute([1, 2, 3]);
 
 #### 解题思路
 
+这题的解题思路和上一题是 全排列 是一样的，区别在于多了一个条件
 
+- 数组内容可能会有重复的数字
 
- 这题的解题思路和上一题是 全排列 是一样的，区别在于多了一个条件
-
-  - 数组内容可能会有重复的数字
-
- 所以整体的逻辑和上一题基本保持一致，使用回溯的套路即可快速解题。因为数组的成员可能会重复，所以和上一题相比会多几步操作：
+所以整体的逻辑和上一题基本保持一致，使用回溯的套路即可快速解题。因为数组的成员可能会重复，所以和上一题相比会多几步操作：
 
 1. 先将整个数组进行一次排序
 
-2. 我们我们分别创建两个数组 一个空数组 一个存放nums
+2. 我们我们分别创建两个数组 一个空数组 一个存放 nums
 
-3. 每次递归都往第一个数组中存放一个nums中的一个值  nums就减去一个值
+3. 每次递归都往第一个数组中存放一个 nums 中的一个值 nums 就减去一个值
 
-4. 如果nums中取的值和前一个取的值一样，则直接跳过 取下一个值
+4. 如果 nums 中取的值和前一个取的值一样，则直接跳过 取下一个值
 
 5. 递归不断执行上面那个过程的
 
-6. 当nums为空时 说明已经全部添加完成了 这时候将这个结果存入 结果数组中
+6. 当 nums 为空时 说明已经全部添加完成了 这时候将这个结果存入 结果数组中
 
 7. 最后将这个结果数组进行返回即可。
 
@@ -1051,31 +1072,31 @@ permute([1, 2, 3]);
  * @return {number[][]}
  */
 var permuteUnique = function (nums) {
-  if (nums.length === 1) {
-    return [nums];
-  }
-  nums.sort((a, b) => a - b);
-  let res = [];
-  let temp = null;
-  const diff = (path, params) => {
-    if (params.length === 0) {
-      res.push(path);
-      return;
-    }
-    for (let i = 0; i < params.length; i++) {
-      if (params[i] === params[i - 1]) {
-        continue;
-      } else {
-        temp = params[i];
-        params.splice(i, 1);
-        diff([...path, temp], params);
-        params.splice(i, 0, temp);
-      }
-    }
-  };
-  diff([], nums);
-  return res
-};
+	if (nums.length === 1) {
+		return [nums]
+	}
+	nums.sort((a, b) => a - b)
+	let res = []
+	let temp = null
+	const diff = (path, params) => {
+		if (params.length === 0) {
+			res.push(path)
+			return
+		}
+		for (let i = 0; i < params.length; i++) {
+			if (params[i] === params[i - 1]) {
+				continue
+			} else {
+				temp = params[i]
+				params.splice(i, 1)
+				diff([...path, temp], params)
+				params.splice(i, 0, temp)
+			}
+		}
+	}
+	diff([], nums)
+	return res
+}
 ```
 
 ## 旋转图像
@@ -1094,7 +1115,6 @@ var permuteUnique = function (nums) {
 
 示例 1：
 
-
 输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]
 输出：[[7,4,1],[8,5,2],[9,6,3]]
 示例 2：
@@ -1108,7 +1128,7 @@ var permuteUnique = function (nums) {
 
 但是题目是有要求的，要求我们只能原地的修改数组，所以暴力破解法在这里不能使用，得使用更加巧妙的方法。这个方法我是看官方解题的视频学来的。
 
-将每个点都使用坐标进行表示，我们会发现 旋转90度其实是内部的坐标一些变化。如：
+将每个点都使用坐标进行表示，我们会发现 旋转 90 度其实是内部的坐标一些变化。如：
 
 ```
 (0,0) => (2,0)
@@ -1119,7 +1139,7 @@ var permuteUnique = function (nums) {
 
 涉及到的不是两两交换，而是**四个元素**之间的互相交换。
 
-所以真的难的是我们要判断哪四个点之间要交换，最后执行一次交换  就能进行解题了。 也推荐大家看下leetcode官方解题
+所以真的难的是我们要判断哪四个点之间要交换，最后执行一次交换 就能进行解题了。 也推荐大家看下 leetcode 官方解题
 
 **原型图**
 
@@ -1130,34 +1150,31 @@ var permuteUnique = function (nums) {
 ```js
 // 暴力破解法
 var rotate = function (matrix) {
-  let res = [];
-  for (let i = 0; i < matrix.length; i++) {
-    let temp = [];
-    for (let j = matrix.length - 1; j >= 0; j--) {
-      temp.push(matrix[j][i]);
-    }
-    res.push(temp);
-  }
-  matrix = res;
-};
+	let res = []
+	for (let i = 0; i < matrix.length; i++) {
+		let temp = []
+		for (let j = matrix.length - 1; j >= 0; j--) {
+			temp.push(matrix[j][i])
+		}
+		res.push(temp)
+	}
+	matrix = res
+}
 
 // leetcode官方解题 - 四四交换
 var rotate = function (matrix) {
-  let n = matrix.length;
-  let temp;
-  for (let i = 0; i < n / 2; i++) {
-    for (let j = i; j < n - 1 - i; j++) {
-      // 这里是四个点进行互相交换
-      temp = matrix[i][j];
-      matrix[i][j] = matrix[n - 1 - j][i];
-      matrix[n - 1 - j][i] = matrix[n - 1 - i][n - 1 - j];
-      matrix[n - 1 - i][n - 1 - j] = matrix[j][n - 1 - i];
-      matrix[j][n - 1 - i] = temp;
-    }
-  }
-  console.log(matrix);
-};
+	let n = matrix.length
+	let temp
+	for (let i = 0; i < n / 2; i++) {
+		for (let j = i; j < n - 1 - i; j++) {
+			// 这里是四个点进行互相交换
+			temp = matrix[i][j]
+			matrix[i][j] = matrix[n - 1 - j][i]
+			matrix[n - 1 - j][i] = matrix[n - 1 - i][n - 1 - j]
+			matrix[n - 1 - i][n - 1 - j] = matrix[j][n - 1 - i]
+			matrix[j][n - 1 - i] = temp
+		}
+	}
+	console.log(matrix)
+}
 ```
-
-
-
