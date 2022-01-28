@@ -509,3 +509,240 @@ class LinkList<T> {
 ### 双向链表
 
 尽管从链表的头节点遍历到尾节点很简单，但反过来，从后向前遍历则没那么简单。此时向链表插入一个节点需要更多的工作，我们需要指出该节点正确的前驱和后继。但是在从链表 中删除节点时，效率提高了，不需要再查找待删除节点的前驱节点了。
+
+双向链表另外一个好处是因为每一个节点都有对应的**前驱**和**后继**，所以当我们获取某个节点时可以很方便的直到这个节点的前驱节点是什么，而这个是单向链表所比较难的，因为这个，所以我们也可以很方便的反向输出链表（只要找到最后一个节点，然后依次输出前一个节点即可）
+
+```ts
+{
+  class Node {
+    constructor(
+      public element: any = null,
+      public previous: Node | null = null,
+      public next: Node | null = null
+    ) {}
+  }
+
+  class LinkList<T> {
+    public head = new Node("head");
+
+    private find(item: T): Node {
+      let current = this.head;
+      while (current.next) {
+        if (current.element === item) {
+          break;
+        } else {
+          current = current.next;
+        }
+      }
+      return current;
+    }
+
+    private findPrevious(item: T): Node {
+      let current = this.head;
+      while (current.next) {
+        if (current.next.element === item) {
+          break;
+        } else {
+          current = current.next;
+        }
+      }
+      return current;
+    }
+
+    private findLast(): Node {
+      let curent = this.head;
+      while (curent.next) {
+        curent = curent.next;
+      }
+      return curent;
+    }
+
+    public insert(element: T, item: T) {
+      let current = this.find(item);
+      let newNode = new Node(element);
+      if (current.next) {
+        // 双向链表插入元素
+        current.next.previous = newNode;
+        newNode.next = current.next;
+        newNode.previous = current;
+        current.next = newNode;
+      } else {
+        current.next = newNode;
+        newNode.previous = current;
+      }
+    }
+
+    public remove(item: T) {
+      let currNode = this.find(item);
+      if (!(currNode.next == null) && !(currNode.previous == null)) {
+        currNode.previous.next = currNode.next;
+        currNode.next.previous = currNode.previous;
+        currNode.next = null;
+        currNode.previous = null;
+      }
+    }
+
+    public display() {
+      let currNode = this.head;
+      // console.log(currNode);
+      while (currNode) {
+        console.log(currNode.element, currNode.previous?.element);
+        if (currNode.next) {
+          currNode = currNode.next;
+        } else {
+          break;
+        }
+      }
+    }
+
+    public dispReverse(): void {
+      let last = this.findLast();
+      // console.log(last.element);
+      while (last) {
+        console.log(last.element);
+        if (last.previous) {
+          last = last.previous;
+        } else {
+          break;
+        }
+      }
+    }
+  }
+  // 测试代码
+  let doubleLink = new LinkList<string>();
+
+  doubleLink.insert("jimmy", "head");
+  doubleLink.insert("xuexue", "jimmy");
+  doubleLink.insert("henry", "xuexue");
+  doubleLink.insert("jack", "henry");
+  // doubleLink.remove("xuexue");
+  doubleLink.display();
+  console.log("*************************");
+  doubleLink.dispReverse();
+}
+```
+
+### 循环链表
+
+循环链表和单链表是非常像的，都是一个节点只有一个后继，唯一区别的就在于最后一个节点的next指向的是head头节点，形成一个闭环。所以我们实现的代码其实只需要修改构造函数内部如:
+
+```ts
+{
+  class Node {
+    constructor(public element: any = null, public next: Node | null = null) {}
+  }
+
+  class LinkList<T> {
+    public head = new Node("head");
+    constructor() {
+      this.head.next = this.head;
+    }
+    find(item: T): Node {
+      let currNode = this.head;
+      while (currNode.next && currNode.next.element !== "head") {
+        if (currNode.element === item) {
+          break;
+        } else {
+          currNode = currNode.next;
+        }
+      }
+      return currNode;
+    }
+    findPrevious(item: T): Node {
+      // 查找一个元素的前一个元素
+      let currNode = this.head;
+      while (currNode.next) {
+        if (currNode.next.element === item) {
+          break;
+        } else {
+          currNode = currNode.next;
+        }
+      }
+      return currNode;
+    }
+    insert(newElement: T, item: T): void {
+      let node = new Node(newElement);
+      let currNode = this.find(item);
+      node.next = currNode.next;
+      currNode.next = node;
+    }
+    remove(item: T): void {
+      let prevNode = this.findPrevious(item);
+      if (prevNode.next) {
+        prevNode.next = prevNode.next.next;
+      }
+    }
+    display(): void {
+      let currNode = this.head;
+      while (currNode.next) {
+        console.log(currNode.element);
+        if (currNode.next && currNode.next.element !== 'head') {
+          currNode = currNode.next;
+        } else {
+          break;
+        }
+      }
+    }
+  }
+
+  let list = new LinkList<string>();
+  list.insert("Jimmy", "head");
+  list.insert("xuexue", "jimmy");
+  console.log("---------");
+  list.display();
+}
+```
+
+所以如果是循环链表，我们使用while循环遍历链表的时候一定要注意在合适的情况结束循环，否则将是一个死循环。
+
+**例题**
+
+传说在公元 1 世纪的犹太战争中，犹太历史学家弗拉维奥·约瑟夫斯和他的 40 个同胞被罗马士兵包围。犹太士兵决定宁可自杀也不做俘虏，于是商量出了一个自杀方案。他们围成一个圈，从一个人开始，数到第三个人时将第三个人杀死，然后再数，直到杀光所有人。约瑟夫和另外一个人决定不参加这个疯狂的游戏，他们快速地计算出了两个位置，站在那里得以幸存。写一段程序将 *n* 个人围成一圈，并且第 *m* 个人会被杀掉，计算一圈人中哪两个人最后会存活。使用循环链表解决该问题。
+
+**解答**
+
+我们需要使用循环链表，先初始化一个循环链表，再一次插入2-39个元素（头表示的就是第一个），之后再不断的进行删除，判断最后剩下的是哪两个元素。
+
+```ts
+let list = new LinkList<number>();
+list.insert(2, 1);
+for (let i = 3; i <= 40; i++) {
+  list.insert(i, i - 1);
+}
+
+const killOne = (list: LinkList<number>) => {
+  let start = list.head;
+  while (list.length >= 3) {
+    if (list.head.next?.next) {
+      let current = start.next?.next as Node;
+      start = current?.next as Node;
+      list.head = start;
+      list.remove(current.element);
+    }
+  }
+  console.log(list.head.element);
+  console.log(list.head.next.element);
+};
+
+killOne(list);
+```
+
+我也不知道我的理解的是否有错，第一个杀的是3然后6然后9.....最后剩下的是就是活下来的人。
+
+## 散列表（hashTable）
+
+散列表对于我来说是一个全新的知识点，其他的数据结构像栈、队列、链表之类的或多或少在大学里都听过，所以再看这块的知识就跟复习一样，而散列表的知识第一次看知识点感觉好新颖，有点像是对象的底层实现。
+
+这里散列表是基于数组来实现的，我理解的它最重要的是用来让我们存储一些键值对（先忽略为什么用数组实现键值对，我刚开始也很疑惑，最重要的是理解这个设计的思想）
+
+实现散列表需要知道的一个名词是 **碰撞**，理解这个词先要知道散列表到底是做的是啥，咋存储的。
+
+简单的说就是创建一个容量大小预先设定的数组，之后通过一个特殊的算法，将我们要存储的每个key，都转成一一对应的数值，之后将这个数值作为数组的下标，键值对的值作为这个下标下所存储的值。所以碰撞表示的是：**两个不同key通过算法处理之后对应的是同一个数字，后面被作为数组的索引存储我们的数组中。**
+
+我个人觉得能够手写散列表固然很牛逼很加分，但是了解基础的数据结构算法是更加重要的。
+
+**简单实现**
+
+```ts
+```
+
