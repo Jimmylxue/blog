@@ -499,7 +499,7 @@ var isValidSudoku = function (board) {
     // 处理列
     colGap = [];
     for (let l = 0; l < board.length; l++) {
-      if (board[l][i] !== '.') {
+      if (board[l][i] !== ".") {
         if (colGap.includes(board[l][i])) {
           return false;
         } else {
@@ -512,7 +512,7 @@ var isValidSudoku = function (board) {
       // 处理格子
       let m = parseInt(i / 3),
         n = parseInt(j / 3);
-      if (board[i][j] !== '.') {
+      if (board[i][j] !== ".") {
         if (boxGap[m * 3 + n].includes(board[i][j])) {
           return false;
         } else {
@@ -524,7 +524,7 @@ var isValidSudoku = function (board) {
         rowGap = [];
       }
       if (j <= board[i].length - 1) {
-        if (board[i][j] !== '.') {
+        if (board[i][j] !== ".") {
           if (rowGap.includes(board[i][j])) {
             return false;
           } else {
@@ -614,7 +614,7 @@ var isValidSudoku = function (board) {
  */
 var generateParenthesis = function (n) {
   let arr = []; // 存放结果数组
-  diff(0, 0, n, '');
+  diff(0, 0, n, "");
   /**
    * @param {number} left
    * @param {number} right
@@ -633,13 +633,13 @@ var generateParenthesis = function (n) {
     // 左括号的数量小于数字 n = 3 时，可以递归
     if (left < n) {
       //  n == 3 (( =》 (((
-      diff(left + 1, right, n, str + '(');
+      diff(left + 1, right, n, str + "(");
     }
 
     // 右括号数量小于左括号数量时，可以递归
     if (right < left) {
       //  (() =》 (()) (())( => (())()
-      diff(left, right + 1, n, str + ')');
+      diff(left, right + 1, n, str + ")");
     }
   }
 };
@@ -950,8 +950,6 @@ var combinationSum = function (candidates, target) {
 
 **效果**
 
-![成绩](https://vitepress-source.oss-cn-beijing.aliyuncs.com/quanpailie.png)
-
 #### 源代码
 
 ```js
@@ -989,6 +987,32 @@ permute([1, 2, 3]);
 思想：**回溯**
 :::
 
+:::demo
+
+```vue
+<template>
+  <div class="demo">
+    <iframe
+      src="//player.bilibili.com/player.html?aid=851006005&bvid=BV1GL4y1x7RP&cid=494084751&page=1"
+      scrolling="no"
+      border="0"
+      frameborder="no"
+      framespacing="0"
+      allowfullscreen="true"
+    >
+    </iframe>
+  </div>
+</template>
+<style>
+.demo > iframe {
+  width: 100%;
+  height: 450px;
+}
+</style>
+```
+
+:::
+
 #### 题目
 
 给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。
@@ -1005,7 +1029,6 @@ permute([1, 2, 3]);
 输入：nums = [1,2,3]
 输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
 
-
 提示：
 
 1 <= nums.length <= 8
@@ -1013,35 +1036,33 @@ permute([1, 2, 3]);
 
 #### 解题思路
 
+这题的解题思路和上一题是 全排列 是一样的，区别在于多了一个条件
 
+- 数组内容可能会有重复的数字
 
- 这题的解题思路和上一题是 全排列 是一样的，区别在于多了一个条件
-
-  - 数组内容可能会有重复的数字
-
- 所以整体的逻辑和上一题基本保持一致，使用回溯的套路即可快速解题。因为数组的成员可能会重复，所以和上一题相比会多几步操作：
+所以整体的逻辑和上一题基本保持一致，使用回溯的套路即可快速解题。因为数组的成员可能会重复，所以和上一题相比会多几步操作：
 
 1. 先将整个数组进行一次排序
 
-2. 我们我们分别创建两个数组 一个空数组 一个存放nums
+2. 我们我们分别创建两个数组 一个空数组 一个存放 nums
 
-3. 每次递归都往第一个数组中存放一个nums中的一个值  nums就减去一个值
+3. 每次递归都往第一个数组中存放一个 nums 中的一个值 nums 就减去一个值
 
-4. 如果nums中取的值和前一个取的值一样，则直接跳过 取下一个值
+4. 如果 nums 中取的值和前一个取的值一样，则直接跳过 取下一个值
 
 5. 递归不断执行上面那个过程的
 
-6. 当nums为空时 说明已经全部添加完成了 这时候将这个结果存入 结果数组中
+6. 当 nums 为空时 说明已经全部添加完成了 这时候将这个结果存入 结果数组中
 
 7. 最后将这个结果数组进行返回即可。
 
 **原型图**
 
-![image-20220126203754555](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220126203754555.png)
+![image-20220127212353493](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220127212353493.png)
 
 **效果**
 
-![成绩](https://vitepress-source.oss-cn-beijing.aliyuncs.com/res1.png)
+![image-20220127212410423](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220127212410423.png)
 
 #### 源代码
 
@@ -1074,7 +1095,7 @@ var permuteUnique = function (nums) {
     }
   };
   diff([], nums);
-  return res
+  return res;
 };
 ```
 
@@ -1094,7 +1115,6 @@ var permuteUnique = function (nums) {
 
 示例 1：
 
-
 输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]
 输出：[[7,4,1],[8,5,2],[9,6,3]]
 示例 2：
@@ -1108,7 +1128,7 @@ var permuteUnique = function (nums) {
 
 但是题目是有要求的，要求我们只能原地的修改数组，所以暴力破解法在这里不能使用，得使用更加巧妙的方法。这个方法我是看官方解题的视频学来的。
 
-将每个点都使用坐标进行表示，我们会发现 旋转90度其实是内部的坐标一些变化。如：
+将每个点都使用坐标进行表示，我们会发现 旋转 90 度其实是内部的坐标一些变化。如：
 
 ```
 (0,0) => (2,0)
@@ -1119,7 +1139,7 @@ var permuteUnique = function (nums) {
 
 涉及到的不是两两交换，而是**四个元素**之间的互相交换。
 
-所以真的难的是我们要判断哪四个点之间要交换，最后执行一次交换  就能进行解题了。 也推荐大家看下leetcode官方解题
+所以真的难的是我们要判断哪四个点之间要交换，最后执行一次交换 就能进行解题了。 也推荐大家看下 leetcode 官方解题
 
 **原型图**
 
@@ -1190,19 +1210,19 @@ var rotate = function (matrix) {
 
 这题我没有找到什么比较优秀的思路思路解题，有点类似于是暴力解题了。
 
-- 一次for循环，遍历一整个数组
+- 一次 for 循环，遍历一整个数组
 
 - 初始化一个对象
 
-- 将每次遍历到的字符串进行一次排序，再转成字符串，以这个字符串作为key
+- 将每次遍历到的字符串进行一次排序，再转成字符串，以这个字符串作为 key
 
-  - 判断对象中是否有这个为key的值，如果没有将这个key的值作为一个数组的方式存入
+  - 判断对象中是否有这个为 key 的值，如果没有将这个 key 的值作为一个数组的方式存入
 
-  - 如果有这个key，则把遍历到的这个值插入到这个key的数组中
+  - 如果有这个 key，则把遍历到的这个值插入到这个 key 的数组中
 
-- 遍历结束，通过Object.values()将值以一个数组的形式返回
+- 遍历结束，通过 Object.values()将值以一个数组的形式返回
 
- 这个解题思路我在leetcode上速度能击败93.96%的人，但是内存消耗比较大只能击败5%的人。
+这个解题思路我在 leetcode 上速度能击败 93.96%的人，但是内存消耗比较大只能击败 5%的人。
 
 **原型图**
 
@@ -1230,4 +1250,3 @@ var groupAnagrams = function (strs) {
   }
 };
 ```
-
