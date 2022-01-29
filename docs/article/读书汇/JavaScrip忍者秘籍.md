@@ -343,7 +343,7 @@ call 和 apply 是可以显示修改 this 绑定的,这两个方法也是开发�
 
 总结下来 this 的指向我们其实只要参考这几个公式,基本就能够像忍者一样非常稳健的找出 this 的所在了.
 
-:::demo
+**:::demo**
 
 ```vue
 <template>
@@ -367,7 +367,7 @@ call 和 apply 是可以显示修改 this 绑定的,这两个方法也是开发�
 </style>
 ```
 
-:::
+**:::**
 
 ### 理解闭包
 
@@ -1414,6 +1414,32 @@ console.log(reg.test(str3)) // false
 #### 总结
 
 正则的内容真的太多了，学起来并不是一两天甚至几个月的事情，主要这玩意儿涉及的一些知识点真的很多，稍微用不到就会忘记，真如我是看了至少三遍的正则，还是不会用，所以我的目标是以后在可以使用正则的场景都逼自己使用正则，而不是停留在舒适区使用其他方式完成需求。
+
+:::demo
+
+```vue
+<template>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=808614286&bvid=BV1734y127yt&cid=497081546&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
+</template>
+<style>
+.demo > iframe {
+	width: 100%;
+	height: 450px;
+}
+</style>
+```
+
+:::
 
 ### 代码模块化
 
