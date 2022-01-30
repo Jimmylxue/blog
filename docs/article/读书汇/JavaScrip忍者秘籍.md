@@ -1615,6 +1615,32 @@ ESM 也是有一些细节的
 
 模块化现在开发已经离不开，基本都是 ESM，很容易上手，就随便带过了，不过过去我清湖 AMD 具体是什么，还有 UMD 还是有收获的！！！
 
+:::demo
+
+```vue
+<template>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=936211019&bvid=BV1DT4y1k7QY&cid=497818774&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
+</template>
+<style>
+.demo > iframe {
+	width: 100%;
+	height: 450px;
+}
+</style>
+```
+
+:::
+
 ## 第四部分 洞悉浏览器
 
 对于我来说使用的最多的工具出了写代码的 IDE，那就是浏览器了，虽然现在有了 Node.js，但是浏览器是大多数 JS 应用最常被执行的环境了。所以浏览器的一定要玩明白了。
