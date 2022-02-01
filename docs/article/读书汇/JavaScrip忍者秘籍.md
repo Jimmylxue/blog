@@ -1799,6 +1799,32 @@ ESM 也是有一些细节的
 
 会引起布局抖动的 API 和属性有蛮多的，其中对于 DOM 来说，一些涉及宽高、大小之类的属性如果操作不当就会发生问题。
 
+:::demo
+
+```vue
+<template>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=253641761&bvid=BV17Y411t7dv&cid=498573817&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
+</template>
+<style>
+.demo > iframe {
+	width: 100%;
+	height: 450px;
+}
+</style>
+```
+
+:::
+
 ### 事件
 
 JS 是单线程+事件驱动的，所以事件是一个非常重要的知识点，事件写好可以极大的优化代码结构，让代码更加的优雅，性能能高！
@@ -1809,13 +1835,15 @@ JS 是单线程+事件驱动的，所以事件是一个非常重要的知识点�
 
 事件循环前面很简答的记录过一次，在过去，我以为我明白的差不多了，但是当读完书之后才发现自己只是处于一知半解的水平，而且对于自己想的答案并不自信，很多东西之前知道又忘记了，所以这里系统的复习一下：
 
-事件循环比较重要的是我们需要知道两个重要的任务队列： **红任务**，**微任务**。
+事件循环比较重要的是我们需要知道两个重要的任务队列： **宏任务**，**微任务**。
 
 宏任务的例子有很多，几乎所有的页面事件、网络事件、定时器事件等等。
 
 微任务的例子过去我只知道一个 Promise，其实还有 DOM 发生变化等等（其实这个我也还是不清晰）。
 
 **模型图**
+
+![image-20220131185408485](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220131185408485.png)
 
 事件循环的基本原则：
 
@@ -2071,6 +2099,32 @@ W3C 更倾向于默认冒泡，所以默认是冒泡事件，即默认 false。
 #### 总结
 
 事件循环的概念还是非常重要的，加深了理解，另外我清晰了冒泡和捕获的概念，知道了原来默认支持的是冒泡事件。以及如果使用委托相对优雅的写一些特殊的代码。
+
+:::demo
+
+```vue
+<template>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=423727502&bvid=BV1e3411E7RU&cid=499091876&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
+</template>
+<style>
+.demo > iframe {
+	width: 100%;
+	height: 450px;
+}
+</style>
+```
+
+:::
 
 ## 读后感
 

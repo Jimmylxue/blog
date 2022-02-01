@@ -1398,3 +1398,213 @@ var myPow = function (x, n) {
 	return res
 }
 ```
+
+## 螺旋矩阵
+
+::: tip 考点
+难度：**中级**
+
+思想：可以使用循环或递归解题
+:::
+
+:::demo
+
+```vue
+<template>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=808635799&bvid=BV1W34y127h1&cid=498538290&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
+</template>
+<style>
+.demo > iframe {
+	width: 100%;
+	height: 450px;
+}
+</style>
+```
+
+:::
+
+#### 题目
+
+给你一个 m 行 n 列的矩阵 matrix ，请按照 顺时针螺旋顺序 ，返回矩阵中的所有元素。
+
+```
+示例 1：
+
+输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]
+输出：[1,2,3,6,9,8,7,4,5]
+
+示例 2：
+
+输入：matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+输出：[1,2,3,4,8,12,11,10,9,5,6,7]
+```
+
+#### 解题思路
+
+这题的思路是我们需要将每个点的坐标给记下来，然后记住每个点走动的位置的大小，用(i,j)记录当前的点，当我们每次
+
+- 右走 每次 i+0 j+1
+
+- 向下 每次 i+1 j+0
+
+- 向左 每次 i-1 j+0
+
+- 向上 每次 i+0 j-1
+
+然后我们要做的是 顺时针是 不断 执行 右=>下=>左=>上 的过程 并把每次踩到的点都存入新的数组中，当走到边界时 换个位置 边界：
+
+- 当 i 或者 j 小于 0 （左边界）
+
+- 当 i 或者 j 等于边界时 （有边界）
+
+- 当 i 和 j 都访问到踩过的点时 换方向
+
+**原型图**
+
+![image-20220131181817283](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220131181817283.png)
+
+**效果**
+
+![image-20220131180308414](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220131180308414.png)
+
+#### 源代码
+
+```js
+/**
+ * @param {number[][]} matrix
+ * @return {number[]}
+ */
+var spiralOrder = function (matrix) {
+	let rowCount = matrix.length
+	let colCount = matrix[0].length
+	const position = [
+		[0, 1],
+		[1, 0],
+		[0, -1],
+		[-1, 0],
+	]
+	let directive = 0
+
+	let res = []
+	let row = 0,
+		col = -1
+	while (res.length < rowCount * colCount) {
+		const nextRow = row + position[directive][0]
+		const nextCol = col + position[directive][1]
+		if (
+			nextRow < 0 ||
+			nextRow === rowCount ||
+			nextCol < 0 ||
+			nextCol === colCount ||
+			matrix[nextRow][nextCol] === ''
+		) {
+			directive = (directive + 1) % position.length
+			continue
+		}
+		res.push(matrix[nextRow][nextCol])
+		matrix[nextRow][nextCol] = ''
+		row = nextRow
+		col = nextCol
+	}
+	return res
+}
+```
+
+## 跳跃游戏
+
+::: tip 考点
+难度：**中级**
+
+思想：类似贪心算法、循环判断
+:::
+
+:::demo
+
+```vue
+<template>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=636167573&bvid=BV1Fb4y1J7aS&cid=499086665&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
+</template>
+<style>
+.demo > iframe {
+	width: 100%;
+	height: 450px;
+}
+</style>
+```
+
+:::
+
+#### 题目
+
+给定一个非负整数数组 `nums` ，你最初位于数组的 **第一个下标** 。数组中的每个元素代表你在该位置可以跳跃的最大长度。判断你是否能够到达最后一个下标。
+
+```
+示例 1：
+
+输入：nums = [2,3,1,1,4]
+输出：true
+解释：可以先跳 1 步，从下标 0 到达下标 1, 然后再从下标 1 跳 3 步到达最后一个下标。
+示例 2：
+
+输入：nums = [3,2,1,0,4]
+输出：false
+解释：无论怎样，总会到达下标为 3 的位置。但该下标的最大跳跃长度是 0 ， 所以永远不可能到达最后一个下标。
+```
+
+#### 解题思路
+
+这题类似使用贪心算法，我们到数组的每一个点，判断这个点所能到达的最大的数组索引位置
+遍历下来 只要这个最大能够到达的位置+1(+1 是因为索引从 0 开始) 是否 大于等于数组的长度
+
+- 如果满足，则说明能够到达
+- 如果不满足，则说明不能到达
+  除了这个条件，还有前置条件
+- 当我们最大到达的位置于当前遍历的索引一致的时候，如果这个点刚好等于 0 并且这时候最大能到达的位置+1 也小于数组长度
+  则直接停止遍历 直接返回 false 即可
+
+**原型图**
+
+![image-20220201113819746](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220201113819746.png)
+
+**效果**
+
+![image-20220201113746900](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220201113746900.png)
+
+#### 源代码
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canJump = function (nums) {
+	let nextIndex = 0
+	for (let i = 0; i < nums.length - 1; i++) {
+		nextIndex = Math.max(nums[i] + i, nextIndex)
+		if (nextIndex === i && nums[i] === 0 && nextIndex < nums.length) {
+			break
+		}
+	}
+	return nextIndex + 1 >= nums.length
+}
+```
