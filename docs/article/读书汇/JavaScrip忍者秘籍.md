@@ -2135,3 +2135,29 @@ W3C 更倾向于默认冒泡，所以默认是冒泡事件，即默认 false。
 当然，对我来说意义最大的不是我知识层面的积累，而是我将这本书我过去所不是很清晰的知识点都采用了费曼学习法的方式录制成了视频分享出去，这本书重要的知识点肯定不止我记录的这些，只是这些事相对于我来说比较模糊的知识点，所以还是真正的买一本来看能够获得更大的收获！
 
 最后，谢谢大家的观看！祝大家都能成为一名前端开发的 **忍者**！
+
+:::demo
+
+```vue
+<template>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=808680375&bvid=BV1B34y127pq&cid=499667435&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
+</template>
+<style>
+.demo > iframe {
+	width: 100%;
+	height: 450px;
+}
+</style>
+```
+
+:::
