@@ -1750,6 +1750,32 @@ var merge = function (intervals) {
 思想：巧解，找规律
 :::
 
+:::demo
+
+```vue
+<template>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=893779070&bvid=BV1CP4y1A736&cid=500685063&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
+</template>
+<style>
+.demo > iframe {
+	width: 100%;
+	height: 450px;
+}
+</style>
+```
+
+:::
+
 #### 题目
 
 给你一个 无重叠的 ，按照区间起始端点排序的区间列表。
@@ -1784,7 +1810,7 @@ var merge = function (intervals) {
 
 这题这上一题的解题思路基本一致，只不过题目给我们的是一个不含重复的区间集合
 
- 再额外给我们一个区间，我们只要将这个额外的区间加入到区间集合中，这样这题就完全变成了上一题的解题思路
+再额外给我们一个区间，我们只要将这个额外的区间加入到区间集合中，这样这题就完全变成了上一题的解题思路
 
 这题，我们需要的是先将这个二维数组排序(根据二维数组的开始项进行排序)，因为在这道题中 开始区间和结束区间，相对更加重要的一个是开始区间，所以要根据其排序：
 
