@@ -731,7 +731,7 @@ killOne(list);
 
 ## 散列表（hashTable）
 
-散列表对于我来说是一个全新的知识点，其他的数据结构像栈、队列、链表之类的或多或少在大学里都听过，所以再看这块的知识就跟复习一样，而散列表的知识第一次看知识点感觉好新颖，有点像是对象的底层实现。
+散列表对于我来说是一个全新的知识点，其他的数据结构像栈、队列、链表之类的或多或少在大学里都听过，所以再看这块的知识就跟复习一样，而散列表的知识第一次看知识点感觉好新颖，有点像是对象的底层实现。所以为了更好的理解散列表，**我们要暂时忘记想象JS并没有给我们提供可以存储键值对的Map类型对象，而是需要我们自己实现一个可以存储键值对的数据结构！**
 
 这里散列表是基于数组来实现的，我理解的它最重要的是用来让我们存储一些键值对（先忽略为什么用数组实现键值对，我刚开始也很疑惑，最重要的是理解这个设计的思想）
 
@@ -744,5 +744,412 @@ killOne(list);
 **简单实现**
 
 ```ts
+{
+  class HashTable {
+    /**
+     * 这里数组使用的是定容数组，而且数组的大小是一个质数
+     *  因为会需要数组的容量进行处理散列算法，所以 质数 很关键
+     */
+    public table: any[] = new Array(137);
+
+    // 简单的散列函数（真实的这个函数肯定是非常复杂的，这里我的意思是大致模拟一下）
+    private simpHash(data: any): number {
+      // 霍纳算法
+      const H = 37;
+      var total = 0;
+      for (var i = 0; i < data.length; ++i) {
+        total += H * total + data.charCodeAt(i);
+      }
+      total = total % this.table.length;
+      if (total < 0) {
+        total += this.table.length - 1;
+      }
+      return parseInt(total as unknown as string);
+    }
+
+    // 插入元素
+    public put(data: any, value: any) {
+      // 通过这里也可以知道 散列函数是非常重要的，一定要确保的是不发生碰撞
+      let index = this.simpHash(data);
+      this.table[index] = value;
+    }
+
+    // 显示散列表中的元素
+    public showDistro() {
+      for (var i = 0; i < this.table.length; ++i) {
+        if (this.table[i] != undefined) {
+          console.log(i + ": " + this.table[i]);
+        }
+      }
+    }
+
+    // 获取值
+    public get(key: any): any {
+      return this.table[this.simpHash(key)];
+    }
+  }
+
+  let table1 = new HashTable();
+  table1.put("Jimmy", 111);
+  table1.put("xuexue", 222);
+  table1.put("Jack", 333);
+  table1.put("Henry", 444);
+  table1.put(22, 444);
+  table1.put("22", "what");
+  table1.showDistro();
+}
+```
+
+### 哈希表和红黑树
+
+前面已经知道了哈希表是可以用来实现存储键值对这种数据类型的结构了，但是本质上除了哈希表以外，还有其他的数据结构也可以用来实现键值对的存储，就是 **红黑树**，这个知识点这本书我看到现在还有没有出现这个数据结构，之所以我会知道这个是因为在和一个算法大厂的同学聊天中得知的，C++这门语言有专门提供两种Map类型的键值对，底层分别是使用哈希表和红黑树！
+
+## 集合（Set）
+
+虽然JS在ES6版本已经给我们提供了实现集合的构造函数`Set`，但是这本书是在ES6之前就出的了，所以可见集合这个数据类型/结构是非常重要的，所以也就跟着手动实现一个集合吧~
+
+在过于说到Set我的第一想法就是数组去重，诚然这是个非常有用的操作，面试也蛮经常会问到的，但是正所谓集合，如数学上的集合，我们经常处理的就是，交集、并集、差集、子集操作。
+
+列表具有以下的 API:
+
+| 属性/方法          | 含义                               |
+| ------------------ | ---------------------------------- |
+| size（属性）       | 集合的元素个数                     |
+| add（方法）        | 添加元素                           |
+| remove（方法）     | 删除元素                           |
+| union（方法）      | 并集操作                           |
+| intersect（方法）  | 交集操作                           |
+| difference（方法） | 差集操作                           |
+| subset（方法）     | 判断当前的集合是否指定集合的子集   |
+| show（方法）       | 输出集合成员                       |
+
+**简单实现**
+
+```ts
+{
+  class Set {
+    private dataStore: any[] = [];
+    constructor() {}
+    get size() {
+      return 11;
+    }
+
+    public add(item: any): boolean {
+      if (!this.dataStore.includes(item)) {
+        this.dataStore.push(item);
+        return true;
+      }
+      return false;
+    }
+
+    public remove(item: any): boolean {
+      let index = this.dataStore.indexOf(item);
+      if (index !== -1) {
+        this.dataStore.splice(index, 1);
+        return true;
+      }
+      return false;
+    }
+
+    // 并集操作
+    public union(set: Set) {
+      let tempSet = new Set();
+      for (let i = 0; i < this.dataStore.length; i++) {
+        tempSet.add(this.dataStore[i]);
+      }
+      for (let j = 0; j < set.size; j++) {
+        if (!tempSet.contains(set.dataStore[i])) {
+          tempSet.dataStore.push(set.dataStore[i]);
+        }
+      }
+      return tempSet;
+    }
+
+    // 交集操作
+    public intersect(set: Set) {
+      let tempSet = new Set();
+      for (let i = 0; i < this.dataStore.length; i++) {
+        if (set.contains(this.dataStore[i])) {
+          tempSet.add(this.dataStore[i]);
+        }
+      }
+    }
+
+    // 差集
+    public difference(set: Set) {
+      let tempSet = new Set();
+      for (let i = 0; i < this.dataStore.length; i++) {
+        if (!set.contains(this.dataStore[i])) {
+          tempSet.add(this.dataStore[i]);
+        }
+      }
+    }
+
+    // 判断当前的集合是否指定集合的子集
+    public subset(set: Set): boolean {
+      if (set.size < this.size) {
+        return false;
+      }
+      for (const value of this.dataStore) {
+        if (!set.contains(value)) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    public show() {
+      this.dataStore.forEach((item) => console.log(item));
+    }
+
+    // 工具方法 判断一个元素书否存在于一个集合中
+    private contains(item: any) {
+      if (this.dataStore.includes(item)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+  let set = new Set();
+  set.add("jimmy");
+  set.add("xuexue");
+
+  console.log(set.remove("jimy"));
+  console.log(set);
+
+  let set2 = new Set();
+  set2.add("jimmy");
+  console.log(set2.subset(set));
+}
+```
+
+## 二叉树
+
+树是计算机科学中经常用到的一种数据结构，二叉树是最为特殊的一种树的结构。是因为在二叉树上进行查找非常快（而在链表上查找则不是这样），为二叉树添加或删除元素也非常快（而对数组执行添加或删除操作则不是这样）。
+
+- 链表查找元素的效率不高（一定要找到一个节点的前驱节点才能获取到当前节点）
+- 数组添加和删除元素效率 **可能** 不高（在数组头部删除和添加元素效率不高）
+
+树的数据结构不仅非常广泛的运用于计算机世界中，生活中也是普遍使用到，如公司的组织架构：
+
+![image-20220203155918318](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220203155918318.png)
+
+
+
+二叉树是一种特殊的树，它的子节点个数不超过两个。二叉树具有一些特殊的计算性质，使得在它们之上的一些操作异常高效。
+
+### 二叉搜索树（BST）
+
+BST:Binary Sort Tree
+
+二叉查找树是一种特殊的二叉树，相对较小的值保存在左节点中，较大的值保存在右节点中。其的定义：
+
+- 若左子树不空，则左子树上所有结点的值均小于它的根结点的值；
+- 若右子树不空，则右子树上所有结点的值均大于或等于它的根结点的值；
+- 左、右子树也分别为二叉排序树；
+
+列表具有以下的 API:
+
+| 属性/方法         | 含义         |
+| ----------------- | ------------ |
+| root（属性）      | 树的根节点   |
+| insert（方法）    | 添加元素     |
+| remove（方法）    | 删除元素     |
+| find（方法）      | 查找元素     |
+| getMin（方法）    | 获取最小的值 |
+| getMax（方法）    | 获取最大值   |
+| preOrder（方法）  | 先序遍历     |
+| inOrder（方法）   | 中序遍历     |
+| postOrder（方法） | 后序遍历     |
+
+正常的二叉树是获取数中的最大值和最小值是相对比较费时间的，但是由于二叉搜索树的特性，我们获取最大值和最小值就非常的快速：
+
+- 最小值往左下角查找
+- 最大值往右下角查找
+
+其次二叉树需要掌握的是 **先序遍历、中序遍历、后序遍历**，正常的方式是通过递归的方式可以实现，当然也可以使用`while(true)`这种循环的方式实现！
+
+二叉搜索树比较特殊，插入元素的时候也需要满足搜索树的条件，小值放左边，大值放右边
+
+二叉搜索数删除在删除的时候也需要做特别的处理！！！
+
+- 如果待删除节点是叶子节点（没有子节点的节点），那么只需要将从父节点指向它的链接 指向 null。
+- 如果待删除节点只包含一个子节点，那么原本指向它的节点久得做些调整，使其指向它的 子节点。
+- 如果待删除节点包含两个子节点，正确的做法有两种：要么查找待删除节点左子树 上的最大值，要么查找其右子树上的最小值。（下面的代码实现使用的是第二种）
+
+**Node**
+
+```ts
+class Node {
+    constructor(
+        public data: number | null = null,
+        public Left: Node | null = null,
+        public right: Node | null = null
+    ) {}
+
+    public show(): number | null {
+        return this.data
+    }
+}
+```
+
+**BST**
+
+```ts
+class BST {
+    constructor(public root: Node | null = null) {}
+
+    public insert(data: number) {
+        let node = new Node(data, null, null)
+        // 如果根为空 直接插入
+        if (this.root === null) {
+            this.root = node
+            return
+        }
+        // 根据二叉搜索树规则插入
+        let current = this.root
+        let parent
+        while (true) {
+            parent = current
+            if (parent.data && data < parent.data) {
+                current = current.Left as Node
+                if (!current) {
+                    parent.Left = node
+                    break
+                }
+            } else {
+                current = current.right as Node
+                if (!current) {
+                    parent.right = node
+                    break
+                }
+            }
+        }
+    }
+
+    // 先序遍历
+    public preOrder(root: Node) {
+        if (root) {
+            console.log(root.data)
+            this.preOrder(root.Left as Node)
+            this.preOrder(root.right as Node)
+        }
+    }
+
+    // 中序遍历
+    public inOrder(root: Node) {
+        if (root) {
+            this.inOrder(root.Left as Node)
+            console.log(root.data)
+            this.inOrder(root.right as Node)
+        }
+    }
+
+    // 后续遍历
+    public postOrder(root: Node) {
+        if (root) {
+            this.postOrder(root.Left as Node)
+            this.postOrder(root.right as Node)
+            console.log(root.data)
+        }
+    }
+
+    // 获取最小值
+    public getMin(): number {
+        let current = this.root
+        while (current && current.Left) {
+            current = current.Left
+        }
+        return (current && current.data) as number
+    }
+
+    // 获取最大值
+    public getMax(): number {
+        let current = this.root
+        while (current && current.right) {
+            current = current.right
+        }
+        return (current && current.data) as number
+    }
+
+    // 查找节点
+    public find(data: number): Node | null {
+        let current = this.root
+        while (current) {
+            if (current && current.data === data) {
+                return current
+            } else if (current && (current.data as number) < data) {
+                current = current.right
+            } else if (current && (current.data as number) > data) {
+                current = current.Left
+            }
+        }
+        return null
+    }
+
+    // 删除节点
+    public remove(data: number) {
+        this.root = this.removeNode(this.root as Node, data)
+    }
+
+    private removeNode(node: Node, data: number): Node | null {
+        if (!node) {
+            return null
+        }
+        if (data === node.data) {
+            // 叶子节点
+            if (!node.Left && !node.right) {
+                return null
+            }
+            // 没有左节点
+            if (!node.Left) {
+                return node.right
+            }
+            // 没有右节点
+            if (!node.right) {
+                return node.Left
+            }
+            // 有两个子节点的节点
+            let tempNode = this.getMinNode(node.right)
+            node.data = tempNode.data
+            node.right = this.removeNode(node.right, tempNode.data as number)
+            return node
+        } else if (data < (node.data as number)) {
+            node.Left = this.removeNode(node.Left as Node, data)
+            return node
+        } else {
+            node.right = this.removeNode(node.right as Node, data)
+            return node
+        }
+    }
+
+    private getMinNode(node: Node): Node {
+        let current = node
+        while (current && current.Left) {
+            current = current.Left
+        }
+        return current
+    }
+}
+
+let nums = new BST()
+// nums.root
+nums.insert(23)
+nums.insert(45)
+nums.insert(16)
+nums.insert(37)
+nums.insert(3)
+nums.insert(99)
+nums.insert(22)
+// nums.inOrder(nums.root as Node)
+nums.preOrder(nums.root as Node)
+// nums.postOrder(nums.root as Node)
+console.log('min', nums.getMin())
+console.log('max', nums.getMax())
+console.log('find', nums.find(7))
+nums.remove(23)
+// nums.preOrder(nums.root as Node)
+// nums.inOrder(nums.root as Node)
 ```
 
