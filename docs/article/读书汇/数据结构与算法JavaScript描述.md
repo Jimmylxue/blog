@@ -14,6 +14,32 @@
 
 ## 列表(List)
 
+:::demo
+
+```vue
+<template>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=253369241&bvid=BV1yY411b7US&cid=487271372&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
+</template>
+<style>
+.demo > iframe {
+	width: 100%;
+	height: 450px;
+}
+</style>
+```
+
+:::
+
 大学时我是有上《数据结构》这门课的，但是好像没听过 **列表** 这一个数据结构。
 
 列表是一组有序的数据。每个列表中的数据项称为元素。在 JavaScript 中，列表中的元素 可以是任意数据类型。列表中可以保存多少元素并没有事先限定，实际使用时元素的数量 受到程序内存的限制。
@@ -98,39 +124,39 @@ console.log(names.length); // 4
 
 ```js
 {
-  class Stack<T> {
-    dataStore: T[] = [];
-    top: number = 0;
-    constructor() {}
-    // 获取栈的长度
-    get length(): Number {
-      return this.dataStore.length;
-    }
-    // 入栈方法
-    push(element: T): void {
-      this.dataStore.push(element);
-      this.top++;
-    }
-    // 出栈方法
-    pop(): T {
-      // 数组的pop()方法就是删除数组的最后一个元素
-      if (this.dataStore.length !== 0) {
-        this.top--;
-        // console.log("2222");
-        return this.dataStore.pop();
-      }
-    }
-    // 返回栈顶元素
-    peek(): T {
-      // console.log(111, this.dataStore, this.top);
-      return this.dataStore[this.top - 1];
-    }
-    // 清空栈
-    clear(): void {
-      this.top = 0;
-      this.dataStore.length = 0;
-    }
-  }
+	class Stack<T> {
+		dataStore: T[] = []
+		top: number = 0
+		constructor() {}
+		// 获取栈的长度
+		get length(): Number {
+			return this.dataStore.length
+		}
+		// 入栈方法
+		push(element: T): void {
+			this.dataStore.push(element)
+			this.top++
+		}
+		// 出栈方法
+		pop(): T {
+			// 数组的pop()方法就是删除数组的最后一个元素
+			if (this.dataStore.length !== 0) {
+				this.top--
+				// console.log("2222");
+				return this.dataStore.pop()
+			}
+		}
+		// 返回栈顶元素
+		peek(): T {
+			// console.log(111, this.dataStore, this.top);
+			return this.dataStore[this.top - 1]
+		}
+		// 清空栈
+		clear(): void {
+			this.top = 0
+			this.dataStore.length = 0
+		}
+	}
 }
 ```
 
@@ -168,18 +194,18 @@ console.log('32转为2进制的结果为：'newNum)
 
 ```js
 function isPalindrome(word) {
-  let s = new Stack();
-  for (let i = 0; i < word.length; i++) {
-    s.push(word[i]);
-  }
-  let rword = "";
-  while (s.length > 0) {
-    rword += s.pop();
-  }
-  return word === rword;
+	let s = new Stack()
+	for (let i = 0; i < word.length; i++) {
+		s.push(word[i])
+	}
+	let rword = ''
+	while (s.length > 0) {
+		rword += s.pop()
+	}
+	return word === rword
 }
-console.log(isPalindrome("hello"));
-console.log(isPalindrome("racecar"));
+console.log(isPalindrome('hello'))
+console.log(isPalindrome('racecar'))
 ```
 
 ### 使用栈模拟递归
@@ -191,26 +217,26 @@ console.log(isPalindrome("racecar"));
 ```js
 // 递归函数实现
 function factorial(n) {
-  if (n === 0) {
-    return 1; // 0的阶乘为1
-  } else {
-    return n * factorial(n - 1);
-  }
+	if (n === 0) {
+		return 1 // 0的阶乘为1
+	} else {
+		return n * factorial(n - 1)
+	}
 }
 // 栈实现
 function fact(n) {
-  let s = new Stack();
-  while (n > 1) {
-    s.push(n--);
-  }
-  let product = 1;
-  while (s.length > 0) {
-    product *= s.pop();
-  }
-  return product;
+	let s = new Stack()
+	while (n > 1) {
+		s.push(n--)
+	}
+	let product = 1
+	while (s.length > 0) {
+		product *= s.pop()
+	}
+	return product
 }
-console.log(factorial(5)); // 显示 120
-console.log(fact(5)); // 显示 120
+console.log(factorial(5)) // 显示 120
+console.log(fact(5)) // 显示 120
 ```
 
 ## 队列(Queue)
@@ -356,47 +382,43 @@ console.log(nums)
 
 ```ts
 interface Element {
-  data: any;
-  code: number;
+	data: any
+	code: number
 }
 class Queue {
-  private dataStore: Element[] = [];
-  get length(): number {
-    return this.dataStore.length;
-  }
-  enqueus(element: Element) {
-    this.dataStore.push(element);
-  }
-  dequeus(): any | undefined {
-    let priority = this.dataStore[0].code;
-    let flag = false;
-    for (let i = 1; i < this.dataStore.length; i++) {
-      if (this.dataStore[i].code < priority) {
-        flag = true;
-        priority = i;
-      }
-    }
-    return flag
-      ? this.dataStore.splice(priority, 1)[0]
-      : this.dataStore.shift();
-  }
-  front(): Element {
-    return this.dataStore[0];
-  }
-  back(): Element {
-    return this.dataStore[this.length - 1];
-  }
-  toString(): string {
-    return this.dataStore
-      .map((item) => item.data + "--" + item.code)
-      .join("\n");
-  }
-  clear(): void {
-    this.dataStore.length = 0;
-  }
-  isEmpty(): boolean {
-    return this.length === 0;
-  }
+	private dataStore: Element[] = []
+	get length(): number {
+		return this.dataStore.length
+	}
+	enqueus(element: Element) {
+		this.dataStore.push(element)
+	}
+	dequeus(): any | undefined {
+		let priority = this.dataStore[0].code
+		let flag = false
+		for (let i = 1; i < this.dataStore.length; i++) {
+			if (this.dataStore[i].code < priority) {
+				flag = true
+				priority = i
+			}
+		}
+		return flag ? this.dataStore.splice(priority, 1)[0] : this.dataStore.shift()
+	}
+	front(): Element {
+		return this.dataStore[0]
+	}
+	back(): Element {
+		return this.dataStore[this.length - 1]
+	}
+	toString(): string {
+		return this.dataStore.map(item => item.data + '--' + item.code).join('\n')
+	}
+	clear(): void {
+		this.dataStore.length = 0
+	}
+	isEmpty(): boolean {
+		return this.length === 0
+	}
 }
 ```
 
@@ -405,17 +427,17 @@ class Queue {
 **测试代码**
 
 ```js
-let que = new Queue();
+let que = new Queue()
 /**
  * 优先级一到5 1的最高 5最低
  */
-que.enqueus({ data: "吃饭", code: 2 });
-que.enqueus({ data: "睡觉", code: 2 });
-que.enqueus({ data: "打豆豆", code: 2 });
-que.enqueus({ data: "学习", code: 1 });
-console.log(que.dequeus()); // { data: '学习', code: 1 }
-console.log(que.dequeus()); // { data: '吃饭', code: 2 }
-console.log(que.toString()); // 睡觉--2 \n 打豆豆--2
+que.enqueus({ data: '吃饭', code: 2 })
+que.enqueus({ data: '睡觉', code: 2 })
+que.enqueus({ data: '打豆豆', code: 2 })
+que.enqueus({ data: '学习', code: 1 })
+console.log(que.dequeus()) // { data: '学习', code: 1 }
+console.log(que.dequeus()) // { data: '吃饭', code: 2 }
+console.log(que.toString()) // 睡觉--2 \n 打豆豆--2
 ```
 
 ## 链表
@@ -429,7 +451,7 @@ console.log(que.toString()); // 睡觉--2 \n 打豆豆--2
 
 ### 链表的节点(Node)类型
 
-JavaScript可以基于对象实现链表，每个节点包含两个属性，分别是：
+JavaScript 可以基于对象实现链表，每个节点包含两个属性，分别是：
 
 | 属性/方法 | 含义                 |
 | --------- | -------------------- |
@@ -437,8 +459,8 @@ JavaScript可以基于对象实现链表，每个节点包含两个属性，分�
 | next      | 指向下一个节点的链接 |
 
 ```ts
-class Node{
-    constructor(public element: any = null, public next: Node | null = null) {}
+class Node {
+	constructor(public element: any = null, public next: Node | null = null) {}
 }
 ```
 
@@ -446,63 +468,63 @@ class Node{
 
 栈具有以下 API：
 
-| 属性/方法 | 含义                 |
-| --------- | -------------------- |
-| head   | 链表的头节点 |
-| find  | 查找给定的数据 |
-| insert | 插入新节点 |
-| remove | 删除节点         |
-| display | 显示链表中的元素 |
+| 属性/方法 | 含义             |
+| --------- | ---------------- |
+| head      | 链表的头节点     |
+| find      | 查找给定的数据   |
+| insert    | 插入新节点       |
+| remove    | 删除节点         |
+| display   | 显示链表中的元素 |
 
 ```ts
 class LinkList<T> {
-  public head = new Node("head");
-  find(item: T): Node {
-    let currNode = this.head;
-    while (currNode.next) {
-      if (currNode.element === item) {
-        break;
-       } else {
-        currNode = currNode.next;
-       }
-    }
-    return currNode;
-  }
-  findPrevious(item: T): Node {
-    // 查找一个元素的前一个元素
-    let currNode = this.head;
-    while (currNode.next) {
-      if (currNode.next.element === item) {
-        break;
-      } else {
-        currNode = currNode.next;
-      }
-    }
-    return currNode;
-  }
-  insert(newElement: T, item: T): void {
-    let node = new Node(newElement);
-    let currNode = this.find(item);
-    node.next = currNode.next;
-    currNode.next = node;
-  }
-  remove(item: T): void {
-    let prevNode = this.findPrevious(item);
-    if (prevNode.next) {
-      prevNode.next = prevNode.next.next;
-    }
-  }
-  display(): void {
-    let currNode = this.head;
-    while (currNode) {
-      console.log(currNode.element);
-      if (currNode.next) {
-        currNode = currNode.next;
-      } else {
-        break;
-      }
-    }
-  }
+	public head = new Node('head')
+	find(item: T): Node {
+		let currNode = this.head
+		while (currNode.next) {
+			if (currNode.element === item) {
+				break
+			} else {
+				currNode = currNode.next
+			}
+		}
+		return currNode
+	}
+	findPrevious(item: T): Node {
+		// 查找一个元素的前一个元素
+		let currNode = this.head
+		while (currNode.next) {
+			if (currNode.next.element === item) {
+				break
+			} else {
+				currNode = currNode.next
+			}
+		}
+		return currNode
+	}
+	insert(newElement: T, item: T): void {
+		let node = new Node(newElement)
+		let currNode = this.find(item)
+		node.next = currNode.next
+		currNode.next = node
+	}
+	remove(item: T): void {
+		let prevNode = this.findPrevious(item)
+		if (prevNode.next) {
+			prevNode.next = prevNode.next.next
+		}
+	}
+	display(): void {
+		let currNode = this.head
+		while (currNode) {
+			console.log(currNode.element)
+			if (currNode.next) {
+				currNode = currNode.next
+			} else {
+				break
+			}
+		}
+	}
 }
 ```
 
@@ -514,230 +536,230 @@ class LinkList<T> {
 
 ```ts
 {
-  class Node {
-    constructor(
-      public element: any = null,
-      public previous: Node | null = null,
-      public next: Node | null = null
-    ) {}
-  }
+	class Node {
+		constructor(
+			public element: any = null,
+			public previous: Node | null = null,
+			public next: Node | null = null
+		) {}
+	}
 
-  class LinkList<T> {
-    public head = new Node("head");
+	class LinkList<T> {
+		public head = new Node('head')
 
-    private find(item: T): Node {
-      let current = this.head;
-      while (current.next) {
-        if (current.element === item) {
-          break;
-        } else {
-          current = current.next;
-        }
-      }
-      return current;
-    }
+		private find(item: T): Node {
+			let current = this.head
+			while (current.next) {
+				if (current.element === item) {
+					break
+				} else {
+					current = current.next
+				}
+			}
+			return current
+		}
 
-    private findPrevious(item: T): Node {
-      let current = this.head;
-      while (current.next) {
-        if (current.next.element === item) {
-          break;
-        } else {
-          current = current.next;
-        }
-      }
-      return current;
-    }
+		private findPrevious(item: T): Node {
+			let current = this.head
+			while (current.next) {
+				if (current.next.element === item) {
+					break
+				} else {
+					current = current.next
+				}
+			}
+			return current
+		}
 
-    private findLast(): Node {
-      let curent = this.head;
-      while (curent.next) {
-        curent = curent.next;
-      }
-      return curent;
-    }
+		private findLast(): Node {
+			let curent = this.head
+			while (curent.next) {
+				curent = curent.next
+			}
+			return curent
+		}
 
-    public insert(element: T, item: T) {
-      let current = this.find(item);
-      let newNode = new Node(element);
-      if (current.next) {
-        // 双向链表插入元素
-        current.next.previous = newNode;
-        newNode.next = current.next;
-        newNode.previous = current;
-        current.next = newNode;
-      } else {
-        current.next = newNode;
-        newNode.previous = current;
-      }
-    }
+		public insert(element: T, item: T) {
+			let current = this.find(item)
+			let newNode = new Node(element)
+			if (current.next) {
+				// 双向链表插入元素
+				current.next.previous = newNode
+				newNode.next = current.next
+				newNode.previous = current
+				current.next = newNode
+			} else {
+				current.next = newNode
+				newNode.previous = current
+			}
+		}
 
-    public remove(item: T) {
-      let currNode = this.find(item);
-      if (!(currNode.next == null) && !(currNode.previous == null)) {
-        currNode.previous.next = currNode.next;
-        currNode.next.previous = currNode.previous;
-        currNode.next = null;
-        currNode.previous = null;
-      }
-    }
+		public remove(item: T) {
+			let currNode = this.find(item)
+			if (!(currNode.next == null) && !(currNode.previous == null)) {
+				currNode.previous.next = currNode.next
+				currNode.next.previous = currNode.previous
+				currNode.next = null
+				currNode.previous = null
+			}
+		}
 
-    public display() {
-      let currNode = this.head;
-      // console.log(currNode);
-      while (currNode) {
-        console.log(currNode.element, currNode.previous?.element);
-        if (currNode.next) {
-          currNode = currNode.next;
-        } else {
-          break;
-        }
-      }
-    }
+		public display() {
+			let currNode = this.head
+			// console.log(currNode);
+			while (currNode) {
+				console.log(currNode.element, currNode.previous?.element)
+				if (currNode.next) {
+					currNode = currNode.next
+				} else {
+					break
+				}
+			}
+		}
 
-    public dispReverse(): void {
-      let last = this.findLast();
-      // console.log(last.element);
-      while (last) {
-        console.log(last.element);
-        if (last.previous) {
-          last = last.previous;
-        } else {
-          break;
-        }
-      }
-    }
-  }
-  // 测试代码
-  let doubleLink = new LinkList<string>();
+		public dispReverse(): void {
+			let last = this.findLast()
+			// console.log(last.element);
+			while (last) {
+				console.log(last.element)
+				if (last.previous) {
+					last = last.previous
+				} else {
+					break
+				}
+			}
+		}
+	}
+	// 测试代码
+	let doubleLink = new LinkList<string>()
 
-  doubleLink.insert("jimmy", "head");
-  doubleLink.insert("xuexue", "jimmy");
-  doubleLink.insert("henry", "xuexue");
-  doubleLink.insert("jack", "henry");
-  // doubleLink.remove("xuexue");
-  doubleLink.display();
-  console.log("*************************");
-  doubleLink.dispReverse();
+	doubleLink.insert('jimmy', 'head')
+	doubleLink.insert('xuexue', 'jimmy')
+	doubleLink.insert('henry', 'xuexue')
+	doubleLink.insert('jack', 'henry')
+	// doubleLink.remove("xuexue");
+	doubleLink.display()
+	console.log('*************************')
+	doubleLink.dispReverse()
 }
 ```
 
 ### 循环链表
 
-循环链表和单链表是非常像的，都是一个节点只有一个后继，唯一区别的就在于最后一个节点的next指向的是head头节点，形成一个闭环。所以我们实现的代码其实只需要修改构造函数内部如:
+循环链表和单链表是非常像的，都是一个节点只有一个后继，唯一区别的就在于最后一个节点的 next 指向的是 head 头节点，形成一个闭环。所以我们实现的代码其实只需要修改构造函数内部如:
 
 ```ts
 {
-  class Node {
-    constructor(public element: any = null, public next: Node | null = null) {}
-  }
+	class Node {
+		constructor(public element: any = null, public next: Node | null = null) {}
+	}
 
-  class LinkList<T> {
-    public head = new Node("head");
-    constructor() {
-      this.head.next = this.head;
-    }
-    find(item: T): Node {
-      let currNode = this.head;
-      while (currNode.next && currNode.next.element !== "head") {
-        if (currNode.element === item) {
-          break;
-        } else {
-          currNode = currNode.next;
-        }
-      }
-      return currNode;
-    }
-    findPrevious(item: T): Node {
-      // 查找一个元素的前一个元素
-      let currNode = this.head;
-      while (currNode.next) {
-        if (currNode.next.element === item) {
-          break;
-        } else {
-          currNode = currNode.next;
-        }
-      }
-      return currNode;
-    }
-    insert(newElement: T, item: T): void {
-      let node = new Node(newElement);
-      let currNode = this.find(item);
-      node.next = currNode.next;
-      currNode.next = node;
-    }
-    remove(item: T): void {
-      let prevNode = this.findPrevious(item);
-      if (prevNode.next) {
-        prevNode.next = prevNode.next.next;
-      }
-    }
-    display(): void {
-      let currNode = this.head;
-      while (currNode.next) {
-        console.log(currNode.element);
-        if (currNode.next && currNode.next.element !== 'head') {
-          currNode = currNode.next;
-        } else {
-          break;
-        }
-      }
-    }
-  }
+	class LinkList<T> {
+		public head = new Node('head')
+		constructor() {
+			this.head.next = this.head
+		}
+		find(item: T): Node {
+			let currNode = this.head
+			while (currNode.next && currNode.next.element !== 'head') {
+				if (currNode.element === item) {
+					break
+				} else {
+					currNode = currNode.next
+				}
+			}
+			return currNode
+		}
+		findPrevious(item: T): Node {
+			// 查找一个元素的前一个元素
+			let currNode = this.head
+			while (currNode.next) {
+				if (currNode.next.element === item) {
+					break
+				} else {
+					currNode = currNode.next
+				}
+			}
+			return currNode
+		}
+		insert(newElement: T, item: T): void {
+			let node = new Node(newElement)
+			let currNode = this.find(item)
+			node.next = currNode.next
+			currNode.next = node
+		}
+		remove(item: T): void {
+			let prevNode = this.findPrevious(item)
+			if (prevNode.next) {
+				prevNode.next = prevNode.next.next
+			}
+		}
+		display(): void {
+			let currNode = this.head
+			while (currNode.next) {
+				console.log(currNode.element)
+				if (currNode.next && currNode.next.element !== 'head') {
+					currNode = currNode.next
+				} else {
+					break
+				}
+			}
+		}
+	}
 
-  let list = new LinkList<string>();
-  list.insert("Jimmy", "head");
-  list.insert("xuexue", "jimmy");
-  console.log("---------");
-  list.display();
+	let list = new LinkList<string>()
+	list.insert('Jimmy', 'head')
+	list.insert('xuexue', 'jimmy')
+	console.log('---------')
+	list.display()
 }
 ```
 
-所以如果是循环链表，我们使用while循环遍历链表的时候一定要注意在合适的情况结束循环，否则将是一个死循环。
+所以如果是循环链表，我们使用 while 循环遍历链表的时候一定要注意在合适的情况结束循环，否则将是一个死循环。
 
 **例题**
 
-传说在公元 1 世纪的犹太战争中，犹太历史学家弗拉维奥·约瑟夫斯和他的 40 个同胞被罗马士兵包围。犹太士兵决定宁可自杀也不做俘虏，于是商量出了一个自杀方案。他们围成一个圈，从一个人开始，数到第三个人时将第三个人杀死，然后再数，直到杀光所有人。约瑟夫和另外一个人决定不参加这个疯狂的游戏，他们快速地计算出了两个位置，站在那里得以幸存。写一段程序将 *n* 个人围成一圈，并且第 *m* 个人会被杀掉，计算一圈人中哪两个人最后会存活。使用循环链表解决该问题。
+传说在公元 1 世纪的犹太战争中，犹太历史学家弗拉维奥·约瑟夫斯和他的 40 个同胞被罗马士兵包围。犹太士兵决定宁可自杀也不做俘虏，于是商量出了一个自杀方案。他们围成一个圈，从一个人开始，数到第三个人时将第三个人杀死，然后再数，直到杀光所有人。约瑟夫和另外一个人决定不参加这个疯狂的游戏，他们快速地计算出了两个位置，站在那里得以幸存。写一段程序将 _n_ 个人围成一圈，并且第 _m_ 个人会被杀掉，计算一圈人中哪两个人最后会存活。使用循环链表解决该问题。
 
 **解答**
 
-我们需要使用循环链表，先初始化一个循环链表，再一次插入2-39个元素（头表示的就是第一个），之后再不断的进行删除，判断最后剩下的是哪两个元素。
+我们需要使用循环链表，先初始化一个循环链表，再一次插入 2-39 个元素（头表示的就是第一个），之后再不断的进行删除，判断最后剩下的是哪两个元素。
 
 ```ts
-let list = new LinkList<number>();
-list.insert(2, 1);
+let list = new LinkList<number>()
+list.insert(2, 1)
 for (let i = 3; i <= 40; i++) {
-  list.insert(i, i - 1);
+	list.insert(i, i - 1)
 }
 
 const killOne = (list: LinkList<number>) => {
-  let start = list.head;
-  while (list.length >= 3) {
-    if (list.head.next?.next) {
-      let current = start.next?.next as Node;
-      start = current?.next as Node;
-      list.head = start;
-      list.remove(current.element);
-    }
-  }
-  console.log(list.head.element);
-  console.log(list.head.next.element);
-};
+	let start = list.head
+	while (list.length >= 3) {
+		if (list.head.next?.next) {
+			let current = start.next?.next as Node
+			start = current?.next as Node
+			list.head = start
+			list.remove(current.element)
+		}
+	}
+	console.log(list.head.element)
+	console.log(list.head.next.element)
+}
 
-killOne(list);
+killOne(list)
 ```
 
-我也不知道我的理解的是否有错，第一个杀的是3然后6然后9.....最后剩下的是就是活下来的人。
+我也不知道我的理解的是否有错，第一个杀的是 3 然后 6 然后 9.....最后剩下的是就是活下来的人。
 
 ## 散列表（hashTable）
 
-散列表对于我来说是一个全新的知识点，其他的数据结构像栈、队列、链表之类的或多或少在大学里都听过，所以再看这块的知识就跟复习一样，而散列表的知识第一次看知识点感觉好新颖，有点像是对象的底层实现。所以为了更好的理解散列表，**我们要暂时忘记想象JS并没有给我们提供可以存储键值对的Map类型对象，而是需要我们自己实现一个可以存储键值对的数据结构！**
+散列表对于我来说是一个全新的知识点，其他的数据结构像栈、队列、链表之类的或多或少在大学里都听过，所以再看这块的知识就跟复习一样，而散列表的知识第一次看知识点感觉好新颖，有点像是对象的底层实现。所以为了更好的理解散列表，**我们要暂时忘记想象 JS 并没有给我们提供可以存储键值对的 Map 类型对象，而是需要我们自己实现一个可以存储键值对的数据结构！**
 
 这里散列表是基于数组来实现的，我理解的它最重要的是用来让我们存储一些键值对（先忽略为什么用数组实现键值对，我刚开始也很疑惑，最重要的是理解这个设计的思想）
 
 实现散列表需要知道的一个名词是 **碰撞**，理解这个词先要知道散列表到底是做的是啥，咋存储的。
 
-简单的说就是创建一个容量大小预先设定的数组，之后通过一个特殊的算法，将我们要存储的每个key，都转成一一对应的数值，之后将这个数值作为数组的下标，键值对的值作为这个下标下所存储的值。所以碰撞表示的是：**两个不同key通过算法处理之后对应的是同一个数字，后面被作为数组的索引存储我们的数组中。**
+简单的说就是创建一个容量大小预先设定的数组，之后通过一个特殊的算法，将我们要存储的每个 key，都转成一一对应的数值，之后将这个数值作为数组的下标，键值对的值作为这个下标下所存储的值。所以碰撞表示的是：**两个不同 key 通过算法处理之后对应的是同一个数字，后面被作为数组的索引存储我们的数组中。**
 
 我个人觉得能够手写散列表固然很牛逼很加分，但是了解基础的数据结构算法是更加重要的。
 
@@ -745,182 +767,182 @@ killOne(list);
 
 ```ts
 {
-  class HashTable {
-    /**
-     * 这里数组使用的是定容数组，而且数组的大小是一个质数
-     *  因为会需要数组的容量进行处理散列算法，所以 质数 很关键
-     */
-    public table: any[] = new Array(137);
+	class HashTable {
+		/**
+		 * 这里数组使用的是定容数组，而且数组的大小是一个质数
+		 *  因为会需要数组的容量进行处理散列算法，所以 质数 很关键
+		 */
+		public table: any[] = new Array(137)
 
-    // 简单的散列函数（真实的这个函数肯定是非常复杂的，这里我的意思是大致模拟一下）
-    private simpHash(data: any): number {
-      // 霍纳算法
-      const H = 37;
-      var total = 0;
-      for (var i = 0; i < data.length; ++i) {
-        total += H * total + data.charCodeAt(i);
-      }
-      total = total % this.table.length;
-      if (total < 0) {
-        total += this.table.length - 1;
-      }
-      return parseInt(total as unknown as string);
-    }
+		// 简单的散列函数（真实的这个函数肯定是非常复杂的，这里我的意思是大致模拟一下）
+		private simpHash(data: any): number {
+			// 霍纳算法
+			const H = 37
+			var total = 0
+			for (var i = 0; i < data.length; ++i) {
+				total += H * total + data.charCodeAt(i)
+			}
+			total = total % this.table.length
+			if (total < 0) {
+				total += this.table.length - 1
+			}
+			return parseInt(total as unknown as string)
+		}
 
-    // 插入元素
-    public put(data: any, value: any) {
-      // 通过这里也可以知道 散列函数是非常重要的，一定要确保的是不发生碰撞
-      let index = this.simpHash(data);
-      this.table[index] = value;
-    }
+		// 插入元素
+		public put(data: any, value: any) {
+			// 通过这里也可以知道 散列函数是非常重要的，一定要确保的是不发生碰撞
+			let index = this.simpHash(data)
+			this.table[index] = value
+		}
 
-    // 显示散列表中的元素
-    public showDistro() {
-      for (var i = 0; i < this.table.length; ++i) {
-        if (this.table[i] != undefined) {
-          console.log(i + ": " + this.table[i]);
-        }
-      }
-    }
+		// 显示散列表中的元素
+		public showDistro() {
+			for (var i = 0; i < this.table.length; ++i) {
+				if (this.table[i] != undefined) {
+					console.log(i + ': ' + this.table[i])
+				}
+			}
+		}
 
-    // 获取值
-    public get(key: any): any {
-      return this.table[this.simpHash(key)];
-    }
-  }
+		// 获取值
+		public get(key: any): any {
+			return this.table[this.simpHash(key)]
+		}
+	}
 
-  let table1 = new HashTable();
-  table1.put("Jimmy", 111);
-  table1.put("xuexue", 222);
-  table1.put("Jack", 333);
-  table1.put("Henry", 444);
-  table1.put(22, 444);
-  table1.put("22", "what");
-  table1.showDistro();
+	let table1 = new HashTable()
+	table1.put('Jimmy', 111)
+	table1.put('xuexue', 222)
+	table1.put('Jack', 333)
+	table1.put('Henry', 444)
+	table1.put(22, 444)
+	table1.put('22', 'what')
+	table1.showDistro()
 }
 ```
 
 ### 哈希表和红黑树
 
-前面已经知道了哈希表是可以用来实现存储键值对这种数据类型的结构了，但是本质上除了哈希表以外，还有其他的数据结构也可以用来实现键值对的存储，就是 **红黑树**，这个知识点这本书我看到现在还有没有出现这个数据结构，之所以我会知道这个是因为在和一个算法大厂的同学聊天中得知的，C++这门语言有专门提供两种Map类型的键值对，底层分别是使用哈希表和红黑树！
+前面已经知道了哈希表是可以用来实现存储键值对这种数据类型的结构了，但是本质上除了哈希表以外，还有其他的数据结构也可以用来实现键值对的存储，就是 **红黑树**，这个知识点这本书我看到现在还有没有出现这个数据结构，之所以我会知道这个是因为在和一个算法大厂的同学聊天中得知的，C++这门语言有专门提供两种 Map 类型的键值对，底层分别是使用哈希表和红黑树！
 
 ## 集合（Set）
 
-虽然JS在ES6版本已经给我们提供了实现集合的构造函数`Set`，但是这本书是在ES6之前就出的了，所以可见集合这个数据类型/结构是非常重要的，所以也就跟着手动实现一个集合吧~
+虽然 JS 在 ES6 版本已经给我们提供了实现集合的构造函数`Set`，但是这本书是在 ES6 之前就出的了，所以可见集合这个数据类型/结构是非常重要的，所以也就跟着手动实现一个集合吧~
 
-在过于说到Set我的第一想法就是数组去重，诚然这是个非常有用的操作，面试也蛮经常会问到的，但是正所谓集合，如数学上的集合，我们经常处理的就是，交集、并集、差集、子集操作。
+在过于说到 Set 我的第一想法就是数组去重，诚然这是个非常有用的操作，面试也蛮经常会问到的，但是正所谓集合，如数学上的集合，我们经常处理的就是，交集、并集、差集、子集操作。
 
 列表具有以下的 API:
 
-| 属性/方法          | 含义                               |
-| ------------------ | ---------------------------------- |
-| size（属性）       | 集合的元素个数                     |
-| add（方法）        | 添加元素                           |
-| remove（方法）     | 删除元素                           |
-| union（方法）      | 并集操作                           |
-| intersect（方法）  | 交集操作                           |
-| difference（方法） | 差集操作                           |
-| subset（方法）     | 判断当前的集合是否指定集合的子集   |
-| show（方法）       | 输出集合成员                       |
+| 属性/方法          | 含义                             |
+| ------------------ | -------------------------------- |
+| size（属性）       | 集合的元素个数                   |
+| add（方法）        | 添加元素                         |
+| remove（方法）     | 删除元素                         |
+| union（方法）      | 并集操作                         |
+| intersect（方法）  | 交集操作                         |
+| difference（方法） | 差集操作                         |
+| subset（方法）     | 判断当前的集合是否指定集合的子集 |
+| show（方法）       | 输出集合成员                     |
 
 **简单实现**
 
 ```ts
 {
-  class Set {
-    private dataStore: any[] = [];
-    constructor() {}
-    get size() {
-      return 11;
-    }
+	class Set {
+		private dataStore: any[] = []
+		constructor() {}
+		get size() {
+			return 11
+		}
 
-    public add(item: any): boolean {
-      if (!this.dataStore.includes(item)) {
-        this.dataStore.push(item);
-        return true;
-      }
-      return false;
-    }
+		public add(item: any): boolean {
+			if (!this.dataStore.includes(item)) {
+				this.dataStore.push(item)
+				return true
+			}
+			return false
+		}
 
-    public remove(item: any): boolean {
-      let index = this.dataStore.indexOf(item);
-      if (index !== -1) {
-        this.dataStore.splice(index, 1);
-        return true;
-      }
-      return false;
-    }
+		public remove(item: any): boolean {
+			let index = this.dataStore.indexOf(item)
+			if (index !== -1) {
+				this.dataStore.splice(index, 1)
+				return true
+			}
+			return false
+		}
 
-    // 并集操作
-    public union(set: Set) {
-      let tempSet = new Set();
-      for (let i = 0; i < this.dataStore.length; i++) {
-        tempSet.add(this.dataStore[i]);
-      }
-      for (let j = 0; j < set.size; j++) {
-        if (!tempSet.contains(set.dataStore[i])) {
-          tempSet.dataStore.push(set.dataStore[i]);
-        }
-      }
-      return tempSet;
-    }
+		// 并集操作
+		public union(set: Set) {
+			let tempSet = new Set()
+			for (let i = 0; i < this.dataStore.length; i++) {
+				tempSet.add(this.dataStore[i])
+			}
+			for (let j = 0; j < set.size; j++) {
+				if (!tempSet.contains(set.dataStore[i])) {
+					tempSet.dataStore.push(set.dataStore[i])
+				}
+			}
+			return tempSet
+		}
 
-    // 交集操作
-    public intersect(set: Set) {
-      let tempSet = new Set();
-      for (let i = 0; i < this.dataStore.length; i++) {
-        if (set.contains(this.dataStore[i])) {
-          tempSet.add(this.dataStore[i]);
-        }
-      }
-    }
+		// 交集操作
+		public intersect(set: Set) {
+			let tempSet = new Set()
+			for (let i = 0; i < this.dataStore.length; i++) {
+				if (set.contains(this.dataStore[i])) {
+					tempSet.add(this.dataStore[i])
+				}
+			}
+		}
 
-    // 差集
-    public difference(set: Set) {
-      let tempSet = new Set();
-      for (let i = 0; i < this.dataStore.length; i++) {
-        if (!set.contains(this.dataStore[i])) {
-          tempSet.add(this.dataStore[i]);
-        }
-      }
-    }
+		// 差集
+		public difference(set: Set) {
+			let tempSet = new Set()
+			for (let i = 0; i < this.dataStore.length; i++) {
+				if (!set.contains(this.dataStore[i])) {
+					tempSet.add(this.dataStore[i])
+				}
+			}
+		}
 
-    // 判断当前的集合是否指定集合的子集
-    public subset(set: Set): boolean {
-      if (set.size < this.size) {
-        return false;
-      }
-      for (const value of this.dataStore) {
-        if (!set.contains(value)) {
-          return false;
-        }
-      }
-      return true;
-    }
+		// 判断当前的集合是否指定集合的子集
+		public subset(set: Set): boolean {
+			if (set.size < this.size) {
+				return false
+			}
+			for (const value of this.dataStore) {
+				if (!set.contains(value)) {
+					return false
+				}
+			}
+			return true
+		}
 
-    public show() {
-      this.dataStore.forEach((item) => console.log(item));
-    }
+		public show() {
+			this.dataStore.forEach(item => console.log(item))
+		}
 
-    // 工具方法 判断一个元素书否存在于一个集合中
-    private contains(item: any) {
-      if (this.dataStore.includes(item)) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }
-  let set = new Set();
-  set.add("jimmy");
-  set.add("xuexue");
+		// 工具方法 判断一个元素书否存在于一个集合中
+		private contains(item: any) {
+			if (this.dataStore.includes(item)) {
+				return true
+			} else {
+				return false
+			}
+		}
+	}
+	let set = new Set()
+	set.add('jimmy')
+	set.add('xuexue')
 
-  console.log(set.remove("jimy"));
-  console.log(set);
+	console.log(set.remove('jimy'))
+	console.log(set)
 
-  let set2 = new Set();
-  set2.add("jimmy");
-  console.log(set2.subset(set));
+	let set2 = new Set()
+	set2.add('jimmy')
+	console.log(set2.subset(set))
 }
 ```
 
@@ -934,8 +956,6 @@ killOne(list);
 树的数据结构不仅非常广泛的运用于计算机世界中，生活中也是普遍使用到，如公司的组织架构：
 
 ![image-20220203155918318](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220203155918318.png)
-
-
 
 二叉树是一种特殊的树，它的子节点个数不超过两个。二叉树具有一些特殊的计算性质，使得在它们之上的一些操作异常高效。
 
@@ -982,15 +1002,15 @@ BST:Binary Sort Tree
 
 ```ts
 class Node {
-    constructor(
-        public data: number | null = null,
-        public Left: Node | null = null,
-        public right: Node | null = null
-    ) {}
+	constructor(
+		public data: number | null = null,
+		public Left: Node | null = null,
+		public right: Node | null = null
+	) {}
 
-    public show(): number | null {
-        return this.data
-    }
+	public show(): number | null {
+		return this.data
+	}
 }
 ```
 
@@ -998,139 +1018,139 @@ class Node {
 
 ```ts
 class BST {
-    constructor(public root: Node | null = null) {}
+	constructor(public root: Node | null = null) {}
 
-    public insert(data: number) {
-        let node = new Node(data, null, null)
-        // 如果根为空 直接插入
-        if (this.root === null) {
-            this.root = node
-            return
-        }
-        // 根据二叉搜索树规则插入
-        let current = this.root
-        let parent
-        while (true) {
-            parent = current
-            if (parent.data && data < parent.data) {
-                current = current.Left as Node
-                if (!current) {
-                    parent.Left = node
-                    break
-                }
-            } else {
-                current = current.right as Node
-                if (!current) {
-                    parent.right = node
-                    break
-                }
-            }
-        }
-    }
+	public insert(data: number) {
+		let node = new Node(data, null, null)
+		// 如果根为空 直接插入
+		if (this.root === null) {
+			this.root = node
+			return
+		}
+		// 根据二叉搜索树规则插入
+		let current = this.root
+		let parent
+		while (true) {
+			parent = current
+			if (parent.data && data < parent.data) {
+				current = current.Left as Node
+				if (!current) {
+					parent.Left = node
+					break
+				}
+			} else {
+				current = current.right as Node
+				if (!current) {
+					parent.right = node
+					break
+				}
+			}
+		}
+	}
 
-    // 先序遍历
-    public preOrder(root: Node) {
-        if (root) {
-            console.log(root.data)
-            this.preOrder(root.Left as Node)
-            this.preOrder(root.right as Node)
-        }
-    }
+	// 先序遍历
+	public preOrder(root: Node) {
+		if (root) {
+			console.log(root.data)
+			this.preOrder(root.Left as Node)
+			this.preOrder(root.right as Node)
+		}
+	}
 
-    // 中序遍历
-    public inOrder(root: Node) {
-        if (root) {
-            this.inOrder(root.Left as Node)
-            console.log(root.data)
-            this.inOrder(root.right as Node)
-        }
-    }
+	// 中序遍历
+	public inOrder(root: Node) {
+		if (root) {
+			this.inOrder(root.Left as Node)
+			console.log(root.data)
+			this.inOrder(root.right as Node)
+		}
+	}
 
-    // 后续遍历
-    public postOrder(root: Node) {
-        if (root) {
-            this.postOrder(root.Left as Node)
-            this.postOrder(root.right as Node)
-            console.log(root.data)
-        }
-    }
+	// 后续遍历
+	public postOrder(root: Node) {
+		if (root) {
+			this.postOrder(root.Left as Node)
+			this.postOrder(root.right as Node)
+			console.log(root.data)
+		}
+	}
 
-    // 获取最小值
-    public getMin(): number {
-        let current = this.root
-        while (current && current.Left) {
-            current = current.Left
-        }
-        return (current && current.data) as number
-    }
+	// 获取最小值
+	public getMin(): number {
+		let current = this.root
+		while (current && current.Left) {
+			current = current.Left
+		}
+		return (current && current.data) as number
+	}
 
-    // 获取最大值
-    public getMax(): number {
-        let current = this.root
-        while (current && current.right) {
-            current = current.right
-        }
-        return (current && current.data) as number
-    }
+	// 获取最大值
+	public getMax(): number {
+		let current = this.root
+		while (current && current.right) {
+			current = current.right
+		}
+		return (current && current.data) as number
+	}
 
-    // 查找节点
-    public find(data: number): Node | null {
-        let current = this.root
-        while (current) {
-            if (current && current.data === data) {
-                return current
-            } else if (current && (current.data as number) < data) {
-                current = current.right
-            } else if (current && (current.data as number) > data) {
-                current = current.Left
-            }
-        }
-        return null
-    }
+	// 查找节点
+	public find(data: number): Node | null {
+		let current = this.root
+		while (current) {
+			if (current && current.data === data) {
+				return current
+			} else if (current && (current.data as number) < data) {
+				current = current.right
+			} else if (current && (current.data as number) > data) {
+				current = current.Left
+			}
+		}
+		return null
+	}
 
-    // 删除节点
-    public remove(data: number) {
-        this.root = this.removeNode(this.root as Node, data)
-    }
+	// 删除节点
+	public remove(data: number) {
+		this.root = this.removeNode(this.root as Node, data)
+	}
 
-    private removeNode(node: Node, data: number): Node | null {
-        if (!node) {
-            return null
-        }
-        if (data === node.data) {
-            // 叶子节点
-            if (!node.Left && !node.right) {
-                return null
-            }
-            // 没有左节点
-            if (!node.Left) {
-                return node.right
-            }
-            // 没有右节点
-            if (!node.right) {
-                return node.Left
-            }
-            // 有两个子节点的节点
-            let tempNode = this.getMinNode(node.right)
-            node.data = tempNode.data
-            node.right = this.removeNode(node.right, tempNode.data as number)
-            return node
-        } else if (data < (node.data as number)) {
-            node.Left = this.removeNode(node.Left as Node, data)
-            return node
-        } else {
-            node.right = this.removeNode(node.right as Node, data)
-            return node
-        }
-    }
+	private removeNode(node: Node, data: number): Node | null {
+		if (!node) {
+			return null
+		}
+		if (data === node.data) {
+			// 叶子节点
+			if (!node.Left && !node.right) {
+				return null
+			}
+			// 没有左节点
+			if (!node.Left) {
+				return node.right
+			}
+			// 没有右节点
+			if (!node.right) {
+				return node.Left
+			}
+			// 有两个子节点的节点
+			let tempNode = this.getMinNode(node.right)
+			node.data = tempNode.data
+			node.right = this.removeNode(node.right, tempNode.data as number)
+			return node
+		} else if (data < (node.data as number)) {
+			node.Left = this.removeNode(node.Left as Node, data)
+			return node
+		} else {
+			node.right = this.removeNode(node.right as Node, data)
+			return node
+		}
+	}
 
-    private getMinNode(node: Node): Node {
-        let current = node
-        while (current && current.Left) {
-            current = current.Left
-        }
-        return current
-    }
+	private getMinNode(node: Node): Node {
+		let current = node
+		while (current && current.Left) {
+			current = current.Left
+		}
+		return current
+	}
 }
 
 let nums = new BST()
@@ -1152,4 +1172,3 @@ nums.remove(23)
 // nums.preOrder(nums.root as Node)
 // nums.inOrder(nums.root as Node)
 ```
-
