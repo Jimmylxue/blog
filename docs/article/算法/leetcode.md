@@ -1985,3 +1985,112 @@ var generateMatrix = function (n) {
 	return arr
 }
 ```
+
+## 旋转链表
+
+::: tip 考点
+难度：**中级**
+
+思想：链表、环形链表
+:::
+
+:::demo
+
+```vue
+<template>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=338852619&bvid=BV1oR4y1j7SP&cid=501806082&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
+</template>
+<style>
+.demo > iframe {
+	width: 100%;
+	height: 450px;
+}
+</style>
+```
+
+:::
+
+#### 题目
+
+给你一个链表的头节点 head ，旋转链表，将链表每个节点向右移动 k 个位置。
+
+```
+示例 1：
+
+输入：head = [1,2,3,4,5], k = 2
+输出：[4,5,1,2,3]
+示例 2：
+
+输入：head = [0,1,2], k = 4
+输出：[2,0,1]
+```
+
+#### 解题思路
+
+链表的题目对我来说算是非常恶心的题型，不是会做，而是不会写......*，*比如这题，思路出来了以后写了很久，最终还是参考了大神的解题思路才写出来
+
+这题的思路也是相对比较清晰，先将这个链表的头尾进行链接，形成一个环形链表，
+
+然后将移动 k 个位置的节点作为头节点，往后移动链表长度之后那个位置截断头尾的连接，
+
+最后再将这个新的链表进行返回
+
+**原型图**
+
+![image-20220205152134712](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220205152134712.png)
+
+**效果**
+
+![image-20220205152107666](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220205152107666.png)
+
+#### 源代码
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} k
+ * @return {ListNode}
+ */
+var rotateRight = function (head, k) {
+	if (!head) {
+		return null
+	}
+	let current = head
+	let length = 0
+	while (current) {
+		length++
+		if (!current.next) {
+			current.next = head
+			break
+		}
+		current = current.next
+	}
+	let temp = null
+	let left = k % length
+	while (left++ < length) {
+		if (left === length) {
+			temp = head
+		}
+		head = head.next
+	}
+	temp.next = null
+	return head
+}
+```
