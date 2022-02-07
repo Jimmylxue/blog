@@ -2094,3 +2094,299 @@ var rotateRight = function (head, k) {
 	return head
 }
 ```
+
+## 不同路径
+
+::: tip 考点
+难度：**中级**
+
+思想：动态规划、回溯
+:::
+
+:::demo
+
+```vue
+<template>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=551310422&bvid=BV1ii4y1Z7Y7&cid=502717072&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
+</template>
+<style>
+.demo > iframe {
+	width: 100%;
+	height: 450px;
+}
+</style>
+```
+
+:::
+
+:::demo
+
+```vue
+<template>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=766337060&bvid=BV1Er4y1h7MW&cid=502721364&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
+</template>
+<style>
+.demo > iframe {
+	width: 100%;
+	height: 450px;
+}
+</style>
+```
+
+:::
+
+#### 题目
+
+一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。
+
+机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。
+
+问总共有多少条不同的路径？
+
+```
+示例 1：
+
+输入：m = 3, n = 7
+输出：28
+示例 2：
+
+输入：m = 3, n = 2
+输出：3
+解释：
+从左上角开始，总共有 3 条路径可以到达右下角。
+
+1. 向右 -> 向下 -> 向下
+2. 向下 -> 向下 -> 向右
+3. 向下 -> 向右 -> 向下
+   示例 3：
+
+输入：m = 7, n = 3
+输出：28
+示例 4：
+
+输入：m = 3, n = 3
+输出：6
+```
+
+#### 解题思路
+
+思路一：回溯递归的方式
+
+这个方式的解题思路和补全括号的题目的思路是一样的，所以只要使用回溯的方式进行解题，那套熟悉的代码写下来很快就能解题，但是这样的解题效率是比较慢的，不是最优解
+
+思路二：动态规划
+
+之前处理的动态规划都是使用一维数组的，这回这个比较特殊是一个二维数组，其特点是 除了边界的点的走法都等于上面的路程+左边的路程，所以可以根据这个进行操作，最后输出指定点的值即可。
+
+**原型图**
+
+回溯法：
+
+![image-20220206194631662](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220206194631662.png)
+
+动态规划：
+
+![image-20220206195346732](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220206195346732.png)
+
+**效果**
+
+![image-20220206194600231](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220206194600231.png)
+
+#### 源代码
+
+```js
+/**
+ * @param {number} m
+ * @param {number} n
+ * @return {number}
+ */
+// 回溯法
+var uniquePaths2 = function (m, n) {
+	let startX = 0,
+		startY = 0
+	let endX = m - 1,
+		endY = n - 1
+	let res = 0
+	const diff = (startX, startY) => {
+		if (startX === endX && startY === endY) {
+			res++
+		}
+		if (startY < endY) {
+			diff(startX, startY + 1)
+		}
+		if (startX < endX) {
+			diff(startX + 1, startY)
+		}
+	}
+	diff(startX, startY)
+	return res
+}
+
+// 动态规范
+var uniquePaths = function (m, n) {
+	const f = new Array(m).fill(1).map(() => new Array(n).fill(1))
+	for (let i = 1; i < m; i++) {
+		for (let j = 1; j < n; j++) {
+			f[i][j] = f[i - 1][j] + f[i][j - 1]
+		}
+	}
+	return f[m - 1][n - 1]
+}
+```
+
+## 不同路径 Ⅱ
+
+::: tip 考点
+难度：**中级**
+
+思想：动态规划
+:::
+
+:::demo
+
+```vue
+<template>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=893797653&bvid=BV1SP4y1A7fG&cid=503160357&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
+</template>
+<style>
+.demo > iframe {
+	width: 100%;
+	height: 450px;
+}
+</style>
+```
+
+:::
+
+#### 题目
+
+一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。
+
+机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish”）。
+
+现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？
+
+网格中的障碍物和空位置分别用 1 和 0 来表示。
+
+```
+示例 1：
+
+输入：obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]]
+输出：2
+解释：3x3 网格的正中间有一个障碍物。
+从左上角到右下角一共有 2 条不同的路径：
+
+1. 向右 -> 向右 -> 向下 -> 向下
+2. 向下 -> 向下 -> 向右 -> 向右
+
+示例 2：
+
+输入：obstacleGrid = [[0,1],[0,0]]
+输出：1
+```
+
+#### 解题思路
+
+这题是 62 不同路径的升级版本，添加了障碍物的元素，更难了一点，但是任然可以使用动态规划进行解题。和上一题一个道理，因为机器人只能向右或者向下走，所以它**到达一个点的走法等于左边格子走法+上面格子的走法**，其次
+
+- 如果障碍物在左边，那它到达这个点的走法只等于到达上边的走法
+
+- 如果障碍物在目标点的上边，那它到达这个点的走法只等于到达左边的走法
+
+以此可以列一个二维数组使用动态规划的方式进行求解
+
+**原型图**
+
+动态规划：
+
+![image-20220207124849691](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220207124849691.png)
+
+**效果**
+
+![image-20220207113141867](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220207113141867.png)
+
+#### 源代码
+
+```js
+/**
+ * @param {number[][]} obstacleGrid
+ * @return {number}
+ */
+var uniquePathsWithObstacles = function (obstacleGrid) {
+	let row = obstacleGrid.length
+	let col = obstacleGrid[0].length
+	for (let i = 0; i < row; i++) {
+		for (let j = 0; j < col; j++) {
+			if (obstacleGrid[i][j] === 1) {
+				obstacleGrid[i][j] = -1
+			}
+		}
+	}
+	let xFlag = false
+	let yFlag = false
+	for (let i = 0; i < row; i++) {
+		for (let j = 0; j < col; j++) {
+			if (i === 0) {
+				if (obstacleGrid[i][j] !== -1 && !xFlag) {
+					obstacleGrid[i][j] = 1
+				} else {
+					xFlag = true
+				}
+			}
+			if (j === 0) {
+				if (obstacleGrid[i][j] !== -1 && !yFlag) {
+					obstacleGrid[i][j] = 1
+				} else {
+					yFlag = true
+				}
+			}
+		}
+	}
+	for (let i = 1; i < row; i++) {
+		for (let j = 1; j < col; j++) {
+			if (obstacleGrid[i][j] === -1) {
+				continue
+			} else if (obstacleGrid[i - 1][j] === -1) {
+				obstacleGrid[i][j] = obstacleGrid[i][j - 1]
+			} else if (obstacleGrid[i][j - 1] === -1) {
+				obstacleGrid[i][j] = obstacleGrid[i - 1][j]
+			} else {
+				obstacleGrid[i][j] = obstacleGrid[i - 1][j] + obstacleGrid[i][j - 1]
+			}
+		}
+	}
+	return obstacleGrid[row - 1][col - 1] === -1
+		? 0
+		: obstacleGrid[row - 1][col - 1]
+}
+```
