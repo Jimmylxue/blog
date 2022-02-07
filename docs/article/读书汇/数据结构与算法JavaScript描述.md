@@ -100,6 +100,32 @@ console.log(names.length); // 4
 
 ## 栈(Stack)
 
+:::demo
+
+```vue
+<template>
+	<div class="demo">
+		<iframe
+			src="//player.bilibili.com/player.html?aid=296290782&bvid=BV1aF411J7j7&cid=503512221&page=1"
+			scrolling="no"
+			border="0"
+			frameborder="no"
+			framespacing="0"
+			allowfullscreen="true"
+		>
+		</iframe>
+	</div>
+</template>
+<style>
+.demo > iframe {
+	width: 100%;
+	height: 450px;
+}
+</style>
+```
+
+:::
+
 栈和列表是一种类似的数据结构，不过从上个例子也能看出来，列表是非常简陋的，几乎就是简单的处理数组的 API 相结合了，使用场景也相对有所限制。
 
 栈则不同，栈再计算机世界有非常多的使用场景，比如 JS 执行时上下文其实就是个栈的结构。栈是一种高效的数据结构，因为数据只能在栈顶添加或删除，所以这样的操作很快，而且容易实现。
