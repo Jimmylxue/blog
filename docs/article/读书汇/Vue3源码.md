@@ -16,7 +16,7 @@
 
 ![整体结构图](http://vitepress-source.oss-cn-beijing.aliyuncs.com/vue3.png)
 
-因为初始化过程的代码最重要的过程是创建渲染器和挂载的这两个过程，而整体的代码量非常之大，所以需要明确目标，只看初始化过程的代码，不看其他内容的代码，如：响应式、vnode之类的代码。
+因为初始化过程的代码最重要的过程是创建渲染器和挂载的这两个过程，而整体的代码量非常之大，所以需要明确目标，只看初始化过程的代码，不看其他内容的代码，如：响应式、vnode 之类的代码。
 
 ### 问题集合
 
@@ -26,13 +26,13 @@
 
   ```ts
   function ensureRenderer() {
-    // 单例 渲染函数 可以简单的理解这个渲染器可以帮助我们创建应用实例
-    return (
-      renderer ||
-      // 通过 createRenderer 创建渲染函数
-      ((renderer = createRenderer < Node),
-      Element | (ShadowRoot > rendererOptions))
-    );
+  	// 单例 渲染函数 可以简单的理解这个渲染器可以帮助我们创建应用实例
+  	return (
+  		renderer ||
+  		// 通过 createRenderer 创建渲染函数
+  		((renderer = createRenderer < Node),
+  		Element | (ShadowRoot > rendererOptions))
+  	)
   }
   ```
 
@@ -42,23 +42,23 @@
 
   - render
 
-    是一个函数，这个render函数和组件的render函数有所不同，这个render函数是接收虚拟DOM,转正真实DOM，再挂载到宿主DOM上，就类似于React的`ReactDOM.render(<App />,document.getElementById('app'))`是一个道理的
+    是一个函数，这个 render 函数和组件的 render 函数有所不同，这个 render 函数是接收虚拟 DOM,转正真实 DOM，再挂载到宿主 DOM 上，就类似于 React 的`ReactDOM.render(<App />,document.getElementById('app'))`是一个道理的
 
   - hydrate
 
-    当处理服务端渲染中使用的， 服务端将一个 vnode生成 html
+    当处理服务端渲染中使用的， 服务端将一个 vnode 生成 html
 
   - createApp：createAppAPI(render, hydrate)
 
-    返回的实际上是createAppApi（工厂函数）
+    返回的实际上是 createAppApi（工厂函数）
 
-  这个createAPI就是返回的createApp函数就是用户使用的createApp函数，其中就暴露了我们熟悉的 use、mount、component方法。
+  这个 createAPI 就是返回的 createApp 函数就是用户使用的 createApp 函数，其中就暴露了我们熟悉的 use、mount、component 方法。
 
-  和vue2不同的地方在于这些方法已经变成了实例方法而不是原型方法了。
+  和 vue2 不同的地方在于这些方法已经变成了实例方法而不是原型方法了。
 
 - 挂载都做了什么事情
 
-  挂载最新执行的是根组件的挂载，我们通过createApp传入的配置对象会被转成转换成一个根组件，render函数执行processComponent挂载组件，挂载组件会执行的是：
+  挂载最新执行的是根组件的挂载，我们通过 createApp 传入的配置对象会被转成转换成一个根组件，render 函数执行 processComponent 挂载组件，挂载组件会执行的是：
 
   - 先创建组件的实例
   - 创建更新函数
@@ -75,11 +75,11 @@
 
 ```ts
 function ensureRenderer() {
-  return (
-    renderer ||
-    // 通过 createRenderer 创建渲染函数
-    (renderer = createRenderer<Node, Element | ShadowRoot>(rendererOptions))
-  );
+	return (
+		renderer ||
+		// 通过 createRenderer 创建渲染函数
+		(renderer = createRenderer<Node, Element | ShadowRoot>(rendererOptions))
+	)
 }
 ```
 
@@ -89,16 +89,15 @@ function ensureRenderer() {
 
 ```ts
 function baseCreateRenderer(
-  options: RendererOptions,
-  createHydrationFns?: typeof createHydrationFunctions
+	options: RendererOptions,
+	createHydrationFns?: typeof createHydrationFunctions
 ): any {
-  // 省略2000多行 渲染器方法
-  return {
-    render,
-    hydrate,
-    // createApp 返回的实际上是createAppApi（工厂函数）
-    createApp: createAppAPI(render, hydrate), 
-  };
+	// 省略2000多行 渲染器方法
+	return {
+		render,
+		hydrate,
+		// createApp 返回的实际上是createAppApi（工厂函数）
+		createApp: createAppAPI(render, hydrate),
+	}
 }
 ```
-
