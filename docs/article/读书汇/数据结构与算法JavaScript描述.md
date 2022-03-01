@@ -1198,3 +1198,67 @@ nums.remove(23)
 // nums.preOrder(nums.root as Node)
 // nums.inOrder(nums.root as Node)
 ```
+
+## 图（graph）
+
+图对我来说也是一个全新的数据结构，以前从未接触过图，现实中图的例子也有蛮多，铁路图、交通干线图这都是图的结构，在计算机世界中经过了解发现前端日常使用的最多的一个工具之一“**webpack**，在打包构建的时候其实也是有使用到图的数据结构的，各个文件之间的依赖关系就是一个图的数据结构。
+
+图最重要的元素：定点、边
+
+根据图是否有方向可以分为：有向图、无方向图
+
+根据图的边是否带值（权重）可分为：带权图、不带权图
+
+表示图的方式：邻接表（邻接表数组）
+
+- 邻接表（邻接表数组）
+
+![image-20220228174608562](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220228174608562.png)
+
+关于图的两种算法：深度优先搜索（dfs）、广度优先搜索（bfs）
+
+### 深度优先搜素
+
+深度优先搜索算法比较简单:访问一个没有访问过的顶点，将它标记为已访问，再递归地去访问在初始顶点的邻接表中其他没有访问过的顶点。
+
+
+
+
+```ts
+class Graph {
+  edges = 0 // 边
+  adj: (string | number)[][] = []
+  constructor(public vertices = 0) {
+    for (let i = 0; i < this.vertices; i++) {
+      this.adj[i] = []
+      this.adj[i].push('') // 自己不可能和自己相连
+    }
+  }
+
+  addEdge(v: number, w: number) {
+    this.adj[v].push(w)
+    this.adj[w].push(v)
+    this.edges++
+  }
+
+  showGraph() {
+    for (let i = 0; i < this.vertices; i++) {
+      console.log(i + '->')
+      for (let j = 0; j < this.vertices; j++) {
+        if (this.adj[j][j] !== undefined) {
+          console.log(this.adj[i][j])
+        }
+      }
+      console.log('--------')
+    }
+  }
+}
+
+let g = new Graph(5)
+g.addEdge(0, 1)
+g.addEdge(0, 2)
+g.addEdge(1, 3)
+g.addEdge(2, 4)
+g.showGraph()
+```
+
