@@ -22,6 +22,8 @@ hello 你们好，我是 Jimmy😁，这个网站是记录我们开发生涯中�
 
   [视频记录](https://space.bilibili.com/304985153/channel/seriesdetail?sid=1998005)
 
+- 《JavaScript DOM 编程艺术》
+
 ## Todo
 
 - 《数据结构算法 JavaScript 描述》
