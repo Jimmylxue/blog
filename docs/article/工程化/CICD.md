@@ -16,6 +16,6 @@ gitlab+jenkins 是比较适合企业生产级别的方案，如果是我们自�
 
 > 跟着文档配置下来就行，每次我重装服务器也是跟着这个我总结下来的文档，就能完美的配置下来啦~
 
-**Github Action 使用&配置文件**：[传送门](http://localhost:3000/article/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2.html#%E5%85%A8%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2)
+**Github Action 使用&配置文件**：[传送门](http://www.jimmyxuexue.top:999/article/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2.html#%E5%85%A8%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2)
 
 最后谢谢大家的观看，有不明白的地方欢迎评论或者加我个人微信！
