@@ -1,5 +1,11 @@
 const head = [
-  ['link', { rel: 'icon', href: 'http://www.jimmyxuexue.top/small.png' }],
-];
+	[
+		'link',
+		{
+			rel: 'icon',
+			href: 'https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220326203849385.png',
+		},
+	],
+]
 
-export default head;
+export default head
