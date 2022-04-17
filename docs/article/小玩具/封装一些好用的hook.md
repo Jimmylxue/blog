@@ -32,7 +32,7 @@ setTimeout(setState(v=>v++))
 useLocalStroage<T>(key: string, defaultValue?: T | (() => T)): readonly [T, React.Dispatch<React.SetStateAction<T>>];
 ```
 
-## API
+### API
 
 ```typescript
 const [state, setState] = useLocalStorageState<T>(key: string, defaultValue?: T | (() => T));
