@@ -169,3 +169,28 @@ BigInt(Math.pow(2, 53)) === BigInt(Math.pow(2, 53)) + 1// 报错 BigInt类型只
 ```
 
 ![image-20220506205812813](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220506205812813.png)
+
+## Object.hasOwn
+
+这是一个比较新的API，其要实现的目的和`in`、`Object.hasOwnProperty`是一样的，都是判断对象上是否存在于某个属性，区别在于，`Object.hasOwn`是目前为止最安全的一个API！
+
+- `in` 操作符，会触发原型链的查找，这个容易出问题，也不够稳健，不推荐使用
+
+- `Object.hasOwnProperty` 只会在当前的对象上查找，不会触发原型链的查找，相对稳健，但是在特殊的情况下也是会报错的。
+
+  ```js
+  Object.create(null).hasOwnProperty('name') // v报错
+  ```
+
+- `Object.hasOwn` 最推荐的一种API，是上一种的升级版本，更适合于生产环境下，非常的稳健和靠谱
+
+  ```js
+  let object = { age: 24 }
+  Object.hasOwn(object, 'age') // true
+  let object2 = Object.create({ age: 24 })
+  Object.hasOwn(object2, 'age') // false  
+  let object3 = Object.create(null)
+  Object.hasOwn(object3, 'age') // false 
+  ```
+
+  

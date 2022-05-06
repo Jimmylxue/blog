@@ -24,6 +24,8 @@ hello 你们好，我是 Jimmy😁，这个网站是记录我们开发生涯中�
 
 - 《JavaScript DOM 编程艺术》
 
+- 《算法图解》
+
 ## Todo
 
 - 《数据结构算法 JavaScript 描述》
