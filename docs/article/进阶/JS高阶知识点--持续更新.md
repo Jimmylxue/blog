@@ -135,3 +135,37 @@ callback 函数的参数（entries）是一个数组，每个成员都是一个 
 - intersectionRect：目标元素与视口（或根元素）的交叉区域的信息
 
 - intersectionRatio：目标元素的可见比例，即 intersectionRect 占 boundingClientRect 的比例，
+
+## 大数运算（bigInt）
+
+JS在正常情况下表示整数是有范围的，当超过最大值的时候就会触发精度问题。
+
+```js
+Math.pow(2, 53) === Math.pow(2, 53) + 1 // true
+// Math.pow(2, 53) => 9007199254740992
+// Math.pow(2, 53) + 1 => 9007199254740992
+```
+
+在上面的例子中，最多只能表示 9007199254740992 在这个基础上再加也没用。相信总会有计算特别大的数的需求，所以这时候我们就可以使用 `BigInt` 函数来处理。
+
+```js
+BigInt(Math.pow(2, 53)) === BigInt(Math.pow(2, 53)) + BigInt(1) // false
+
+BigInt(Math.pow(2, 53)) === BigInt(Math.pow(2, 53)) + 1// 报错 BigInt类型只能与BigInt类型相加  否则会有类型错误
+```
+
+## 数字分隔符
+
+又是一个为和大数值打交道而产生的一个新的写法，让人眼前一亮！
+
+在过去，如果我们要表示100W，写法为 1000000
+
+使用数字分隔符之后：
+
+1_000_000
+
+```js
+1000000 === 1_000_000 // true
+```
+
+![image-20220506205812813](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220506205812813.png)
