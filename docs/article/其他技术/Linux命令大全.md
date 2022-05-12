@@ -168,11 +168,20 @@
   mkdir demo # 在当前路径下创建一个dmeo文件夹
   ```
 
+- `rmdir `删除目录
+
+  ```
+  rmdir demo # 删除当前目录下的 demo 文件夹
+  ```
+
+  只有当这个文件夹下是空的时候，这个命令才能删除成功，否则是删除失败，如果想要删除有文件内容的文件夹（目录），则可以使用`rm -rf demo` 的形式来记性删除
+
 - `ls` 查看当前目录下文件
 
   ```
   ls # 查看当前目录下文件（不包含隐藏文件）
   ls -a # 查看当前目录下文件（包含隐藏文件）
+  ls -l # 显示详细的列表信息（这个更加多的内容）
   ```
 
   ![image-20211226224906205](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20211226224906205.png)
@@ -189,7 +198,7 @@
 
   ```
   tar -axvf node-v16.13.1-linux-x64.tar.gz # 解压 .tar.gz 格式压缩包
-
+  
   # 如果解压 .tar.xz 类型文件 需要先将 .tar.xz 转成 .tar
   xz -d node-v16.13.1-linux-x64.tar.xz # 得到 node-v16.13.1-linux-x64.tar 文件
   tar -xvf node-v16.13.1-linux-x64.tar # 解压 .tar文件
@@ -213,6 +222,12 @@
 
   ![image-20211226231957370](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20211226231957370.png)
 
+- `touch`创建文件
+
+  ```
+  touch index.html
+  ```
+
 - `vim` 使用编辑器
 
   ```
@@ -229,6 +244,22 @@
   ```
 
   兄弟们这个命令非常的危险，尤其是删库跑路的那个命令，如果是公司的服务器这样搞一下是要赔很多钱说不定会被告的，千万不要用！！！
+
+- `*`通配符
+
+  `*`这里类似于正则进行匹配，在shell里，`*`可以代表人和的字符或者数字，所以可以做出以下的一些操作：
+
+  | 命令 | 含义 |
+  |  ----  | ----  |
+  | `cat at*` | 查看所有以 at 开头的文件 |
+  | `rm -rf *.css` | 删除所有的css文件 |
+  | `rm -rf *.temp.*` | 删除所有的包含 .temp. 的文件 |
+
+- `?`通配符
+
+  匹配一个字符，也是正则的概念，只是和JS中的正则不太一样，在linux中：
+
+  b?at => 可以成功匹配 boat或brat
 
 ### 其他
 
