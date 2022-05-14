@@ -24,6 +24,10 @@
 
   ![image-20211226223445111](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20211226223445111.png)
 
+- `passwd`修改密码
+
+  只需要输入 `passwd` 即可，输入一遍旧密码和两遍新密码即可。密码最好复杂。
+
 - `uname -a`查看系统版本信息
 
   ```
@@ -186,6 +190,8 @@
 
   ![image-20211226224906205](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20211226224906205.png)
 
+**查看文件信息**
+
 - `cat`查看文件内容
 
   ```
@@ -193,6 +199,22 @@
   ```
 
   ![image-20211226225118652](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20211226225118652.png)
+
+- `head`查看前10行内容
+
+  `head  /etc/passwd`
+
+  ![image-20220514225602256](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220514225602256.png)
+
+- `tail`查看后10行内容
+
+  `tail /etc/passwd`
+
+  如果想指定行数，可以使用-n 来设置，如：`tail -3 /etc/passed`
+
+  ![image-20220514225855188](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220514225855188.png)
+
+**对文件进行排序**
 
 - `tar`解压文件
 
@@ -260,6 +282,18 @@
   匹配一个字符，也是正则的概念，只是和JS中的正则不太一样，在linux中：
 
   b?at => 可以成功匹配 boat或brat
+
+**查找文件**
+
+- `find dir -name file` 查找文件
+
+  查找dir目录下的file文件。例：
+
+  ```
+  find ./me -name index.html # 查找me目录下的所有的index.html文件
+  ```
+
+  ![image-20220514224819845](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220514224819845.png)
 
 ### 其他
 
