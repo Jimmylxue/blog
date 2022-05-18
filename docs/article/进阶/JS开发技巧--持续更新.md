@@ -227,3 +227,28 @@ let count = 0;
 const power = Math.pow(4, 3); // 64
 const power = 4 ** 3; // 64
 ```
+
+## 具名导出时更改别名
+
+如项目中我们使用了两个组件库的`Table`组件，并且都用上了，这时候如果引入两个`Table`会报错，所以我们可以使用导出时改名，用的就是`as`关键字。
+
+```ts
+import { Table } from 'dz-ui'
+import { Table as Tables } from 'antd'
+```
+
+看着感觉蛮简单的，但是之前我就是搞错了，我把 **结构** 语法搞混了，写成如下这样，一直报错，后面才焕然大悟是搞混乱了：
+
+```ts
+import { Table } from 'dz-ui'
+import { Table : Tables } from 'antd' // 直接报错了 : 是结构的语法
+
+// 结构时改名才是使用 :
+const person = {
+  name:'jimmy',
+  age:22
+}
+const { name:names, age:ages } = person
+```
+
+稍微记录一下，避免下次再搞混乱了。
