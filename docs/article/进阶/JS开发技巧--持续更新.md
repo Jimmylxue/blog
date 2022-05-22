@@ -1,3 +1,17 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 开发技巧
+
+  - - meta
+    - name: keywords
+      content: JS
+
+  - - script
+    - src: https://vitepress-source.oss-cn-beijing.aliyuncs.com/statistics.js
+---
+
 ## JS 开发技巧 -- 持续更新
 
 > 所谓技巧，就是用更少行数，写出更加优雅的代码
@@ -9,15 +23,15 @@
 看到过滤，第一时间我想到的就是数组的`filter`方法，脑海中出现的代码是这样：
 
 ```js
-let arr = [1, 0, undefined, 6, 7, '', false];
-Array.prototyoe.filter.call(arr, (item) => Boolean(item)); // [1, 6, 7]
+let arr = [1, 0, undefined, 6, 7, '', false]
+Array.prototyoe.filter.call(arr, item => Boolean(item)) // [1, 6, 7]
 ```
 
 但是实际上数组的处理函数我们是可以简写的，写成：
 
 ```js
-let arr = [1, 0, undefined, 6, 7, '', false];
-Array.prototype.filter.call(arr, Boolean); // [1, 6, 7]
+let arr = [1, 0, undefined, 6, 7, '', false]
+Array.prototype.filter.call(arr, Boolean) // [1, 6, 7]
 ```
 
 ## 数组元素转数字
@@ -25,15 +39,15 @@ Array.prototype.filter.call(arr, Boolean); // [1, 6, 7]
 将一个数组的元素转为数字，第一想法想到的是`map`方法：
 
 ```js
-let arr = ['12', '1', '3.1415', '-10.01'];
-Array.prototyoe.map.call(arr, (item) => Number(item)); // [12, 1, 3.1415, -10.01]
+let arr = ['12', '1', '3.1415', '-10.01']
+Array.prototyoe.map.call(arr, item => Number(item)) // [12, 1, 3.1415, -10.01]
 ```
 
 但是实际上这个处理函数我们是可以和前面过滤错误值一样直接简写的，写成：
 
 ```js
-let arr = ['12', '1', '3.1415', '-10.01'];
-Array.prototyoe.map.call(arr, Number); // [12, 1, 3.1415, -10.01]
+let arr = ['12', '1', '3.1415', '-10.01']
+Array.prototyoe.map.call(arr, Number) // [12, 1, 3.1415, -10.01]
 ```
 
 以此类推，处理函数可以写`String`转字符串。
@@ -44,14 +58,14 @@ Array.prototyoe.map.call(arr, Number); // [12, 1, 3.1415, -10.01]
 
 ```js
 if (a > 10) {
-  doSomething(a);
+	doSomething(a)
 }
 ```
 
 替换后
 
 ```js
-a > 10 && doSomething(a);
+a > 10 && doSomething(a)
 ```
 
 `&&`只有在左侧为真时，才会执行右侧的代码，否则就会触发短路，就特别适合处理这种场景。
@@ -62,7 +76,7 @@ a > 10 && doSomething(a);
 
 ```js
 if (a === undefined || a === 10 || a === 15 || a === null) {
-  doSomething();
+	doSomething()
 }
 ```
 
@@ -70,7 +84,7 @@ if (a === undefined || a === 10 || a === 15 || a === null) {
 
 ```js
 if ([undefined, 10, 15, null].includes(a)) {
-  //...
+	//...
 }
 ```
 
@@ -82,26 +96,26 @@ if ([undefined, 10, 15, null].includes(a)) {
 
 ```js
 const parent = {
-  child: {
-    child1: {
-      child2: {
-        key: [1, 2, 3, 4, 5],
-      },
-    },
-  },
-};
+	child: {
+		child1: {
+			child2: {
+				key: [1, 2, 3, 4, 5],
+			},
+		},
+	},
+}
 ```
 
 在开发中我们为了确保出现错误，我过去都是使用`&&`来进行读取：
 
 ```js
-parent && parent.child && parent.child.child1 && parent.child.child1.child2;
+parent && parent.child && parent.child.child1 && parent.child.child1.child2
 ```
 
 诚然，这样代码必定不会报错，但是代码实在是太长了，十分的臃肿。我们使用 JS 的可选链运算符来写，代码就会变为：
 
 ```js
-parent?.child?.child1?.child2;
+parent?.child?.child1?.child2
 ```
 
 这样写和上面的一长串是一样的。这个真的非常的有用，一定要用起来！！！！
@@ -114,14 +128,14 @@ parent?.child?.child1?.child2;
 
 ```js
 if (a === null || a === undefined) {
-  doSomething();
+	doSomething()
 }
 ```
 
 使用**空值合并运算符**简化代码
 
 ```js
-a ?? doSomething();
+a ?? doSomething()
 ```
 
 空值合并操作符（??）是一个逻辑操作符，当左侧的操作数为 null 或者 undefined 时，返回其右侧操作数，否则返回左侧操作数。
@@ -131,19 +145,19 @@ a ?? doSomething();
 取整，第一时间我想到的是`parseInt()`：
 
 ```js
-parseInt(3.1415923); // 3
+parseInt(3.1415923) // 3
 ```
 
 除此之外，可能还能想到一个`Math.floor()`方法
 
 ```js
-Math.floor(3.1415923); // 3
+Math.floor(3.1415923) // 3
 ```
 
 其实可以使用~~运算符来消除数字的小数部分，它相对于数字的那些方法会快很多。
 
 ```js
-~~3.1415926; // 3
+~~3.1415926 // 3
 ```
 
 其实这个运算符的作用有很多，通常是用来将变量转化为数字类型的，不同类型的转化结果不一样：
@@ -157,10 +171,10 @@ Math.floor(3.1415923); // 3
 除了这种方式之外，我们还可以使用按位与来实现数字的取整操作，只需要在数字后面加上`|0`即可：
 
 ```js
-23.9 |
-  (0 - // 23
-    23.9) |
-  0; // -23
+;23.9 |
+	(0 - // 23
+		23.9) |
+	0 // -23
 ```
 
 ## 检测一个对象是否位空对象
@@ -168,15 +182,15 @@ Math.floor(3.1415923); // 3
 这个操作是非常常用的，我经常使用的是`JSON.stringify()`来进行转成字符串进行判断：
 
 ```js
-let obj = {};
-JSON.stringify(obj) === '{}'; // true
+let obj = {}
+JSON.stringify(obj) === '{}' // true
 ```
 
 其实可以使用对象的原型方法来遍历 key 判断 key 是都位空：
 
 ```js
-let obj = {};
-Object.keys(obj).length === 0; // true
+let obj = {}
+Object.keys(obj).length === 0 // true
 ```
 
 ## 获取数组中的最后一项
@@ -184,15 +198,15 @@ Object.keys(obj).length === 0; // true
 第一想法，根据数组的索引来获取：
 
 ```js
-let arr = [1, 2, 3, 4, 5];
-arr[arr.length - 1]; // 5
+let arr = [1, 2, 3, 4, 5]
+arr[arr.length - 1] // 5
 ```
 
 这样写没什么问题，就好像写的会偏多一点，其实可以使用数组的`slice`方法：
 
 ```js
-let arr = [1, 2, 3, 4, 5];
-Array.prototype.slice.call(arr, -1); // 5
+let arr = [1, 2, 3, 4, 5]
+Array.prototype.slice.call(arr, -1) // 5
 ```
 
 数组的 slice 方法支持传入负数，为负数时表示从后往前查找，传入-1 表示查找最后一个元素，且这个方法是不会改变原数组的。
@@ -202,19 +216,19 @@ Array.prototype.slice.call(arr, -1); // 5
 转为布尔值，我最常使用的方法是使用 `Boolean()`方法进行转：
 
 ```js
-let str1 = '';
-let count = 0;
-Boolean(str1); // false
-Boolean(count); // false
+let str1 = ''
+let count = 0
+Boolean(str1) // false
+Boolean(count) // false
 ```
 
 其实还有一个更加装 X 的方法，使用`!!`来获取布尔值
 
 ```js
-let str1 = '';
-let count = 0;
-!!str1; // false
-!!count; // false
+let str1 = ''
+let count = 0
+!!str1 // false
+!!count // false
 ```
 
 简单的解释一下，当`!str`表示将 str 这个值进行取反，在`!str`的前面再加一个`!`变成`!!str`，将取反的结果再次取反，得到的就是原来的值的布尔类型。
@@ -224,8 +238,8 @@ let count = 0;
 过去要使用乘方的方法时，第一想到的就是`Math.pow()`方法，但是还可以使用`**`来表示乘方。
 
 ```js
-const power = Math.pow(4, 3); // 64
-const power = 4 ** 3; // 64
+const power = Math.pow(4, 3) // 64
+const power = 4 ** 3 // 64
 ```
 
 ## 具名导出时更改别名

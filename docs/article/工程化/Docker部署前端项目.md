@@ -1,3 +1,17 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 使用 Docker 部署前端项目
+
+  - - meta
+    - name: keywords
+      content: 使用 Docker 部署前端项目
+
+  - - script
+    - src: https://vitepress-source.oss-cn-beijing.aliyuncs.com/statistics.js
+---
+
 # 使用 Docker 部署前端项目
 
 ## 环境的部署

@@ -1,8 +1,22 @@
-# 封装一些好用的hooks
+---
+head:
+  - - meta
+    - name: description
+      content: 封装一些好用的hooks
 
-::: tip 跟大家安利一个非常好用的hooks工具库~~
+  - - meta
+    - name: keywords
+      content: react、hooks
 
-[@shihengtech/hooks](https://shiheng-fe.github.io/hooks/use-loading)，是我现在所在公司的前辈自行封装的一些hooks，其中的一些hooks几乎都是我目前开发的项目中的一些必备的hooks。
+  - - script
+    - src: https://vitepress-source.oss-cn-beijing.aliyuncs.com/statistics.js
+---
+
+# 封装一些好用的 hooks
+
+::: tip 跟大家安利一个非常好用的 hooks 工具库~~
+
+[@shihengtech/hooks](https://shiheng-fe.github.io/hooks/use-loading)，是我现在所在公司的前辈自行封装的一些 hooks，其中的一些 hooks 几乎都是我目前开发的项目中的一些必备的 hooks。
 
 学习源码，并且自己也封装了一遍，源码在：[hooks](https://github.com/Jimmylxue/hooks)
 
@@ -12,7 +26,7 @@
 
 ## useLocalStorageState
 
-顾名思义，和useState一样，会创建一个和useState一样的数据结构，这个数据会被保存到浏览器的`localStorage`中，通过setSLocalStroage也能实现页面的渲染。
+顾名思义，和 useState 一样，会创建一个和 useState 一样的数据结构，这个数据会被保存到浏览器的`localStorage`中，通过 setSLocalStroage 也能实现页面的渲染。
 
 ### 用处
 
@@ -21,9 +35,9 @@
 ### 最终目标
 
 ```tsx
-const [state,setState] = useLocalStorageState('JimmyKey',1)
+const [state, setState] = useLocalStorageState('JimmyKey', 1)
 
-setTimeout(setState(v=>v++))
+setTimeout(setState(v => v++))
 ```
 
 ### Types
@@ -40,9 +54,7 @@ const [state, setState] = useLocalStorageState<T>(key: string, defaultValue?: T 
 
 ### Params
 
-
-|  参数 | 说明 | 类型 | 默认值 |
-|  ----  | ----  |----  |----  |
-| key | 必填，`localStorage` 存储的键值对的键值 |string |- |
-| defaultValue | 默认值，会优先以 `localStorage` 中保存的值为准 |any |()=>any |
-
+| 参数         | 说明                                           | 类型   | 默认值  |
+| ------------ | ---------------------------------------------- | ------ | ------- |
+| key          | 必填，`localStorage` 存储的键值对的键值        | string | -       |
+| defaultValue | 默认值，会优先以 `localStorage` 中保存的值为准 | any    | ()=>any |

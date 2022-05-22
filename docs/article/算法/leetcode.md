@@ -1,3 +1,17 @@
+---
+head:
+  - - meta
+    - name: description
+      content: leetCode刷题记录
+
+  - - meta
+    - name: keywords
+      content: leetOde
+
+	- - script
+    - src: https://vitepress-source.oss-cn-beijing.aliyuncs.com/statistics.js
+---
+
 ## 下一个排列
 
 ::: tip 考点

@@ -1,3 +1,14 @@
+<!-- ---
+head:
+  - - meta
+    - name: description
+      content: Vue3 源码阅读记录
+
+	- - meta
+    - name: keywords
+      content: Vue3 源码阅读记录
+--- -->
+
 # Vue3 源码阅读记录
 
 ::: tip 前言

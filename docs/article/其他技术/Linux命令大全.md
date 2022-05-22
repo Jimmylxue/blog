@@ -1,3 +1,17 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Linux 常用命令
+
+  - - meta
+    - name: keywords
+      content: Linux
+
+  - - script
+    - src: https://vitepress-source.oss-cn-beijing.aliyuncs.com/statistics.js
+---
+
 # Linux 常用命令
 
 ![image-20211226202054235](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20211226202054235.png)
@@ -46,18 +60,18 @@
 
 **进程相关操作**
 
-使用`ps`即可获取当前系统正在运行中的进程，知道了这个就理解了docker查看运行中的容器为什么是`docker ps`了，其返回结果包含有:
+使用`ps`即可获取当前系统正在运行中的进程，知道了这个就理解了 docker 查看运行中的容器为什么是`docker ps`了，其返回结果包含有:
 
-|  字段 | 含义 |
-|  ----  | ----  |
-| PID | 进程ID |
-| STAT | 进程状态：S（正在休眠）、R（正在运行） |
-| TIME | 进程占CPU的总时长 |
-| COMMAND | 命令名（如果使用`npm run dev`开启一个node服务，那个ps命令对应的COMMAND就会是`npm run dev`） |
+| 字段    | 含义                                                                                              |
+| ------- | ------------------------------------------------------------------------------------------------- |
+| PID     | 进程 ID                                                                                           |
+| STAT    | 进程状态：S（正在休眠）、R（正在运行）                                                            |
+| TIME    | 进程占 CPU 的总时长                                                                               |
+| COMMAND | 命令名（如果使用`npm run dev`开启一个 node 服务，那个 ps 命令对应的 COMMAND 就会是`npm run dev`） |
 
-命令选项也很多，类比于docker：
+命令选项也很多，类比于 docker：
 | 命令 | 含义 |
-|  ----  | ----  |
+| ---- | ---- |
 | ps x | 显示当前用户运行的所有进程 |
 | ps ax | 显示当前系统运行的所有进程（这个包含其他用户） |
 | ps u | 显示更详细的进程信息 |
@@ -65,12 +79,12 @@
 
 终止进程：
 | 命令 | 含义 |
-|  ----  | ----  |
+| ---- | ---- |
 | kill pid | 直接杀死这个进程 |
 | kill -STOP pid | 让进程暂停，而不是杀死，（仍然会继续暂存在内容，等待重新被开启） |
 | kill -CONT pid | 开启被暂停的暂存在内存中的进程 |
 
-想要体验一下这些进程命令对于我们来说也很简单，我们只需要开启一个node服务即可，然后就可以体验一下通过进程命令来强制关闭掉我们的node服务。
+想要体验一下这些进程命令对于我们来说也很简单，我们只需要开启一个 node 服务即可，然后就可以体验一下通过进程命令来强制关闭掉我们的 node 服务。
 
 有时候我们启动某个服务发现端口被占用了，如果在进程中能发现的话，逻辑上也是可以通过找进程的方式将其关闭，就可以释放端口号了。
 
@@ -145,7 +159,7 @@
 
   ```
   nohup node app.js # 后台执行app.js
-  
+
   ```
 
 - `jobs`查看后台执行的任务
@@ -230,13 +244,13 @@
 
   ![image-20211226225118652](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20211226225118652.png)
 
-- `head`查看前10行内容
+- `head`查看前 10 行内容
 
-  `head  /etc/passwd`
+  `head /etc/passwd`
 
   ![image-20220514225602256](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220514225602256.png)
 
-- `tail`查看后10行内容
+- `tail`查看后 10 行内容
 
   `tail /etc/passwd`
 
@@ -250,7 +264,7 @@
 
   ```
   tar -axvf node-v16.13.1-linux-x64.tar.gz # 解压 .tar.gz 格式压缩包
-  
+
   # 如果解压 .tar.xz 类型文件 需要先将 .tar.xz 转成 .tar
   xz -d node-v16.13.1-linux-x64.tar.xz # 得到 node-v16.13.1-linux-x64.tar 文件
   tar -xvf node-v16.13.1-linux-x64.tar # 解压 .tar文件
@@ -299,25 +313,25 @@
 
 - `*`通配符
 
-  `*`这里类似于正则进行匹配，在shell里，`*`可以代表人和的字符或者数字，所以可以做出以下的一些操作：
+  `*`这里类似于正则进行匹配，在 shell 里，`*`可以代表人和的字符或者数字，所以可以做出以下的一些操作：
 
-  | 命令 | 含义 |
-  |  ----  | ----  |
-  | `cat at*` | 查看所有以 at 开头的文件 |
-  | `rm -rf *.css` | 删除所有的css文件 |
+  | 命令              | 含义                         |
+  | ----------------- | ---------------------------- |
+  | `cat at*`         | 查看所有以 at 开头的文件     |
+  | `rm -rf *.css`    | 删除所有的 css 文件          |
   | `rm -rf *.temp.*` | 删除所有的包含 .temp. 的文件 |
 
 - `?`通配符
 
-  匹配一个字符，也是正则的概念，只是和JS中的正则不太一样，在linux中：
+  匹配一个字符，也是正则的概念，只是和 JS 中的正则不太一样，在 linux 中：
 
-  b?at => 可以成功匹配 boat或brat
+  b?at => 可以成功匹配 boat 或 brat
 
 **查找文件**
 
 - `find dir -name file` 查找文件
 
-  查找dir目录下的file文件。例：
+  查找 dir 目录下的 file 文件。例：
 
   ```
   find ./me -name index.html # 查找me目录下的所有的index.html文件
@@ -331,20 +345,20 @@
 
   ```
   # firewall-cmd --zone=public --add-port=端口/tcp --permanent
-  
+
   #开放9999端口
   firewall-cmd --zone=public --add-port=9999/tcp --permanent
   #配置立即生效
   firewall-cmd --reload
   ```
 
-  当我们开启一个后端服务的时候向外暴露端口，除了云服务器控制面板里面的端口要开启之外，Linux服务器自身的端口也需要向外开启暴露才行。
+  当我们开启一个后端服务的时候向外暴露端口，除了云服务器控制面板里面的端口要开启之外，Linux 服务器自身的端口也需要向外开启暴露才行。
 
-  因为版本升级到centos8之后，一些配置和7.X的不一样
+  因为版本升级到 centos8 之后，一些配置和 7.X 的不一样
 
-- Nginx反向代理
+- Nginx 反向代理
 
-	修改配置nginx的 **default.conf** 文件
+  修改配置 nginx 的 **default.conf** 文件
 
   ```
   server {
@@ -360,9 +374,8 @@
       }
   }
   ```
-  
-  这样做实现的是
-  
-  -  `http://1.116.xxx.xxx`,请求会发送到`http://1.116.xxx.xxx:3000`
-  - `http://1.116.xxx.xxx/wx`/,请求会发送到`http://1.116.xxx.xxx:9999`
 
+  这样做实现的是
+
+  - `http://1.116.xxx.xxx`,请求会发送到`http://1.116.xxx.xxx:3000`
+  - `http://1.116.xxx.xxx/wx`/,请求会发送到`http://1.116.xxx.xxx:9999`

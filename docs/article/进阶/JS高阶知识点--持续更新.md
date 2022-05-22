@@ -1,3 +1,17 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 高阶知识点
+
+  - - meta
+    - name: keywords
+      content: JS
+
+  - - script
+    - src: https://vitepress-source.oss-cn-beijing.aliyuncs.com/statistics.js
+---
+
 # JS 高阶知识点 -- 持续更新
 
 逛稀土掘金看到的些好文章，记录的非常的详细，JS 高阶知识点。
@@ -52,9 +66,9 @@ DTD声明节点            Node.NOTATION_NODE(12)
 ## 为什么 Commonjs 不适用于浏览器
 
 ```js
-var math = require('math');
+var math = require('math')
 
-math.add(2, 3);
+math.add(2, 3)
 ```
 
 第二行 math.add(2, 3)，在第一行 require('math')之后运行，因此必须等 math.js 加载完成。也就是说，如果加载时间很长，整个应用就会停在那里等。
@@ -98,26 +112,26 @@ Jxue.js 吸收了这一点，当需要编译大段文本的时候，这个是个
 > 它的优点是不会引起重绘回流
 
 ```js
-var div2 = document.getElementById('div2');
+var div2 = document.getElementById('div2')
 let observer = new IntersectionObserver(
-  function (entries) {
-    entries.forEach(function (element, index) {
-      console.log(element);
-      if (element.isIntersecting) {
-        // element.isIntersecting 表示可见
-        div1.innerText = '我出来了';
-      } else {
-        div1.innerText = '首页';
-      }
-    });
-  },
-  {
-    root: null,
-    threshold: [0, 1],
-  }
-);
+	function (entries) {
+		entries.forEach(function (element, index) {
+			console.log(element)
+			if (element.isIntersecting) {
+				// element.isIntersecting 表示可见
+				div1.innerText = '我出来了'
+			} else {
+				div1.innerText = '首页'
+			}
+		})
+	},
+	{
+		root: null,
+		threshold: [0, 1],
+	}
+)
 
-observer.observe(div2); // 监听 div2
+observer.observe(div2) // 监听 div2
 ```
 
 callback 函数的参数（entries）是一个数组，每个成员都是一个 IntersectionObserverEntry 对象。举例来说，如果同时有两个被观察的对象的可见性发生变化，entries 数组就会有两个成员。
@@ -138,7 +152,7 @@ callback 函数的参数（entries）是一个数组，每个成员都是一个 
 
 ## 大数运算（bigInt）
 
-JS在正常情况下表示整数是有范围的，当超过最大值的时候就会触发精度问题。
+JS 在正常情况下表示整数是有范围的，当超过最大值的时候就会触发精度问题。
 
 ```js
 Math.pow(2, 53) === Math.pow(2, 53) + 1 // true
@@ -151,14 +165,14 @@ Math.pow(2, 53) === Math.pow(2, 53) + 1 // true
 ```js
 BigInt(Math.pow(2, 53)) === BigInt(Math.pow(2, 53)) + BigInt(1) // false
 
-BigInt(Math.pow(2, 53)) === BigInt(Math.pow(2, 53)) + 1// 报错 BigInt类型只能与BigInt类型相加  否则会有类型错误
+BigInt(Math.pow(2, 53)) === BigInt(Math.pow(2, 53)) + 1 // 报错 BigInt类型只能与BigInt类型相加  否则会有类型错误
 ```
 
 ## 数字分隔符
 
 又是一个为和大数值打交道而产生的一个新的写法，让人眼前一亮！
 
-在过去，如果我们要表示100W，写法为 1000000
+在过去，如果我们要表示 100W，写法为 1000000
 
 使用数字分隔符之后：
 
@@ -172,7 +186,7 @@ BigInt(Math.pow(2, 53)) === BigInt(Math.pow(2, 53)) + 1// 报错 BigInt类型只
 
 ## Object.hasOwn
 
-这是一个比较新的API，其要实现的目的和`in`、`Object.hasOwnProperty`是一样的，都是判断对象上是否存在于某个属性，区别在于，`Object.hasOwn`是目前为止最安全的一个API！
+这是一个比较新的 API，其要实现的目的和`in`、`Object.hasOwnProperty`是一样的，都是判断对象上是否存在于某个属性，区别在于，`Object.hasOwn`是目前为止最安全的一个 API！
 
 - `in` 操作符，会触发原型链的查找，这个容易出问题，也不够稳健，不推荐使用
 
@@ -182,15 +196,13 @@ BigInt(Math.pow(2, 53)) === BigInt(Math.pow(2, 53)) + 1// 报错 BigInt类型只
   Object.create(null).hasOwnProperty('name') // v报错
   ```
 
-- `Object.hasOwn` 最推荐的一种API，是上一种的升级版本，更适合于生产环境下，非常的稳健和靠谱
+- `Object.hasOwn` 最推荐的一种 API，是上一种的升级版本，更适合于生产环境下，非常的稳健和靠谱
 
   ```js
   let object = { age: 24 }
   Object.hasOwn(object, 'age') // true
   let object2 = Object.create({ age: 24 })
-  Object.hasOwn(object2, 'age') // false  
+  Object.hasOwn(object2, 'age') // false
   let object3 = Object.create(null)
-  Object.hasOwn(object3, 'age') // false 
+  Object.hasOwn(object3, 'age') // false
   ```
-
-  

@@ -1,3 +1,17 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 水印生成器
+
+  - - meta
+    - name: keywords
+      content: canvas
+
+  - - script
+    - src: https://vitepress-source.oss-cn-beijing.aliyuncs.com/statistics.js
+---
+
 # easy-watermark
 
 watermark 是一个基于 canvas 的简单的生成自定义水印的插件，轻量、灵活、配置简单是它的特点。
@@ -26,22 +40,22 @@ cnpm i esay-watermark (推荐)
 
   ```vue
   <template>
-    <img alt="Vue logo" :src="imgurl" />
+  	<img alt="Vue logo" :src="imgurl" />
   </template>
 
   <script setup>
-  import { ref } from 'vue';
-  import waterMarker from 'esay-watermark';
+  import { ref } from 'vue'
+  import waterMarker from 'esay-watermark'
 
-  const imgurl = ref('');
+  const imgurl = ref('')
   waterMarker({
-    src: 'https://img1.baidu.com/it/u=128307009,2094083535&fm=26&fmt=auto',
-    text: 'jimmy',
-    color: '#bdc3c7',
-    size: 120,
-    position: 'center',
-    padding: 10,
-  }).then((res) => (imgurl.value = res));
+  	src: 'https://img1.baidu.com/it/u=128307009,2094083535&fm=26&fmt=auto',
+  	text: 'jimmy',
+  	color: '#bdc3c7',
+  	size: 120,
+  	position: 'center',
+  	padding: 10,
+  }).then(res => (imgurl.value = res))
   </script>
   ```
 
@@ -49,22 +63,22 @@ cnpm i esay-watermark (推荐)
 
   ```html
   <body>
-    <script src="./watermark.min.js"></script>
-    <img id="img2" alt="" />
-    <script>
-      let img2 = document.getElementById('img2');
-      let config = {
-        src: 'http://jimmyxx.oss-cn-beijing.aliyuncs.com/lot.png',
-        text: 'jimmy',
-        color: '#bdc3c7',
-        size: 40,
-        position: 'center',
-        padding: 10,
-      };
-      waterMarker(config).then((res) => {
-        img2.src = res;
-      });
-    </script>
+  	<script src="./watermark.min.js"></script>
+  	<img id="img2" alt="" />
+  	<script>
+  		let img2 = document.getElementById('img2')
+  		let config = {
+  			src: 'http://jimmyxx.oss-cn-beijing.aliyuncs.com/lot.png',
+  			text: 'jimmy',
+  			color: '#bdc3c7',
+  			size: 40,
+  			position: 'center',
+  			padding: 10,
+  		}
+  		waterMarker(config).then(res => {
+  			img2.src = res
+  		})
+  	</script>
   </body>
   ```
 

@@ -1,3 +1,16 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 大兄弟们聚过来，这事很重要 🎉~!
+  - - meta
+    - name: keywords
+      content: Jimmy个人博客、前端加油站
+
+  - - script
+    - src: https://vitepress-source.oss-cn-beijing.aliyuncs.com/statistics.js
+---
+
 # 大兄弟们聚过来，这事很重要 🎉~!
 
 ![An image](/assets/bg.jpg)

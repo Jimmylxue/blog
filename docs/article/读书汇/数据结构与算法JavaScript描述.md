@@ -1,3 +1,16 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 《数据结构与算法 JavaScript 描述》记录
+  - - meta
+    - name: keywords
+      content: 《数据结构与算法 JavaScript 描述》记录
+
+	- - script
+    - src: https://vitepress-source.oss-cn-beijing.aliyuncs.com/statistics.js
+---
+
 # 《数据结构与算法 JavaScript 描述》记录
 
 ::: tip 前言
@@ -1221,37 +1234,34 @@ nums.remove(23)
 
 深度优先搜索算法比较简单:访问一个没有访问过的顶点，将它标记为已访问，再递归地去访问在初始顶点的邻接表中其他没有访问过的顶点。
 
-
-
-
 ```ts
 class Graph {
-  edges = 0 // 边
-  adj: (string | number)[][] = []
-  constructor(public vertices = 0) {
-    for (let i = 0; i < this.vertices; i++) {
-      this.adj[i] = []
-      this.adj[i].push('') // 自己不可能和自己相连
-    }
-  }
+	edges = 0 // 边
+	adj: (string | number)[][] = []
+	constructor(public vertices = 0) {
+		for (let i = 0; i < this.vertices; i++) {
+			this.adj[i] = []
+			this.adj[i].push('') // 自己不可能和自己相连
+		}
+	}
 
-  addEdge(v: number, w: number) {
-    this.adj[v].push(w)
-    this.adj[w].push(v)
-    this.edges++
-  }
+	addEdge(v: number, w: number) {
+		this.adj[v].push(w)
+		this.adj[w].push(v)
+		this.edges++
+	}
 
-  showGraph() {
-    for (let i = 0; i < this.vertices; i++) {
-      console.log(i + '->')
-      for (let j = 0; j < this.vertices; j++) {
-        if (this.adj[j][j] !== undefined) {
-          console.log(this.adj[i][j])
-        }
-      }
-      console.log('--------')
-    }
-  }
+	showGraph() {
+		for (let i = 0; i < this.vertices; i++) {
+			console.log(i + '->')
+			for (let j = 0; j < this.vertices; j++) {
+				if (this.adj[j][j] !== undefined) {
+					console.log(this.adj[i][j])
+				}
+			}
+			console.log('--------')
+		}
+	}
 }
 
 let g = new Graph(5)
@@ -1261,4 +1271,3 @@ g.addEdge(1, 3)
 g.addEdge(2, 4)
 g.showGraph()
 ```
-

@@ -1,3 +1,15 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 《JavaScript 忍者秘籍》记录
+  - - meta
+    - name: keywords
+      content: 《JavaScript 忍者秘籍》记录
+	- - script
+    - src: https://vitepress-source.oss-cn-beijing.aliyuncs.com/statistics.js
+---
+
 # 《JavaScript 忍者秘籍》记录
 
 ::: tip 前言

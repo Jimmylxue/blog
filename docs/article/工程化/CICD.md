@@ -1,3 +1,17 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 前端 CICD 实现方案
+
+  - - meta
+    - name: keywords
+      content: 前端 CICD 实现方案
+
+  - - script
+    - src: https://vitepress-source.oss-cn-beijing.aliyuncs.com/statistics.js
+---
+
 # 前端 CICD 实现方案
 
 在过去，我其实一直不知道大佬口中的 **CICD**，到底是什么意思，感觉好像离前端非常的遥远，在请教了一个身边的大佬（也是我的高中同学），终于直到 **CICD** 是啥玩意儿了，才发现，其实 CICD 就是我们也经常接触的东西，尤其是有自己开发的项目的同学来说是更加亲切的东西了，只是我们可能对它的认知还不够熟悉。
