@@ -8,8 +8,8 @@ head:
     - name: keywords
       content: mini-await-to-js
 
-	- - script
-    - src: https://vitepress-source.oss-cn-beijing.aliyuncs.com/statistics.js
+  # - - script
+  #   - src: https://vitepress-source.oss-cn-beijing.aliyuncs.com/statistics.js
 ---
 
 # mini-await-to-js
