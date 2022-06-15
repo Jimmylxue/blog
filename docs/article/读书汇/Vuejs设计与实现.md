@@ -65,3 +65,101 @@ div.innerHTML = html
 每当我们使用innerHTML去修改DOM这个是极其消耗性能的，因为innerHTML的过程会去试图解析字符串，转成可用的DOM树，之后再插入文档（非常的消耗性能），而当我们数据发生改变，再次使用innerHTML操作的时候等于又要再执行一次，所以这种场景就是 **原生操作DOM消耗性能的场景**
 
 而虚拟DOM在更新的时候会生成一个新的JS的DOM对象，再去比对前一次和这一次的DOM对象的差别，只修改差别的地方（这里就少了渲染DOM树，和插入的过程），所以这就是虚拟DOM的优势。
+
+### 更好的错误处理机制
+
+在开发过程中`try-catch` 是用户自己写吗？如果是我们自己开发一些零碎的小功能的需求，那写一些是没问题的，但是如果是我们在设计框架，或者说封装一些组件，再或者是写一些工具方法，就算是为了开发体验，也应该要在内部实现一下错误处理：
+
+**过去我曾大量写过这样的代码**
+
+```js
+function foo(fn) {
+	try {
+		fn && fn()
+	} catch (error) {
+		console.warn('not a function')
+	}
+}
+
+function bar(fn) {
+	try {
+		fn && fn()
+	} catch (error) {
+		console.warn('not a function')
+	}
+}
+
+module.exports = {
+	foo,
+	bar,
+}
+```
+
+当只有一两个try-catch的时候其实还好，但是一旦 方法多了，就会发现try-catch会让代码变得不太好看，而且也不利于统一的管理。这种其实是可以优化的！
+
+**简单优化后**
+
+```js
+let errorFn = null // 用户存放用户自定义错误处理的方法
+
+function foo(fn) {
+	// to do somethings
+	catchError(fn)
+}
+
+function bar(fn) {
+	// to do somethings
+	catchError(fn)
+}
+
+// 内部统一做错误处理
+function catchError(fn) {
+	try {
+		fn & fn()
+	} catch (error) {
+		errorFn && errorFn()
+	}
+}
+
+// 暴露给用户的 如果发生错误了 应该要如何处理的接口
+function ErrorHandler(fn) {
+	errorFn = fn
+}
+
+module.exports = {
+	foo,
+	bar,
+	ErrorHandler,
+}
+```
+
+用户在使用的时候，就可以不用去写一些`try-catch`了，而且我们也比较贴心的为用户提供了如果发生错误时，相对应处理的钩子函数`ErrorHandler`,用户就可以这样使用：
+
+```js
+const { foo, bar, ErrorHandler } = require('./utils')
+
+ErrorHandler(() => {
+	console.warn('发生错误了，这里统一进行处理')
+})
+
+foo(() => {
+	console.log('foo function')
+})
+
+bar('hello world')
+```
+
+上面的实现逻辑，其实就是 **vue** 的错误处理的方法，它也提供了这种统一处理错误钩子：
+
+```js
+import { createApp } from 'vue'
+import App from 'App.vue'
+
+const app = createApp(App)
+app.config.errorHandler = () => {
+  // 这里做一些错误的处理
+}
+```
+
+
+
