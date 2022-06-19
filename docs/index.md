@@ -44,13 +44,15 @@ hello 你们好，我是 Jimmy😁，这个网站是记录我们开发生涯中�
 
 - 《算法图解》
 
-## Todo
-
 - 《数据结构算法 JavaScript 描述》
 
-  [在线文档](http://www.jimmyxuexue.top:999/article/%E8%AF%BB%E4%B9%A6%E6%B1%87/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95JavaScript%E6%8F%8F%E8%BF%B0.html)+[视频记录](https://space.bilibili.com/304985153/channel/seriesdetail?sid=1962374)
+## Todo
 
-- 《JavaScript DOM 编程艺术》
+- 《Vue.js设计与实现》
+
+- 《JavaScript 二十年》
+
+- 《Web前端测试与集成》
 
 - leetcode 刷题
 
