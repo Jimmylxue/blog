@@ -18,6 +18,8 @@ head:
 ::: tip 关于这个网站~~
 hello 你们好，我是 Jimmy😁，这个网站是记录我们开发生涯中遇到一系列有趣的事情、抓狂的 BUG、值得记录的知识。期待你们的加入，和我一起维护这个网站，共同进步。🎄
 
+立即进入：[传送门](http://www.jimmyxuexue.top/)
+
 [本站 github 地址](https://github.com/Jimmylxue/blog)：https://github.com/Jimmylxue/blog 欢迎 star 一起维护。
 :::
 
