@@ -2609,3 +2609,126 @@ var addBinary = function (a, b) {
 	return sum.reverse().join('')
 }
 ```
+
+## Excel表列名称
+
+::: tip 考点
+难度：**简单**
+
+思想：进制转换、递归解题
+:::
+
+#### 题目
+
+给你一个整数 columnNumber ，返回它在 Excel 表中相对应的列名称。
+
+例如：
+
+A -> 1
+B -> 2
+C -> 3
+...
+Z -> 26
+AA -> 27
+AB -> 28 
+...
+
+```
+输入：columnNumber = 1
+输出："A"
+示例 2：
+
+输入：columnNumber = 28
+输出："AB"
+示例 3：
+
+输入：columnNumber = 701
+输出："ZY"
+示例 4：
+
+输入：columnNumber = 2147483647
+输出："FXSHRXW"
+```
+
+#### 解题思路
+
+这题采用的是递归的解题思路，本质上这题涉及的是进制转换问题，由我们所熟知的 **10进制 => 26进制**
+所以我们可以类比我们熟知的 **除二取余法** => 这里自然而然的编程 **除26取余法**
+
+几个比较关键的边缘条件 还有要注意的是这里数字是从 1 开始 而不是我们所熟知的 10进制 从0开始
+
+采用递归的方式就可以比较方便快速的解题了：
+
+- 不断的除以 26取余，当余数小于26时就用这个值当做index去取值即可
+
+- 当除以26的整数也大于26时，就将这个整数作为值再次执行一次上面的操作，直到得到小于26的整数时，作为index取值
+
+- 当除以26之后的值刚好为整数时，需要将这个值（-1），因为没有为0的索引，最小的索引是从1开始的，这个是唯一比较需要理解的点
+
+  > 举例子：
+  >
+  > 当值为52时:
+  >
+  > 52/26 = 2，所以第一个索引值为2 第二个索引值为0（这是不对的，再这个题目里最小的是1，没有0），所以需要调整为：
+  >
+  > 第一个值为1，第二个值为26 : AZ
+
+**效果**
+
+![image-20220812212819815](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220812212819815.png)
+
+#### 源代码
+
+```js
+/**
+ * @param {number} columnNumber
+ * @return {string}
+ */
+var convertToTitle = function (columnNumber) {
+	const map = {
+		1: 'A',
+		2: 'B',
+		3: 'C',
+		4: 'D',
+		5: 'E',
+		6: 'F',
+		7: 'G',
+		8: 'H',
+		9: 'I',
+		10: 'J',
+		11: 'K',
+		12: 'L',
+		13: 'M',
+		14: 'N',
+		15: 'O',
+		16: 'P',
+		17: 'Q',
+		18: 'R',
+		19: 'S',
+		20: 'T',
+		21: 'U',
+		22: 'V',
+		23: 'W',
+		24: 'X',
+		25: 'Y',
+		26: 'Z',
+	}
+	let str = ''
+	const diff = num => {
+		if (num <= 26) {
+			str += map[num]
+			return
+		}
+		let radix = num % 26 === 0 ? Math.floor(num / 26) - 1 : Math.floor(num / 26)
+		if (radix > 26) {
+			diff(radix)
+		} else {
+			str += map[radix]
+		}
+		diff(num - radix * 26)
+	}
+	diff(columnNumber)
+	return str
+}
+```
+
