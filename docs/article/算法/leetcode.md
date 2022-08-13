@@ -2732,3 +2732,162 @@ var convertToTitle = function (columnNumber) {
 }
 ```
 
+## 多数元素
+
+::: tip 考点
+难度：**简单**
+
+思想：巧解
+:::
+
+#### 题目
+
+给定一个大小为 n 的数组 nums ，返回其中的多数元素。多数元素是指在数组中出现次数 大于 ⌊ n/2 ⌋ 的元素。
+
+你可以假设数组是非空的，并且给定的数组总是存在多数元素。
+
+```
+示例 1：
+
+输入：nums = [3,2,3]
+输出：3
+
+示例 2：
+
+输入：nums = [2,2,1,1,1,2,2]
+输出：2
+```
+
+#### 解题思路
+
+这题时间复杂度要求为O(n) 说明只能一层循环解题，这里借用了 数组 这么一数据结构进行解题（因为数组的下标index正好可以被我们用作key）
+
+所以只要每遍历到一个数字，将数组这个索引下的值 +1 即可
+
+当全部都执行结束之后，再次一层遍历，找出数组中哪个值大于 比对值， 那么那个值所对应的索引就是我们的答案！
+
+**效果**
+
+![image-20220813210319911](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220813210319911.png)
+
+**源代码**
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function (nums) {
+	const arr = new Array(Math.max(...nums) + 1).fill(0)
+	const check = nums.length / 2
+	nums.forEach(num => {
+		arr[num]++
+	})
+	let index = arr.findIndex((_, index) => {
+		return arr[index] > check
+	})
+	return index
+}
+```
+
+## Execl 表列序号
+
+::: tip 考点
+难度：**简单**
+
+思想：进制转换、循环解题
+:::
+
+#### 题目
+
+给你一个字符串 columnTitle ，表示 Excel 表格中的列名称。返回 该列名称对应的列序号 。
+
+例如：
+
+A -> 1
+B -> 2
+C -> 3
+...
+Z -> 26
+AA -> 27
+AB -> 28 
+...
+
+
+示例 1:
+
+输入: columnTitle = "A"
+输出: 1
+示例 2:
+
+输入: columnTitle = "AB"
+输出: 28
+示例 3:
+
+输入: columnTitle = "ZY"
+输出: 701
+
+#### 解题思路
+
+这题是第 168题的 逆向解题思路，但是难度会比那题更低一点，也是使用进制转换的方法就可以快速解题了
+
+先复习一下 二进制 => 十进制：
+
+- 1011 => 1*2(0次方)+1*2(1次方)+0*2(2次方)+1*2(3次方) 
+
+现在转换为我们题目的 26 进制
+
+- AZ => Z*26(0次方)+A*26(1次方)
+        => 26*26(0次方) + 1*26(1次方)
+        => 52
+
+所以按照下面的解题思路就可快速解题了！ --- 又水了一题
+
+**效果**
+
+![image-20220813210827726](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220813210827726.png)
+
+**源代码**
+
+```js
+/**
+ * @param {string} columnTitle
+ * @return {number}
+ */
+var titleToNumber = function (columnTitle) {
+	const map = {
+		A: 1,
+		B: 2,
+		C: 3,
+		D: 4,
+		E: 5,
+		F: 6,
+		G: 7,
+		H: 8,
+		I: 9,
+		J: 10,
+		K: 11,
+		L: 12,
+		M: 13,
+		N: 14,
+		O: 15,
+		P: 16,
+		Q: 17,
+		R: 18,
+		S: 19,
+		T: 20,
+		U: 21,
+		V: 22,
+		W: 23,
+		X: 24,
+		Y: 25,
+		Z: 26,
+	}
+	let count = 0
+	for (let i = columnTitle.length - 1, j = 0; i >= 0; i--, j++) {
+		count += map[columnTitle[i]] * Math.pow(26, j)
+	}
+	return count
+}
+```
+
