@@ -211,6 +211,13 @@ Array.prototype.slice.call(arr, -1) // 5
 
 数组的 slice 方法支持传入负数，为负数时表示从后往前查找，传入-1 表示查找最后一个元素，且这个方法是不会改变原数组的。
 
+ES2022 中新增了一个特别好用的 `at()` 方法，传递负数时会从后往前查，这是目前位置最精简&优化的写法了！
+
+```js
+let arr = [1, 2, 3, 4, 5]
+arr.at(-1) //5
+```
+
 ## 转为布尔值
 
 转为布尔值，我最常使用的方法是使用 `Boolean()`方法进行转：
@@ -294,3 +301,21 @@ parseInt('08',8) === parseInt('09',8) // true
 ```
 
 所以以后如果使用`parseInt`的时候，记得需要加上第二个参数！
+
+## findLast() 与 findLastIndex()
+
+ES2022的新API，使用起来与ES6的 `find()`和`findIndex()`是一样的，虽然 find() 和 findIndex() 都从数组的第一个元素开始搜索，但在某些情况下，最好从最后一个元素开始搜索。在某些情况下，我们知道从最后一个元素中查找可能会获得更好的性能。
+
+```js
+const letters = [
+  { value: 'v' },
+  { value: 'w' },
+  { value: 'x' },
+  { value: 'y' },
+  { value: 'z' },
+];
+const found = letters.findLast((item) => item.value === 'y');
+const foundIndex = letters.findLastIndex((item) => item.value === 'y');
+console.log(found); // { value: 'y' }
+console.log(foundIndex); // 3
+```
