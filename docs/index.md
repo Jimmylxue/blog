@@ -48,6 +48,8 @@ hello 你们好，我是 Jimmy😁，这个网站是记录我们开发生涯中�
 
 - 《数据结构算法 JavaScript 描述》
 
+- 《早起的奇迹》
+
 ## Todo
 
 - 《Vue.js设计与实现》
@@ -59,6 +61,8 @@ hello 你们好，我是 Jimmy😁，这个网站是记录我们开发生涯中�
 - leetcode 刷题
 
   [在线文档](http://www.jimmyxuexue.top:999/article/%E7%AE%97%E6%B3%95/leetcode.html)+[视频记录](https://space.bilibili.com/304985153/channel/seriesdetail?sid=1910803)
+
+- 坚持早起，提升自己（2022-08-22 新增）
 
 ## 联系我
 
