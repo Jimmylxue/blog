@@ -340,3 +340,62 @@ renderer(vnode3, container)
 
 这个就是对于虚拟DOM的一个简单理解，不过虚拟DOM最重要的是在更新环节而不是挂载环节，更新环节会在后续更加清晰之后再更新，敬请期待!
 
+## 非原始值的响应式方案
+
+### 函数和普通对象的区别
+
+如何判断一个对象是普通对象还是函数？
+
+> 这是一个非常常见的一个面试题，相信大部分的小伙伴都会
+
+- 使用`typeof`来判断一个对象是否是函数
+
+  ```js
+  function f1(){}
+  const obj = {}
+
+  typeof f1  // "function"
+  typeof obj // "object"
+  ```
+
+- 使用 `instanceof` 来判断
+
+  > A instanceof B 判断 A 是否由 B 构造出来
+
+  ```js
+  function f1(){}
+  const obj = {}
+  
+  f1 instanceof Function  // true
+  obj instanceof Function // false
+  ```
+
+- 对象内部必要方法
+
+  所有的对象内部方法
+  
+  
+  |  内部方法  |
+  |  ----  |
+  | [[ Get ]] |
+  | [[ Set ]] |
+  | [[ Delete ]] |
+  | [[ OwnPropertyKeys ]] |
+  | [[ GetPrototypeOf ]] |
+  | [[ SetPrototypeOf ]] |
+  | [[ IsExteni=sible ]] |
+  | [[ PreventExtensions ]] |
+  | [[ GetOwnProperty ]] |
+  
+  函数独有的内部方法
+  
+  |  内部方法  |
+  |  ----  |
+  | [[ Call ]] |
+  | [[ Construct] ] |
+  
+  > [[ Construct ]] 与 new 相关
+  
+  以上都是ECMA确定的内部方法，因为函数继承自对象，所以函数有独有的 `[[ Call ]]` 和 `[[ Construct] ]`，这也是一个函数与普通对象的区别。
+
+​	
