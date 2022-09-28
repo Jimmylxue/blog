@@ -1,4 +1,4 @@
 export const footer = {
-	message: 'Released under the MIT License.',
-	copyright: 'Copyright © 2019-present Evan You',
+	message: '© jimmy-知识星球',
+	copyright: '闽ICP备2021016313号-1',
 }
