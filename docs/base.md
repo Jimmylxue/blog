@@ -59,6 +59,8 @@ hello 你们好，我是 Jimmy😁，这个网站是记录我们开发生涯中�
 
 - 《JavaScript 二十年》
 
+- 《即兴演讲》
+
 ## Todo
 
 - 《Vue.js 设计与实现》
