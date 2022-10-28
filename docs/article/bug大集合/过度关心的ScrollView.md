@@ -20,3 +20,7 @@
 相关 issue 和文档：
 
 - [TaroIssue](https://github.com/NervJS/taro/issues/10944)
+
+## 解决
+
+目前并没有找到直接和方便的解决方案，官方给出一个方案是使用`@tarojs/plugin-inject`这个库，注入取消scrollView的节流，但是这个改动比较大，且涉及一些库的版本匹配问题，所以有这类需求还是尽量避开看看有没有什么其他的解决方案吧。
