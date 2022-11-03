@@ -17,13 +17,13 @@
 大家可以先思考下以下哪些语句会导致报错呢？
 
 ```js
-JSON.parst(undefined)
-JSON.parst(null)
-JSON.parst()
-JSON.parst('')
-JSON.parst('11')
-JSON.parst(11)
-JSON.parst(0)
+JSON.parse(undefined)
+JSON.parse(null)
+JSON.parse()
+JSON.parse('')
+JSON.parse('11')
+JSON.parse(11)
+JSON.parse(0)
 ```
 
 最终揭晓吧：
@@ -31,15 +31,15 @@ JSON.parst(0)
 以下的都不报错
 
 ```js
-JSON.parst(null)
-JSON.parst('11')
-JSON.parst(11)
-JSON.parst(0)
+JSON.parse(null)
+JSON.parse('11')
+JSON.parse(11)
+JSON.parse(0)
 ```
 
-比较令我震惊的是：`JSON.parst(null);`不报错，而`JSON.parst('');`居然会报错。
+比较令我震惊的是：`JSON.parse(null);`不报错，而`JSON.parse('');`居然会报错。
 
-我的 app 闪退的原因也就是因为`JSON.parst('');`触发的报错，所以为了解决这个问题，我们可以专门封装一个 parse 方法，防止报错！
+我的 app 闪退的原因也就是因为`JSON.parse('');`触发的报错，所以为了解决这个问题，我们可以专门封装一个 parse 方法，防止报错！
 
 ```ts
 export function parseJSON<T>(jsonString: string) {
