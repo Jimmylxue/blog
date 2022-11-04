@@ -50,3 +50,31 @@ export function parseJSON<T>(jsonString: string) {
 	}
 }
 ```
+
+### 解析
+
+> 感谢评论区大佬的回答，让我知道了触发这个问题的原因，顺带更加深入的理解了一下什么是 **JSON格式** ，过去理解的 **JSON格式是不够全面的**
+
+![解析图片](https://vitepress-source.oss-cn-beijing.aliyuncs.com/WechatIMG72.png)
+
+之所以`JSON.parse`在有的时候会报错，需要知道这个方法的本质是将一个字符串数据转成 **JSON格式**，只有在实在没有办法转成JSON格式的情况下才会触发报错，所以我们要重新认识一下什么是JSON格式。
+
+```json
+{
+  "key":"value"
+}
+```
+
+```json
+null
+```
+
+```json
+111
+```
+
+```json
+[1,2,3]
+```
+
+以上的都属于JSON格式，可以直接在编辑器试下就会很方便的知道哪些是有语法错误的。之所以`JSON.parse('111')`不报错是因为将其转为了数字111，数字是属于JSON格式的，而`JSON.parse('abc')`会报错，是因为字符串'abc'没有办法转成数字，就会直接报错了！
