@@ -20,10 +20,16 @@ features:
   - icon: ⚡️
     title: easy-watermark
     details: watermark是一个基于canvas的简单的生成自定义水印的插件，轻量、灵活、配置简单是它的特点。可以非常快速创建水印、马赛克功能。
+    link: https://github.com/Jimmylxue/easy-watermark
+    # linkText: 'link it'
   - icon: 🖖
     title: snowIndex
     details: 学习程序员鱼皮，用其他技术栈开发极客风网站首页，在线访问：http://www.jimmyxuexue.top:668/
+    link: https://github.com/Jimmylxue/snowIndex
+    # linkText: 'link it'
   - icon: 🛠️
     title: Vitality-reminder
     details: 利用微信订阅号的方式，给女朋友每天定时定时推送消息。 如果还没有女朋友的这个可以祝你一臂之力
+    link: https://github.com/Jimmylxue/Vitality-reminder
+    # linkText: 'link it'
 ---
