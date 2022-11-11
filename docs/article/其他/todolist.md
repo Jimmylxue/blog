@@ -60,3 +60,7 @@ head:
 ## 配置 mac 上的图床 picgo + 阿里云 OSS，了解一下 picgo + Gitee 图床
 
 > 2022-11-11 新增
+
+## snowIndex 接入 jest 并补充一些单测
+
+> 2022-11-11 新增
