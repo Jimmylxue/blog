@@ -46,15 +46,11 @@ hello 你们好，我是 Jimmy😁，这个网站是记录我们开发生涯中�
 
 ## 联系我
 
-B 站，知识分享和趣事视频 🚩
-
-![bilibili](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typorabilibili.jpg)
+- [github](https://github.com/Jimmylxue)
 
 我的个人微信，寻找志同道合的朋友一起交流成长。🌻
 ![wechat](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typorawechat.jpg)
 
-## 其他网站 🚲
+B 站，知识分享和趣事视频 🚩
 
-- [github](https://github.com/Jimmylxue)
-- [博客网](https://github.com/Jimmylxue/blog)
-- [掘金主页](https://juejin.cn/user/2296218359183918)
+![bilibili](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typorabilibili.jpg)

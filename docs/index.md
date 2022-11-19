@@ -20,7 +20,7 @@ features:
   - icon: ⚡️
     title: easy-watermark
     details: watermark是一个基于canvas的简单的生成自定义水印的插件，轻量、灵活、配置简单是它的特点。可以非常快速创建水印、马赛克功能。
-    link: /watermark/介绍/heh
+    link: /watermark/guide/introduce
     # linkText: 'link it'
   - icon: 🖖
     title: snowIndex
