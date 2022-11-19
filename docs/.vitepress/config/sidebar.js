@@ -1,5 +1,6 @@
-import { getMsg } from './util'
+import { scanDir } from './util'
 
 export default {
-	'/': getMsg(),
+	'/': scanDir('article'),
+	'/watermark/': scanDir('watermark'),
 }

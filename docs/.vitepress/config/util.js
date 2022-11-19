@@ -2,8 +2,12 @@ const fs = require('fs')
 const path = require('path')
 const { resolve } = path
 
-export const getMsg = (path = resolve(__dirname, '../../article')) => {
-	// const getMsg = (path = resolve(__dirname, "../../article")) => {
+export const scanDir = pathName => {
+	const path = resolve(__dirname, `../../${pathName}`)
+	return getMsg(path)
+}
+
+export const getMsg = path => {
 	let res = fs.readdirSync(path)
 	if (res) {
 		let arr = res.map(item => {
@@ -22,7 +26,6 @@ export const getMsg = (path = resolve(__dirname, '../../article')) => {
 			}
 			return item
 		})
-		// console.log(arr);
 		return arr
 	} else {
 		console.warn('无文章')
