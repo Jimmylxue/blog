@@ -21,7 +21,6 @@ import { blur } from 'esay-watermark'
 
 const blurSource = ref('')
 
-// fullMarker 全局平铺水印
 blur({
 	src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
 	radius: 5,
@@ -43,7 +42,6 @@ blur({
 		const { blur } = waterMarker // watermark 默认导出对象
 		const blurImage = document.getElementById('blurImage')
 
-		// 高斯模糊效果
 		blur({
 			src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
 			radius: 5,

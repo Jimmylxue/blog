@@ -24,7 +24,7 @@ import { marker } from 'esay-watermark'
 const markerSource = ref('')
 
 marker({
-	src: 'https://img1.baidu.com/it/u=128307009,2094083535&fm=26&fmt=auto',
+	src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
 	text: 'jimmy',
 	color: '#bdc3c7',
 	size: 120,
@@ -49,11 +49,11 @@ marker({
 		const markerImage = document.getElementById('markerImage')
 
 		marker({
-			src: 'https://img1.baidu.com/it/u=128307009,2094083535&fm=26&fmt=auto',
+			src: 'https://avatars.githubusercontent.com/u/65758455?v=4',
 			text: 'jimmy',
 			color: '#bdc3c7',
 			size: 120,
-			position: 'center',
+			position: 'CENTER',
 			padding: 10,
 		}).then(source => {
 			markerImage.src = source
