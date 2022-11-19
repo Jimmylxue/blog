@@ -12,10 +12,10 @@ npm i esay-watermark
 
 ```
 # 使用yarn
-yarn add vant
+yarn add esay-watermark
 
 # 使用pnpm
-pnpm add vant
+pnpm add esay-watermark
 ```
 
 ## 使用方式
