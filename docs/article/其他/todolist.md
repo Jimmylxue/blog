@@ -94,3 +94,9 @@ head:
 ## 优化一下网页博客的图片，节约资源和带宽
 
 > 2022-11-18 新增
+
+压缩图片的网站：
+
+- https://www.tukuaiya.com/
+- https://www.67tool.com/images/imgConvert?to=avif （转 avif => 600k 转至 18k）
+- https://tinypng.com/
