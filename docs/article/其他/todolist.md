@@ -100,3 +100,10 @@ head:
 - https://www.tukuaiya.com/
 - https://www.67tool.com/images/imgConvert?to=avif （转 avif => 600k 转至 18k）
 - https://tinypng.com/
+
+> 2022-11-20 snow-tiny 自动化前端压缩工具上线
+>
+> 2022-11-20 新增 优化  
+>
+> - 兼容支持 配置项 `diffChange`递归查找 `Tile`平铺 `saveOther`保存其他类型文件
+> - 文档新建（基于vitepress）
