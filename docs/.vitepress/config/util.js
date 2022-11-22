@@ -8,15 +8,19 @@ export const scanDir = pathName => {
 }
 
 export const getMsg = path => {
-	let res = fs.readdirSync(path)
+	let res = fs.readdirSync(path).filter(item => !(String(item) === '.DS_Store'))
 	if (res) {
 		let arr = res.map(item => {
 			if (String(item).endsWith('.md')) {
-				return { text: item.split('.')[0], link: resolve(path, item) }
+				return {
+					text: item.split('.')[0],
+					link: resolve(path, item),
+				}
 			} else {
 				return {
 					text: item.split('.')[0],
 					items: getMsg(resolve(path, item)),
+					collapsible: true,
 				}
 			}
 		})

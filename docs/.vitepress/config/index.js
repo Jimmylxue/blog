@@ -27,6 +27,10 @@ const config = {
 		authorAvatar: '/small.png', //  作者头像
 		record: '闽ICP备2021016313号-1',
 		footer: footer,
+		editLink: {
+			pattern: 'https://github.com/Jimmylxue/blog/edit/master/docs/:path',
+			text: 'Edit this page on GitHub',
+		},
 	},
 }
 
