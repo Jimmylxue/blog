@@ -35,11 +35,12 @@ yarn add snow-tiny
 项目根目录下新建 `snowtiny.json` 并做如下配置：
 
 ```json
-// snowtiny.json
 {
-	"entry": "./images", // 压缩目标文件夹
-	"output": "./temp", // 输出文件夹
-	"diffChange": true // 是否深层遍历压缩
+	"entry": "./images",
+	"output": "./temp",
+	"diffCompress": false,
+	"tile": false,
+	"saveOther": false
 }
 ```
 
@@ -56,3 +57,7 @@ scripts: {
 ```
 npm run compress
 ```
+
+## 最终效果
+
+![image-20221127114515593](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20221127114515593.png)
