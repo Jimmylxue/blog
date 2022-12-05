@@ -5,12 +5,8 @@ const nav = [
 		icon: 'reco-message',
 		items: [
 			{
-				text: '诺基亚表情包生成器',
-				link: 'http://www.jimmyxuexue.top:667/Nokia/',
-			},
-			{
-				text: '学习时钟',
-				link: 'http://www.jimmyxuexue.top:667/study/',
+				text: '工具网站推荐',
+				link: 'article/其他/工具网站',
 			},
 		],
 	},
@@ -31,11 +27,6 @@ const nav = [
 			{
 				text: '个人空间',
 				link: 'http://www.jimmyxuexue.top/',
-				icon: 'reco-github',
-			},
-			{
-				text: '稀土掘金',
-				link: 'https://juejin.cn/user/2296218359183918',
 				icon: 'reco-github',
 			},
 		],
