@@ -5,4 +5,5 @@ export default {
 	'/watermark/': scanDir('watermark'),
 	'/snowtiny/': scanDir('snowtiny'),
 	'/snow-react-markdown/': scanDir('snow-react-markdown'),
+	'/life/': scanDir('life'),
 }

@@ -17,6 +17,10 @@ hero:
       link: https://github.com/Jimmylxue/blog
 
 features:
+  - icon: 🛠️
+    title: work life balance
+    details: 读书分享&生活记录
+    link: /life/other/base
   - icon: 🔥
     title: snow-tiny
     details: snow-tiny 是一个专为前端同学开发的基于 tiny 的简单、轻量级的图片压缩工具。只需三步，就可实现图片自动化压缩，极大提高效率和压缩体验！
