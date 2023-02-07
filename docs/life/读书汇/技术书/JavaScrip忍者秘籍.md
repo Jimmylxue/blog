@@ -11,6 +11,10 @@ head:
     - src: https://vitepress-source.oss-cn-beijing.aliyuncs.com/statistics.js
 ---
 
+<script setup>
+import Iframe from '../../../../components/Iframe.vue'
+</script>
+
 # 《JavaScript 忍者秘籍》记录
 
 ::: tip 前言
@@ -165,31 +169,7 @@ store.add(clickFn) // 已经有了
 
 果然，用函数和用好函数是两回事！😯
 
-:::demo
-
-```vue
-<template>
-	<div class="demo">
-		<iframe
-			src="//player.bilibili.com/player.html?aid=680393211&bvid=BV1gS4y1T7E1&cid=477531971&page=1"
-			scrolling="no"
-			border="0"
-			frameborder="no"
-			framespacing="0"
-			allowfullscreen="true"
-		>
-		</iframe>
-	</div>
-</template>
-<style>
-.demo > iframe {
-	width: 100%;
-	height: 450px;
-}
-</style>
-```
-
-:::
+<Iframe link="//player.bilibili.com/player.html?aid=680393211&bvid=BV1gS4y1T7E1&cid=477531971&page=1" />
 
 ### 关于 this
 
@@ -356,31 +336,7 @@ call 和 apply 是可以显示修改 this 绑定的,这两个方法也是开发�
 
 总结下来 this 的指向我们其实只要参考这几个公式,基本就能够像忍者一样非常稳健的找出 this 的所在了.
 
-**:::demo**
-
-```vue
-<template>
-	<div class="demo">
-		<iframe
-			src="//player.bilibili.com/player.html?aid=295567266&bvid=BV14F411v7Q2&cid=479910067&page=1"
-			scrolling="no"
-			border="0"
-			frameborder="no"
-			framespacing="0"
-			allowfullscreen="true"
-		>
-		</iframe>
-	</div>
-</template>
-<style>
-.demo > iframe {
-	width: 100%;
-	height: 450px;
-}
-</style>
-```
-
-**:::**
+<Iframe link="//player.bilibili.com/player.html?aid=295567266&bvid=BV14F411v7Q2&cid=479910067&page=1" />
 
 ### 理解闭包
 
@@ -491,31 +447,7 @@ getFans 和 addFans 由于作用域规则它是可以访问函数内部的 fans 
 
 - 闭包会记住作用域链的全部信息，因此我们不能过度使用。过度使用也会造成性能和效率问题
 
-:::demo
-
-```vue
-<template>
-	<div class="demo">
-		<iframe
-			src="//player.bilibili.com/player.html?aid=978133698&bvid=BV1144y15786&cid=485019585&page=1"
-			scrolling="no"
-			border="0"
-			frameborder="no"
-			framespacing="0"
-			allowfullscreen="true"
-		>
-		</iframe>
-	</div>
-</template>
-<style>
-.demo > iframe {
-	width: 100%;
-	height: 450px;
-}
-</style>
-```
-
-:::
+<Iframe link="//player.bilibili.com/player.html?aid=978133698&bvid=BV1144y15786&cid=485019585&page=1" />
 
 ### 未来的函数：生成器
 
@@ -632,31 +564,7 @@ jimmy.next('xuexue')
 
 生成器函数真的很有用，主要是它能无阻塞的挂起函数，等到合适的时候再恢复函数执行，执行结束之后继续挂起，这个太棒了，非常的适合 js 这种需要大量使用异步的语言。像 async await 就是它的语法糖。目前我还知道的就是 react 的状态管理 dva 就是需要手动写生成器函数。
 
-:::demo
-
-```vue
-<template>
-	<div class="demo">
-		<iframe
-			src="//player.bilibili.com/player.html?aid=593205697&bvid=BV13q4y117RG&cid=485422553&page=1"
-			scrolling="no"
-			border="0"
-			frameborder="no"
-			framespacing="0"
-			allowfullscreen="true"
-		>
-		</iframe>
-	</div>
-</template>
-<style>
-.demo > iframe {
-	width: 100%;
-	height: 450px;
-}
-</style>
-```
-
-:::
+<Iframe link="//player.bilibili.com/player.html?aid=593205697&bvid=BV13q4y117RG&cid=485422553&page=1" />
 
 ## 第三部分 钻研对象
 
@@ -730,31 +638,7 @@ const Person{
 
 以上的例子就非常好的能够展示 getter 作为计算属性时的好处，虽然 fullName 属性和 getFullName 方法最后返回的内容是一样的，但是一个是属性，另外一个是方法，而 fullname 顾名思义更像是属性，应该要使用的是计算属性的方式来进行定义的
 
-:::demo
-
-```vue
-<template>
-	<div class="demo">
-		<iframe
-			src="//player.bilibili.com/player.html?aid=765914854&bvid=BV1br4y1e7WL&cid=491739984&page=1"
-			scrolling="no"
-			border="0"
-			frameborder="no"
-			framespacing="0"
-			allowfullscreen="true"
-		>
-		</iframe>
-	</div>
-</template>
-<style>
-.demo > iframe {
-	width: 100%;
-	height: 450px;
-}
-</style>
-```
-
-:::
+<Iframe link="//player.bilibili.com/player.html?aid=765914854&bvid=BV1br4y1e7WL&cid=491739984&page=1" />
 
 ### 使用代理控制访问
 
@@ -847,31 +731,7 @@ console.log(proxyUser[-1])
 
 代理因为是 ES6 的东西，所以相对会有一些兼容性，但是还好，性能是比 Object.defineProperty 高很多的，但是因为创建了一些代理对象，所以和原生的比较性能还是会缺失一点，但是能让我们做更多的事情也值得。
 
-:::demo
-
-```vue
-<template>
-	<div class="demo">
-		<iframe
-			src="//player.bilibili.com/player.html?aid=850895481&bvid=BV18L4y1t7is&cid=492562165&page=1"
-			scrolling="no"
-			border="0"
-			frameborder="no"
-			framespacing="0"
-			allowfullscreen="true"
-		>
-		</iframe>
-	</div>
-</template>
-<style>
-.demo > iframe {
-	width: 100%;
-	height: 450px;
-}
-</style>
-```
-
-:::
+<Iframe link="//player.bilibili.com/player.html?aid=850895481&bvid=BV18L4y1t7is&cid=492562165&page=1" />
 
 ### 数组
 
@@ -952,31 +812,7 @@ push=>pop 在尾部进行操作、unshift 和 shift 在数组头部操作，这�
   - removeItems 只会返回被删除的元素，插入的元素不会添加进去
   - 如果是在中间插入，那么之后的元素的索引会往后移动。如：henry 就会变成数组的最后一个
 
-:::demo
-
-```vue
-<template>
-	<div class="demo">
-		<iframe
-			src="//player.bilibili.com/player.html?aid=338405532&bvid=BV14R4y1u7QX&cid=493329256&page=1"
-			scrolling="no"
-			border="0"
-			frameborder="no"
-			framespacing="0"
-			allowfullscreen="true"
-		>
-		</iframe>
-	</div>
-</template>
-<style>
-.demo > iframe {
-	width: 100%;
-	height: 450px;
-}
-</style>
-```
-
-:::
+<Iframe link="//player.bilibili.com/player.html?aid=338405532&bvid=BV14R4y1u7QX&cid=493329256&page=1" />
 
 ### Map
 
@@ -1049,31 +885,7 @@ console.log(map.get(secondLink)) //{text: 'scond'}
 - 没有触发原型链查找
 - 支持了对象作为 key 进行存储
 
-:::demo
-
-```vue
-<template>
-	<div class="demo">
-		<iframe
-			src="//player.bilibili.com/player.html?aid=253569873&bvid=BV1NY411t7zw&cid=494088565&page=1"
-			scrolling="no"
-			border="0"
-			frameborder="no"
-			framespacing="0"
-			allowfullscreen="true"
-		>
-		</iframe>
-	</div>
-</template>
-<style>
-.demo > iframe {
-	width: 100%;
-	height: 450px;
-}
-</style>
-```
-
-:::
+<Iframe link="//player.bilibili.com/player.html?aid=253569873&bvid=BV1NY411t7zw&cid=494088565&page=1" />
 
 ### Set
 
@@ -1116,31 +928,7 @@ map 和 set 是更加优秀的类型，避免了一些相对恶心的场景出�
 
 这个是属于一定要掌握的内容，很多大神已经在使用了，比如 vue3 的源码，都是用到了 set 和 map 这些数据类型了。
 
-:::demo
-
-```vue
-<template>
-	<div class="demo">
-		<iframe
-			src="//player.bilibili.com/player.html?aid=978568479&bvid=BV1X44y1s7AC&cid=495411669&page=1"
-			scrolling="no"
-			border="0"
-			frameborder="no"
-			framespacing="0"
-			allowfullscreen="true"
-		>
-		</iframe>
-	</div>
-</template>
-<style>
-.demo > iframe {
-	width: 100%;
-	height: 450px;
-}
-</style>
-```
-
-:::
+<Iframe link="//player.bilibili.com/player.html?aid=978568479&bvid=BV1X44y1s7AC&cid=495411669&page=1" />
 
 ### 正则表达式
 
@@ -1428,31 +1216,7 @@ console.log(reg.test(str3)) // false
 
 正则的内容真的太多了，学起来并不是一两天甚至几个月的事情，主要这玩意儿涉及的一些知识点真的很多，稍微用不到就会忘记，真如我是看了至少三遍的正则，还是不会用，所以我的目标是以后在可以使用正则的场景都逼自己使用正则，而不是停留在舒适区使用其他方式完成需求。
 
-:::demo
-
-```vue
-<template>
-	<div class="demo">
-		<iframe
-			src="//player.bilibili.com/player.html?aid=808614286&bvid=BV1734y127yt&cid=497081546&page=1"
-			scrolling="no"
-			border="0"
-			frameborder="no"
-			framespacing="0"
-			allowfullscreen="true"
-		>
-		</iframe>
-	</div>
-</template>
-<style>
-.demo > iframe {
-	width: 100%;
-	height: 450px;
-}
-</style>
-```
-
-:::
+<Iframe link="//player.bilibili.com/player.html?aid=808614286&bvid=BV1734y127yt&cid=497081546&page=1" />
 
 ### 代码模块化
 
@@ -1628,31 +1392,7 @@ ESM 也是有一些细节的
 
 模块化现在开发已经离不开，基本都是 ESM，很容易上手，就随便带过了，不过过去我清湖 AMD 具体是什么，还有 UMD 还是有收获的！！！
 
-:::demo
-
-```vue
-<template>
-	<div class="demo">
-		<iframe
-			src="//player.bilibili.com/player.html?aid=936211019&bvid=BV1DT4y1k7QY&cid=497818774&page=1"
-			scrolling="no"
-			border="0"
-			frameborder="no"
-			framespacing="0"
-			allowfullscreen="true"
-		>
-		</iframe>
-	</div>
-</template>
-<style>
-.demo > iframe {
-	width: 100%;
-	height: 450px;
-}
-</style>
-```
-
-:::
+<Iframe link="//player.bilibili.com/player.html?aid=936211019&bvid=BV1DT4y1k7QY&cid=497818774&page=1" />
 
 ## 第四部分 洞悉浏览器
 
@@ -1812,31 +1552,7 @@ ESM 也是有一些细节的
 
 会引起布局抖动的 API 和属性有蛮多的，其中对于 DOM 来说，一些涉及宽高、大小之类的属性如果操作不当就会发生问题。
 
-:::demo
-
-```vue
-<template>
-	<div class="demo">
-		<iframe
-			src="//player.bilibili.com/player.html?aid=253641761&bvid=BV17Y411t7dv&cid=498573817&page=1"
-			scrolling="no"
-			border="0"
-			frameborder="no"
-			framespacing="0"
-			allowfullscreen="true"
-		>
-		</iframe>
-	</div>
-</template>
-<style>
-.demo > iframe {
-	width: 100%;
-	height: 450px;
-}
-</style>
-```
-
-:::
+<Iframe link="//player.bilibili.com/player.html?aid=253641761&bvid=BV17Y411t7dv&cid=498573817&page=1" />
 
 ### 事件
 
@@ -2113,31 +1829,7 @@ W3C 更倾向于默认冒泡，所以默认是冒泡事件，即默认 false。
 
 事件循环的概念还是非常重要的，加深了理解，另外我清晰了冒泡和捕获的概念，知道了原来默认支持的是冒泡事件。以及如果使用委托相对优雅的写一些特殊的代码。
 
-:::demo
-
-```vue
-<template>
-	<div class="demo">
-		<iframe
-			src="//player.bilibili.com/player.html?aid=423727502&bvid=BV1e3411E7RU&cid=499091876&page=1"
-			scrolling="no"
-			border="0"
-			frameborder="no"
-			framespacing="0"
-			allowfullscreen="true"
-		>
-		</iframe>
-	</div>
-</template>
-<style>
-.demo > iframe {
-	width: 100%;
-	height: 450px;
-}
-</style>
-```
-
-:::
+<Iframe link="//player.bilibili.com/player.html?aid=423727502&bvid=BV1e3411E7RU&cid=499091876&page=1" />
 
 ## 读后感
 
@@ -2149,28 +1841,4 @@ W3C 更倾向于默认冒泡，所以默认是冒泡事件，即默认 false。
 
 最后，谢谢大家的观看！祝大家都能成为一名前端开发的 **忍者**！
 
-:::demo
-
-```vue
-<template>
-	<div class="demo">
-		<iframe
-			src="//player.bilibili.com/player.html?aid=808680375&bvid=BV1B34y127pq&cid=499667435&page=1"
-			scrolling="no"
-			border="0"
-			frameborder="no"
-			framespacing="0"
-			allowfullscreen="true"
-		>
-		</iframe>
-	</div>
-</template>
-<style>
-.demo > iframe {
-	width: 100%;
-	height: 450px;
-}
-</style>
-```
-
-:::
+<Iframe link="//player.bilibili.com/player.html?aid=808680375&bvid=BV1B34y127pq&cid=499667435&page=1" />
