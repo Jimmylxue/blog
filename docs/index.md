@@ -41,3 +41,9 @@ features:
     link: https://github.com/Jimmylxue/Vitality-reminder
     # linkText: 'link it'
 ---
+
+<style>
+  .VPFeatures>.container>.items>.item{
+    width: calc(100% / 4);
+  }
+</style>
