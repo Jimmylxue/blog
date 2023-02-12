@@ -42,6 +42,12 @@ features:
     # linkText: 'link it'
 ---
 
+<script setup>
+import Member from '../components/Member.vue'
+</script>
+
+<Member />
+
 <style>
   .VPFeatures>.container>.items>.item{
     width: calc(100% / 4);

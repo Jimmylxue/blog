@@ -32,7 +32,7 @@ const config = {
 			text: 'Edit this page on GitHub',
 		},
 	},
-	appearance: 'dark', // dark theme
+	// appearance: 'dark', // dark theme
 }
 
 export default config
