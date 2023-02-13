@@ -49,7 +49,19 @@ import Member from '../components/Member.vue'
 <Member />
 
 <style>
+  
+  /* 宽度大于 640 采用的样式 */
+@media (min-width: 640px) {
   .VPFeatures>.container>.items>.item{
     width: calc(100% / 4);
   }
+}
+
+/* 宽度大于 960 采用的样式 */
+
+@media (min-width: 960px) {
+  .VPFeatures>.container>.items>.item{
+    width: calc(100% / 4);
+  }
+}
 </style>
