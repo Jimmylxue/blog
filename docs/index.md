@@ -17,7 +17,7 @@ hero:
       link: https://github.com/Jimmylxue/blog
 
 features:
-  - icon: 🛠️
+  - icon: 📝
     title: work life balance
     details: 读书分享&生活记录
     link: /life/other/base

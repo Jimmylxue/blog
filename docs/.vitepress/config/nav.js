@@ -1,5 +1,6 @@
 const nav = [
 	{ text: '首页', link: '/' },
+	{ text: '关于我', link: '/other/about' },
 	{
 		text: '小工具',
 		icon: 'reco-message',
