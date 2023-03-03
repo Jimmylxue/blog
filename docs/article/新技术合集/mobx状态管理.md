@@ -6,7 +6,7 @@ head:
 
   - - meta
     - name: keywords
-      content: Nest.js
+      content: mobx
 
   - - script
     - src: https://vitepress-source.oss-cn-beijing.aliyuncs.com/statistics.js
