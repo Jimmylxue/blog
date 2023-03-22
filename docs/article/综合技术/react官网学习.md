@@ -26,3 +26,11 @@ why do multiple JSX tags need to be wrapped?
 this question is often asked by interview（面试）, but this question has answer in official website(官网)：here is answer as follow:
 
 > JSX under the hood it is transformed into plain JavaScript objects, it can’t return two objects from a function without wrapping them into an array. This explains why you also can’t return two JSX tags without wrapping them into another tag or a Fragment.
+
+## pure function
+
+In react version of 18, development function will call twice, some person ask some question about "how to make function just call once?" in react community. In fact, the answer of question is in [official website](https://react.dev/learn/keeping-components-pure).
+
+the docs use an chapter to explain why is this design, which is wanner developer to write pure function.
+
+pure function has some result when it called once or twice! pure function has a lot of benefits, that is why react designed like this!
