@@ -34,3 +34,23 @@ In react version of 18, development function will call twice, some person ask so
 the docs use an chapter to explain why is this design, which is wanner developer to write pure function.
 
 pure function has some result when it called once or twice! pure function has a lot of benefits, that is why react designed like this!
+
+now there are some demo, but which is pure function?
+
+```ts
+function add(obj) {
+	obj.a + 1
+	return obj
+}
+
+add({ a: 1 })
+
+function del(obj) {
+	obj.a += 1
+	return obj
+}
+
+del({ a: 1 })
+```
+
+the real answer is del function, because of it doesn't change outside variables and object when it called and has same result when function receive same input value, but add function is change it.
