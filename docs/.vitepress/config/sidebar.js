@@ -6,4 +6,5 @@ export default {
 	'/snowtiny/': scanDir('snowtiny'),
 	'/snow-react-markdown/': scanDir('snow-react-markdown'),
 	'/life/': scanDir('life'),
+	'/react/': scanDir('react'),
 }

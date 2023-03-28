@@ -40,6 +40,10 @@ features:
     details: 利用微信订阅号的方式，给女朋友每天定时定时推送消息。 如果还没有女朋友的这个可以祝你一臂之力
     link: https://github.com/Jimmylxue/Vitality-reminder
     # linkText: 'link it'
+  - icon: 📝
+    title: React
+    details: React知识点
+    link: /react/useEffect/dependencies
 ---
 
 <script setup>
