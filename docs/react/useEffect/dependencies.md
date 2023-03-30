@@ -19,7 +19,7 @@ export const EffectEventDemo: FC = () => {
 
 	useEffect(() => {
 		if (show) {
-			message.success(`${name} + ${age}`)
+			message.success(`${name} + ${age}`) // 输出内容是什么呢？
 		}
 	}, [show])
 
@@ -91,7 +91,7 @@ export const EffectEventDemo: FC = () => {
 
 	useEffect(() => {
 		setTimeout(() => {
-			message.success(`${name} + ${age}`)
+			message.success(`${name} + ${age}`) // 输出内容是什么呢？
 		}, 5000)
 	}, [])
 
@@ -147,7 +147,7 @@ export const EffectEventDemo: FC = () => {
 
 	useEffect(() => {
 		if (show) {
-			message.success(`${name} + ${age}`)
+			message.success(`${name} + ${age}`) // 输出内容是什么呢？
 		}
 	}, [show])
 
@@ -192,4 +192,6 @@ export const EffectEventDemo: FC = () => {
 
 ## 总结
 
-如果能耐心开导这里，相信大家能理解这个 `useEffect` 关于闭包陷阱的机制了，总的说就是那句非常关键的口诀：**useEffect 中，每一个 effect 版本“看到”的值都来自于它属于的那次渲染**
+如果能耐心开导这里，相信大家能理解这个 `useEffect` 关于闭包陷阱的机制了，总的说就是那句非常关键的口诀：**useEffect 中，每一个 effect 版本“看到”的值都来自于它属于的那次渲染**。
+
+为了避免出现这种闭包陷阱，还有一个口诀：**useEffect 中用到了什么变量，那就把所用的变量加入到 dependencies 中（前提是业务和处理流程正确的情况下）。**
