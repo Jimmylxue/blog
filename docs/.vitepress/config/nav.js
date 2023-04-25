@@ -7,7 +7,7 @@ const nav = [
 		items: [
 			{
 				text: '工具网站推荐',
-				link: 'article/其他/工具网站',
+				link: 'article/other/tool',
 			},
 		],
 	},

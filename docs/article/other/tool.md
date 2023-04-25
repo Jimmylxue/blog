@@ -81,3 +81,9 @@
 - [在线 PS](https://ps.gaoding.com/#/)
 
   > 线上 ps，做一些简单的图很方便
+
+## 数据库
+
+- [planetscale](https://app.planetscale.com/)
+
+> 一款白嫖数据库，免费 5G 空间。非常适合学习，需要科学上网。速度上也会相对慢一点。
