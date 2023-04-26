@@ -8,6 +8,33 @@
 
 ## 友情链接
 
+<script setup>
+import { VPTeamMembers } from 'vitepress/theme'
+
+const members = [
+  {
+    avatar: 'https://avatars.githubusercontent.com/u/23721611?s=100&v=4',
+    name: '妙才 DEV',
+    title: '妙才',
+    links: [
+      { icon: 'github', link: 'https://github.com/Developer27149' },
+      { icon: 'slack', link: 'https://blog-dev27149.vercel.app/' },
+    ]
+  },
+  {
+    avatar: 'https://avatars.githubusercontent.com/u/34816426?s=100&v=4',
+    name: '冰冻大西瓜',
+    title: 'Mr-Q',
+    links: [
+      { icon: 'github', link: 'https://github.com/you-hengh' },
+      { icon: 'slack', link: 'https://bddxg.top/' },
+    ]
+  },
+]
+</script>
+
+<VPTeamMembers size="small" :members="members" />
+
 - [妙才 DEV](https://blog-dev27149.vercel.app/)
 
 - [冰冻大西瓜](https://bddxg.top/)
