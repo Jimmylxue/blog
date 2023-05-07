@@ -44,6 +44,10 @@ features:
     title: React
     details: React知识点
     link: /react/useEffect/dependencies
+  - icon: 📝
+    title: deep-learning
+    details: 深入学习-前端知识
+    link: /deep-learning/masterClass/event-loop
 ---
 
 <script setup>
