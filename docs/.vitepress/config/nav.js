@@ -32,6 +32,7 @@ const nav = [
 			},
 		],
 	},
+	{ text: 'github', link: 'https://github.com/Jimmylxue/blog' },
 ]
 
 export default nav
