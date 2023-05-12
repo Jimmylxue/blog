@@ -87,3 +87,9 @@
 - [planetscale](https://app.planetscale.com/)
 
 > 一款白嫖数据库，免费 5G 空间。非常适合学习，需要科学上网。速度上也会相对慢一点。
+
+## git
+
+- [Learn Git Branching](https://learngitbranching.js.org/?locale=zh_CN)
+
+> 学习 git 指令的网站。一关卡一关卡熟悉每个指令的含义。

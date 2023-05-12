@@ -47,7 +47,7 @@ docker 相当于是一个容器，docker 是运行在服务器上的，有它在
 2. 端口 443：HTTPS 默认端口
 3. 端口 22： SSH 端口
 
-![像这样多开放几个端口即可](https://img-blog.csdnimg.cn/20200811232112592.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NjI0MDE2Mg==,size_16,color_FFFFFF,t_70)
+![像这样多开发几个端口即可](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20230512112648360.png)
 
 ### 环境安装
 
@@ -83,14 +83,14 @@ docker 相当于是一个容器，docker 是运行在服务器上的，有它在
      */
      sudo systemctl enable docker  // 设置自启动
      sudo systemctl disable docker  // 关闭自启动
-
+   
      /*
      	sudo systemctl list-unit-files 查看系统服务信息
      	sudo systemctl list-unit-files | grep docker  查看docker的服务信息
      	sudo systemctl list-unit-files | grep enable  查看系统自启动的服务有哪些
      		| 管道符是用于过滤的，可以参考vue的过滤器的语法
      */
-
+   
      sudo systemctl list-unit-files | grep docker
      ```
 
@@ -118,25 +118,23 @@ docker 相当于是一个容器，docker 是运行在服务器上的，有它在
   - 使用`docker pull nginx` 下载镜像
   - 使用`docker images` 查看是否有拉取的镜像
 
-  ![nginx镜像](https://img-blog.csdnimg.cn/20200814212426275.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NjI0MDE2Mg==,size_16,color_FFFFFF,t_70#pic_center)
-
-  - 开启容器
+  - ![nginx镜像](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20230512112800514.png)开启容器
 
   ```
-    docker run -d -p 8080:80 --name 容器名 nginx 开启一个容器
+  docker run -d -p 8080:80 --name 容器名 nginx 开启一个容器
     /*
       -d 表示后台运行 就算关闭了这个窗口，服务器后台任然在运行
       -p 端口映射 冒号前是本机端口(自己设置)，冒号后是容器端口(默认是80)
     */
   ```
-
+  
   - 浏览器检查是否成功安装，输入服务器公网地址+自己设置的端口(这里的端口必须是已经开放的端口，就是之前阿里云控制台设置的)，如果浏览器出现以下的显示，恭喜，nginx 启动成功
 
-  ![nginx默认页面](https://img-blog.csdnimg.cn/20200811131211344.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NjI0MDE2Mg==,size_16,color_FFFFFF,t_70)
+  ![nginx默认页面](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20230512112818818.png)
 
   - 使用`docker ps`查看已经开启的容器，`docker ps -a`查看所有的容器
 
-  ![查看容器](https://img-blog.csdnimg.cn/20200814213300616.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NjI0MDE2Mg==,size_16,color_FFFFFF,t_70#pic_center)
+  ![查看容器](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20230512112843144.png)
 
   - 使用`docker stop 容器名/id` 停止掉指定的容器
 
@@ -146,15 +144,15 @@ docker 相当于是一个容器，docker 是运行在服务器上的，有它在
 
   - /home 文件夹下新建 mutou 文件夹，木头文件夹下新建 nginx 文件夹，nginx 文件夹下新建 conf.d 文件夹，html 文件夹，大致结构如下：
 
-    ![映射文件解构](https://img-blog.csdnimg.cn/20200811172447883.png)
+    ![映射文件解构](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20230512112904447.png)
 
   - 在我们创建的 conf.d 文件夹下新建 default.conf 文件，做出如下的一些配置:
 
-    ![映射conf.d配置文件](https://img-blog.csdnimg.cn/20200811172400164.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NjI0MDE2Mg==,size_16,color_FFFFFF,t_70)
+    ![映射conf.d 配置文件](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20230512112924814.png)
 
   - 在 html 文件夹下编写我们刚刚修改之后的指定的 html 文件，如我将原有的 index-test.html 修改成了 index-test.html，所以我就要在 html 文件夹下创建一个 index-test.html 文件
 
-    ![文件](https://img-blog.csdnimg.cn/2020081117270767.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NjI0MDE2Mg==,size_16,color_FFFFFF,t_70)
+    ![创建html文件](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20230512112953472.png)
 
   - 启动我们的 nginx 容器，同时映射地址:代码为：
 
@@ -166,13 +164,13 @@ docker 相当于是一个容器，docker 是运行在服务器上的，有它在
 
   - 在上述的步骤完成之后，我们输入 ip:80，就可以得到我们刚刚写的 html 代码的页面了
 
-    ![修改配置后的浏览器显示效果](https://img-blog.csdnimg.cn/20200811173342941.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NjI0MDE2Mg==,size_16,color_FFFFFF,t_70)
+    ![修改配置后的显示效果](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20230512113025405.png)
 
 - 在服务器上安装 git
 
   - 使用`yum install -y git`在服务器上安装，之后使用`git --version`查看版本，如果有就代表安装成了
 
-    ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200812145927643.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NjI0MDE2Mg==,size_16,color_FFFFFF,t_70#pic_center)
+    ![安装git](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20230512113047660.png)
 
   - 安装好了之后做一些 git 的简单配置
     1. git config --global user.name "Your Name"
@@ -206,7 +204,7 @@ docker 相当于是一个容器，docker 是运行在服务器上的，有它在
 
 - 执行`docker ps`如果有我们刚刚那个项目，则部署成功，访问 ip：端口号,就可以线上访问我们的项目了
 
-  ![项目创建成功](https://img-blog.csdnimg.cn/20200814214922208.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NjI0MDE2Mg==,size_16,color_FFFFFF,t_70#pic_center)
+  ![项目创建成功](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20230512113106386.png)
 
 ## 项目部署优化(半自动部署)
 
