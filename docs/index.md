@@ -21,6 +21,10 @@ features:
     title: work life balance
     details: 读书分享&生活记录
     link: /life/other/base
+  - icon: ✨
+    title: snow-todoList
+    details: todolist 基于monorepo架构下 react + nest.js 全栈项目，麻雀虽小五脏俱全
+    link: http://www.jimmyxuexue.top:668/#/todolist
   - icon: 🔥
     title: snow-tiny
     details: snow-tiny 是一个专为前端同学开发的基于 tiny 的简单、轻量级的图片压缩工具。只需三步，就可实现图片自动化压缩，极大提高效率和压缩体验！
@@ -40,11 +44,11 @@ features:
     details: 利用微信订阅号的方式，给女朋友每天定时定时推送消息。 如果还没有女朋友的这个可以祝你一臂之力
     link: https://github.com/Jimmylxue/Vitality-reminder
     # linkText: 'link it'
-  - icon: 📝
+  - icon: 🔖
     title: React
     details: React知识点
     link: /react/useEffect/dependencies
-  - icon: 📝
+  - icon: ✏️
     title: deep-learning
     details: 深入学习-前端知识
     link: /deep-learning/masterClass/event-loop
