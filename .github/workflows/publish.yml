@@ -45,8 +45,8 @@ jobs:
           # 源目录
           SOURCE: 'docs/.vitepress/dist'
           # 服务器ip
-          REMOTE_HOST: '1.116.204.114'
+          REMOTE_HOST: ${{ secrets.PRIVATE_HOST }}
           # 用户
           REMOTE_USER: 'root'
           # 目标地址
-          TARGET: '/me/vitepressBlog'
+          TARGET: '/www/server/nginx/html/blog'
