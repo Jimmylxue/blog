@@ -17,7 +17,7 @@
 	"license": "ISC",
 	"devDependencies": {
 		"snow-tiny": "^0.0.3",
-		"vitepress": "^1.0.0-alpha.27",
+		"vitepress": "^1.0.0-beta.1",
 		"vue": "^3.2.39"
 	},
 	"dependencies": {
