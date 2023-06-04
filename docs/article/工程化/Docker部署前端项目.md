@@ -83,14 +83,14 @@ docker 相当于是一个容器，docker 是运行在服务器上的，有它在
      */
      sudo systemctl enable docker  // 设置自启动
      sudo systemctl disable docker  // 关闭自启动
-   
+
      /*
      	sudo systemctl list-unit-files 查看系统服务信息
      	sudo systemctl list-unit-files | grep docker  查看docker的服务信息
      	sudo systemctl list-unit-files | grep enable  查看系统自启动的服务有哪些
      		| 管道符是用于过滤的，可以参考vue的过滤器的语法
      */
-   
+
      sudo systemctl list-unit-files | grep docker
      ```
 
@@ -127,7 +127,7 @@ docker 相当于是一个容器，docker 是运行在服务器上的，有它在
       -p 端口映射 冒号前是本机端口(自己设置)，冒号后是容器端口(默认是80)
     */
   ```
-  
+
   - 浏览器检查是否成功安装，输入服务器公网地址+自己设置的端口(这里的端口必须是已经开放的端口，就是之前阿里云控制台设置的)，如果浏览器出现以下的显示，恭喜，nginx 启动成功
 
   ![nginx默认页面](https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20230512112818818.png)
@@ -198,7 +198,7 @@ docker 相当于是一个容器，docker 是运行在服务器上的，有它在
 > 到这步就很简单了，离成功就一步之遥了，只需要将项目打包之后的文件夹丢到 nginx 上就可以了。  
 >  因为我们服务器安装了 git，所以对于前端来说，我们只需要将前端 vue 项目执行了打包命令之后的 dist 文件夹给传到服务器上，再在服务器上开一个端口来专门处理这个 dist 文件夹就可以了 -- 这里拿 Vue 项目来演示
 
-    ![打包后的dist文件夹](https://img-blog.csdnimg.cn/20200812163429191.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NjI0MDE2Mg==,size_16,color_FFFFFF,t_70#pic_center)
+![打包后的dist文件夹](https://img-blog.csdnimg.cn/20200812163429191.png)
 
 - 之后执行指令`docker run -d -p 8080:80 -v $PWD/dist:/usr/share/nginx/html nginx`这里注意`$PWD`表示的是当前所在目录，所以执行这一行代码的时候，我们就必须得在项目的目录中了。
 

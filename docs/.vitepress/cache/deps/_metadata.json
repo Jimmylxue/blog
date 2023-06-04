@@ -1,11 +1,17 @@
 {
-  "hash": "315b7936",
-  "browserHash": "06def585",
+  "hash": "21fc8ddb",
+  "browserHash": "8a19786e",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "2f950ffd",
+      "fileHash": "d6a0f943",
+      "needsInterop": false
+    },
+    "medium-zoom": {
+      "src": "../../../../node_modules/medium-zoom/dist/medium-zoom.esm.js",
+      "file": "medium-zoom.js",
+      "fileHash": "89533aa9",
       "needsInterop": false
     }
   },
