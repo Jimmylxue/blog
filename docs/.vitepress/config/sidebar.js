@@ -8,4 +8,5 @@ export default {
 	'/life/': scanDir('life'),
 	'/react/': scanDir('react'),
 	'/deep-learning/': scanDir('deep-learning'),
+	'/reading/': scanDir('reading'),
 }

@@ -18,8 +18,12 @@ hero:
 
 features:
   - icon: 📝
+    title: 读书分享
+    details: 读书分享&感悟
+    link: /reading/softSkill/你要如何衡量你的人生
+  - icon: 🌱
     title: work life balance
-    details: 读书分享&生活记录
+    details: 生活记录
     link: /life/other/base
   - icon: ✨
     title: snow-todoList
