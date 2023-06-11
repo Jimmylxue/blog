@@ -12,7 +12,7 @@ head:
 ---
 
 <script setup>
-import Iframe from '../../../../components/Iframe.vue'
+import Iframe from '../../../components/Iframe.vue'
 </script>
 
 # 《JavaScript 忍者秘籍》记录
