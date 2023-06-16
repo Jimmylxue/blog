@@ -42,6 +42,18 @@
 
   > 不想引入动画库时，自定义配置生成代码的工具
 
+- [wow.js](https://mattboldt.com/demos/typed-js/)
+
+  > 滚动动画
+
+- [granim.js](https://sarcadass.github.io/granim.js/)
+
+  > 背景渐变动画
+
+- [canvas-confetti](https://www.kirilv.com/canvas-confetti/)
+
+  > 撒花效果
+
 ## Git
 
 - [gitmoji.dev](https://gitmoji.dev/)
