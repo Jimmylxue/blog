@@ -1,18 +1,17 @@
 <script setup>
 import { ref } from 'vue'
+import axios from 'axios'
+// import fetch from 'node-fetch'
 const recentList = ref([])
 const user = ref({})
 const fetchCurrent = async () => {
-	const res = await fetch('https://api.github.com/users/jimmylxue/starred')
-	const json = await res.json()
-	console.log(json)
-	recentList.value = json
+	const res = await axios.get('https://api.github.com/users/jimmylxue/starred')
+	recentList.value = res.data
 }
 
 const fetchUser = async () => {
-	const res = await fetch('https://api.github.com/users/jimmylxue')
-	const json = await res.json()
-	user.value = json
+	const res = await axios.get('https://api.github.com/users/jimmylxue')
+	user.value = res.data
 }
 
 fetchCurrent()
