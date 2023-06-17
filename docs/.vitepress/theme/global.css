@@ -7,6 +7,7 @@
     padding-left: 10px !important;
     width: 230px !important;
   }
+  
   .VPContent.has-sidebar {
     padding-left: 250px !important;
     padding-right: 5vw !important;
@@ -47,4 +48,10 @@
 /* 图片点击放大优先级调整 */
 .medium-zoom-image {
   z-index: 9999 !important;
+}
+
+.VPNavBarSearch {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
 }

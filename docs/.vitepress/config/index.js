@@ -10,7 +10,9 @@ const config = {
 	head,
 	markdown,
 	themeConfig: {
-		search: true, //展示搜索
+		search: {
+			provider: 'local',
+		},
 		sidebar,
 		nav,
 		// demoblock: lang,
