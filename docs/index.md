@@ -56,6 +56,10 @@ features:
     title: deep-learning
     details: 深入学习-前端知识
     link: /deep-learning/masterClass/event-loop
+  - icon: 🚀
+    title: job
+    details: 工作相关
+    link: /job/面试题/实习
 ---
 
 <script setup>
