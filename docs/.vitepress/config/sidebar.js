@@ -9,4 +9,5 @@ export default {
 	'/react/': scanDir('react'),
 	'/deep-learning/': scanDir('deep-learning'),
 	'/reading/': scanDir('reading'),
+	'/job/': scanDir('job'),
 }
