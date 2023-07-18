@@ -10,4 +10,5 @@ export default {
 	'/deep-learning/': scanDir('deep-learning'),
 	'/reading/': scanDir('reading'),
 	'/job/': scanDir('job'),
+	'/TDD/': scanDir('TDD'),
 }
