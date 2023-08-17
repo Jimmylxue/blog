@@ -7,7 +7,7 @@
 欺骗 ts 的方式有哪些呢？可能大家第一时间想的比较多的是`ts-ignore`，类似下面这样：
 
 ```ts
-let a: any
+let a: any = 'str'
 // @ts-ignore
 a('jimmy')
 ```
@@ -41,7 +41,7 @@ class User {
 
 const jimmy = new User()
 jimmy.setStudent({ name: 'jimmy' })
-const name = jimmy.studentName()
+jimmy.studentName
 ```
 
 上面的业务代码我写了一个欺骗 ts 的代码，就是这个：
