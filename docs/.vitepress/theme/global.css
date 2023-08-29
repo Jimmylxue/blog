@@ -55,3 +55,16 @@
   width: 100%;
   justify-content: flex-end;
 }
+
+:root {
+  --vp-c-brand: var(--vp-c-green) !important;
+  --vp-c-brand-light: var(--vp-c-green-light) !important;
+  --vp-c-brand-lighter: var(--vp-c-green-lighter) !important;
+  --vp-c-brand-lightest: var(--vp-c-green-lightest) !important;
+  --vp-c-brand-dark: var(--vp-c-green-dark) !important;
+  --vp-c-brand-darker: var(--vp-c-green-darker) !important;
+  --vp-c-brand-darkest: var(--vp-c-green-darkest) !important;
+  --vp-c-brand-dimm-1: var(--vp-c-green-dimm-1) !important;
+  --vp-c-brand-dimm-2: var(--vp-c-green-dimm-2) !important;
+  --vp-c-brand-dimm-3: var(--vp-c-green-dimm-3) !important;
+}
