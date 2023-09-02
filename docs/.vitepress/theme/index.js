@@ -4,6 +4,7 @@ import DefaultTheme from 'vitepress/theme'
 import { onMounted, watch, nextTick } from 'vue'
 import { useRoute } from 'vitepress'
 import mediumZoom from 'medium-zoom'
+import Layout from './Layout.vue'
 import './global.css'
 
 export default {
@@ -26,4 +27,5 @@ export default {
 			() => nextTick(() => initZoom())
 		)
 	},
+	Layout,
 }
