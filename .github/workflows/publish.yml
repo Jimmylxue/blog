@@ -50,3 +50,10 @@ jobs:
           REMOTE_USER: 'root'
           # 目标地址
           TARGET: '/www/server/nginx/html/blog'
+
+        # 推送信息到微信
+      - name: 推送信息到微信
+        uses: easychen/github-action-server-chan@main
+        with:
+          sendkey: ${{ secrets.PRIVATE_FANGTANG_KEY }}
+          title: '网站更新完毕'
