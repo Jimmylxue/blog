@@ -105,3 +105,9 @@
 - [Learn Git Branching](https://learngitbranching.js.org/?locale=zh_CN)
 
 > 学习 git 指令的网站。一关卡一关卡熟悉每个指令的含义。
+
+## 主题
+
+- [realtimecolors](https://realtimecolors.com/)
+
+> 一个主题网站配色的神器，可以非常方便我们做一些主题更改时的一些方案推荐
