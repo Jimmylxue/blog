@@ -11,18 +11,18 @@
  * index.js
  */
 
-function connect(){
-  TypeOrmModule.forRoot({
-    type: 'mysql',
-    host: 'us-east.connect.psdb.cloud',
-    port: 3306,
-    username: 'aaa-bbb-ccc-ddd',
-    password: 'xxx-aaa-sss-dddd',
-    database: 'snow-server',
-    entities: [__dirname + '/**/*.entity{.ts,.js}'],
-    synchronize: false,
-    ssl: {},
-  }),
+function connect() {
+	TypeOrmModule.forRoot({
+		type: 'mysql',
+		host: 'us-east.connect.psdb.cloud',
+		port: 3306,
+		username: 'aaa-bbb-ccc-ddd',
+		password: 'xxx-aaa-sss-dddd',
+		database: 'snow-server',
+		entities: [__dirname + '/**/*.entity{.ts,.js}'],
+		synchronize: false,
+		ssl: {},
+	})
 }
 
 connect()
@@ -53,8 +53,11 @@ console.log(baseParams)
 
 function format(arr: string[]) {
 	const obj = {}
-	const [key, value] = item.split('=')
-	obj[key] = value
+	arr.forEach(item => {
+		const [key, value] = item.split('=')
+		obj[key] = value
+	})
+
 	return obj
 }
 
@@ -79,8 +82,10 @@ format('name=jimmy', 'age=24')
 
 function format(arr: string[]) {
 	const obj = {}
-	const [key, value] = item.split('=')
-	obj[key] = value
+	arr.forEach(item => {
+		const [key, value] = item.split('=')
+		obj[key] = value
+	})
 	return obj
 }
 
@@ -88,18 +93,18 @@ const baseParams = process.argv.slice(2)
 
 const args = format(baseParams)
 
-function connect(){
-  TypeOrmModule.forRoot({
-    type: 'mysql',
-    host: 'us-east.connect.psdb.cloud',
-    port: 3306,
-    username: args.username,
-    password: args.password,
-    database: 'snow-server',
-    entities: [__dirname + '/**/*.entity{.ts,.js}'],
-    synchronize: false,
-    ssl: {},
-  }),
+function connect() {
+	TypeOrmModule.forRoot({
+		type: 'mysql',
+		host: 'us-east.connect.psdb.cloud',
+		port: 3306,
+		username: args.username,
+		password: args.password,
+		database: 'snow-server',
+		entities: [__dirname + '/**/*.entity{.ts,.js}'],
+		synchronize: false,
+		ssl: {},
+	})
 }
 
 connect()
