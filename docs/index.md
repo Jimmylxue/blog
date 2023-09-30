@@ -2,18 +2,18 @@
 layout: home
 
 hero:
-  name: Front end gas station
-  text: Hi, guys, this is very important!
-  tagline: Record my learning and life...
+  name: 前端加油站
+  text: 分享技术，记录生活
+  tagline: 永远相信，美好的事情即将发生!
   image:
     src: https://vitepress-source.oss-cn-beijing.aliyuncs.com/typoraimage-20220326203849385.png
     alt: logo
   actions:
     - theme: brand
-      text: Start Reading
+      text: 进入阅读
       link: /base
     - theme: alt
-      text: View on GitHub
+      text: 进入仓库
       link: https://github.com/Jimmylxue/blog
 
 features:
