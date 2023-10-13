@@ -111,3 +111,9 @@
 - [realtimecolors](https://realtimecolors.com/)
 
 > 一个主题网站配色的神器，可以非常方便我们做一些主题更改时的一些方案推荐
+
+## 图片文本识别
+
+- [tesseract.js](https://www.npmjs.com/package/tesseract.js)
+
+> 帮助我们识别图片中的文字，但是对图片要求比较高，需要图片文字比较干净，没法用于破解图片验证码
