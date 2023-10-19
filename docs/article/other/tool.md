@@ -54,6 +54,10 @@
 
   > 撒花效果
 
+- [Rough Notation](https://roughnotation.com/)
+
+  > 非常好看的手绘风格动画。主要针对文本
+
 ## Git
 
 - [gitmoji.dev](https://gitmoji.dev/)
