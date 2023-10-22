@@ -6,6 +6,9 @@ import { useRoute } from 'vitepress'
 import mediumZoom from 'medium-zoom'
 import Layout from './Layout.vue'
 import './global.css'
+import 'animate.css'
+
+const observers = []
 
 export default {
 	...DefaultTheme,
@@ -21,10 +24,69 @@ export default {
 		}
 		onMounted(() => {
 			initZoom()
+			initFirstScreen()
+			animateFn(true)
 		})
+
+		const isElementInViewport = element => {
+			var rect = element.getBoundingClientRect()
+			const isInViewport =
+				rect.top >= 0 &&
+				rect.bottom <=
+					(window.innerHeight || document.documentElement.clientHeight)
+			return isInViewport
+		}
+
+		const checkHasAttribute = element => {
+			return !!element.getAttribute('snow_is_show')
+		}
+
+		const initFirstScreen = () => {
+			const main = document.querySelector('.vp-doc>div') || []
+			const paragraphs = [...(main?.children || [])]
+			paragraphs.forEach(item => {
+				if (isElementInViewport(item)) {
+					item.setAttribute('snow_is_show', true)
+				}
+			})
+		}
+
+		const animateFn = (isFirstShow = true) => {
+			const main = document.querySelector('.vp-doc>div') || []
+			const paragraphs = [...(main?.children || [])]
+			paragraphs.forEach(item => {
+				const observer = new IntersectionObserver(entries => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting && !checkHasAttribute(item)) {
+							// 元素进入视口
+							item.classList.add('animate__animated')
+							item.classList.add('animate__fadeInUp')
+							item.setAttribute('snow_is_show', true)
+						}
+					})
+				})
+				observer.observe(item)
+				observers.push(observer)
+			})
+		}
+
+		const destructionObserver = () => {
+			observers.forEach(observe => {
+				observe.disconnect()
+			})
+			observers.length = 0
+		}
 		watch(
 			() => route.path,
-			() => nextTick(() => initZoom())
+			() =>
+				nextTick(() => {
+					initZoom()
+					console.log('observers1', observers)
+					destructionObserver()
+					console.log('observers', observers)
+					initFirstScreen()
+					animateFn()
+				})
 		)
 	},
 	Layout,
