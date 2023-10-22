@@ -8,6 +8,8 @@ import Layout from './Layout.vue'
 import './global.css'
 import 'animate.css'
 
+const observers = []
+
 export default {
 	...DefaultTheme,
 	NotFound: () => 'custom 404', // <- this is a Vue 3 functional component
@@ -22,10 +24,11 @@ export default {
 		}
 		onMounted(() => {
 			initZoom()
+			initFirstScreen()
 			animateFn(true)
 		})
 
-		function isElementInViewport(element) {
+		const isElementInViewport = element => {
 			var rect = element.getBoundingClientRect()
 			const isInViewport =
 				rect.top >= 0 &&
@@ -35,37 +38,54 @@ export default {
 		}
 
 		const checkHasAttribute = element => {
-			console.log('check', !!element.getAttribute('snow_is_show'))
 			return !!element.getAttribute('snow_is_show')
 		}
 
-		const animateFn = (isFirstShow = true) => {
-			const main = document.querySelector('.vp-doc>div')
-			const paragraphs = [...main.children]
-			console.log(paragraphs)
-
-			for (var i = 0; i < paragraphs.length; i++) {
-				var paragraph = paragraphs[i]
-				const isInViewport = isElementInViewport(paragraph)
-				if (isInViewport && !checkHasAttribute(paragraph) && !isFirstShow) {
-					paragraph.classList.add('animate__animated')
-					paragraph.classList.add('animate__fadeInUp')
-					if (isInViewport) {
-						element.setAttribute('snow_is_show', true)
-					}
+		const initFirstScreen = () => {
+			const main = document.querySelector('.vp-doc>div') || []
+			const paragraphs = [...(main?.children || [])]
+			paragraphs.forEach(item => {
+				if (isElementInViewport(item)) {
+					item.setAttribute('snow_is_show', true)
 				}
-			}
+			})
 		}
 
-		const changeTextStyle = () => {
-			window.addEventListener('scroll', () => animateFn(false))
+		const animateFn = (isFirstShow = true) => {
+			const main = document.querySelector('.vp-doc>div') || []
+			const paragraphs = [...(main?.children || [])]
+			paragraphs.forEach(item => {
+				const observer = new IntersectionObserver(entries => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting && !checkHasAttribute(item)) {
+							// 元素进入视口
+							item.classList.add('animate__animated')
+							item.classList.add('animate__fadeInUp')
+							item.setAttribute('snow_is_show', true)
+						}
+					})
+				})
+				observer.observe(item)
+				observers.push(observer)
+			})
+		}
+
+		const destructionObserver = () => {
+			observers.forEach(observe => {
+				observe.disconnect()
+			})
+			observers.length = 0
 		}
 		watch(
 			() => route.path,
 			() =>
 				nextTick(() => {
 					initZoom()
-					changeTextStyle()
+					console.log('observers1', observers)
+					destructionObserver()
+					console.log('observers', observers)
+					initFirstScreen()
+					animateFn()
 				})
 		)
 	},
