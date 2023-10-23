@@ -64,6 +64,10 @@
 
   > 代码提交时显示丰富小图标信息
 
+- [Learn Git Branching](https://learngitbranching.js.org/?locale=zh_CN)
+
+  > 学习 git 指令的网站。一关卡一关卡熟悉每个指令的含义。
+
 ## 图片压缩
 
 - https://www.67tool.com/images/imgConvert?to=avif
@@ -104,17 +108,15 @@
 
 > 一款白嫖数据库，免费 5G 空间。非常适合学习，需要科学上网。速度上也会相对慢一点。
 
-## git
-
-- [Learn Git Branching](https://learngitbranching.js.org/?locale=zh_CN)
-
-> 学习 git 指令的网站。一关卡一关卡熟悉每个指令的含义。
-
 ## 主题
 
 - [realtimecolors](https://realtimecolors.com/)
 
 > 一个主题网站配色的神器，可以非常方便我们做一些主题更改时的一些方案推荐
+
+- [墨滴](https://mdnice.com/)
+
+> markdown 多款 markdown 主题，很方便作为微信公众号等文章模板
 
 ## 图片文本识别
 
