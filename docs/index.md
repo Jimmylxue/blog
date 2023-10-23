@@ -64,6 +64,10 @@ features:
     title: TDD
     details: 测试驱动开发
     link: /TDD/1-介绍/关于TDD
+  - icon: ✅
+    title: TDD
+    details: 前端效果case
+    link: /front-end-case/滚动时文字渐入效果
 ---
 
 <script setup>
