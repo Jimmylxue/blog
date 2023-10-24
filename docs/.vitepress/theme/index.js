@@ -45,13 +45,16 @@ export default {
 			const main = document.querySelector('.vp-doc>div') || []
 			const paragraphs = [...(main?.children || [])]
 			paragraphs.forEach(item => {
+				item.removeAttribute('snow_is_show')
+				item.classList.remove('animate__animated')
+				item.classList.remove('animate__fadeInUp')
 				if (isElementInViewport(item)) {
 					item.setAttribute('snow_is_show', true)
 				}
 			})
 		}
 
-		const animateFn = (isFirstShow = true) => {
+		const animateFn = () => {
 			const main = document.querySelector('.vp-doc>div') || []
 			const paragraphs = [...(main?.children || [])]
 			paragraphs.forEach(item => {
@@ -81,9 +84,7 @@ export default {
 			() =>
 				nextTick(() => {
 					initZoom()
-					console.log('observers1', observers)
 					destructionObserver()
-					console.log('observers', observers)
 					initFirstScreen()
 					animateFn()
 				})
