@@ -1,4 +1,3 @@
-// .vitepress/theme/index.js
 import { registerComponents } from './register-components.js'
 import DefaultTheme from 'vitepress/theme'
 import { onMounted, watch, nextTick } from 'vue'
@@ -7,6 +6,7 @@ import mediumZoom from 'medium-zoom'
 import Layout from './Layout.vue'
 import './global.css'
 import 'animate.css'
+import { addAnimate, getChildNodes } from './utils.js'
 
 const observers = []
 
@@ -38,33 +38,31 @@ export default {
 		}
 
 		const checkHasAttribute = element => {
-			return !!element.getAttribute('snow_is_show')
+			return !!element.getAttribute('data-snow_is_show')
 		}
 
 		const initFirstScreen = () => {
 			const main = document.querySelector('.vp-doc>div') || []
-			const paragraphs = [...(main?.children || [])]
+			const paragraphs = getChildNodes(main)
 			paragraphs.forEach(item => {
-				item.removeAttribute('snow_is_show')
-				item.classList.remove('animate__animated')
-				item.classList.remove('animate__fadeInUp')
+				item.removeAttribute('data-snow_is_show')
 				if (isElementInViewport(item)) {
-					item.setAttribute('snow_is_show', true)
+					item.setAttribute('data-snow_is_show', true)
+					addAnimate(item)
 				}
 			})
 		}
 
 		const animateFn = () => {
 			const main = document.querySelector('.vp-doc>div') || []
-			const paragraphs = [...(main?.children || [])]
+			const paragraphs = getChildNodes(main)
 			paragraphs.forEach(item => {
 				const observer = new IntersectionObserver(entries => {
 					entries.forEach(entry => {
 						if (entry.isIntersecting && !checkHasAttribute(item)) {
 							// 元素进入视口
-							item.classList.add('animate__animated')
-							item.classList.add('animate__fadeInUp')
-							item.setAttribute('snow_is_show', true)
+							addAnimate(item)
+							item.setAttribute('data-snow_is_show', true)
 						}
 					})
 				})
