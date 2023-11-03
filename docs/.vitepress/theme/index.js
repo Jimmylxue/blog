@@ -48,7 +48,7 @@ export default {
 				item.removeAttribute('data-snow_is_show')
 				if (isElementInViewport(item)) {
 					item.setAttribute('data-snow_is_show', true)
-					addAnimate(item)
+					addAnimate(item, true)
 				}
 			})
 		}
