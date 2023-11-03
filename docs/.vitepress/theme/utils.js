@@ -27,14 +27,22 @@ export function getChildNodes(node) {
 	return nodeList
 }
 
-const fadeInLeftElement = ['Img'] // 标签存大写
+const fadeInLeftElement = ['IMG'] // 标签存大写
 
 /**
+ * 判断是否是 需要使用 左滑进入的 元素
  * @param {Element} node
  * @returns {boolean}
  */
 function isNeedFadeInLeft(node) {
-	return fadeInLeftElement.includes(node.tagName)
+	/**
+	 * vitePress img标签是 包裹在 p标签下的，所以需要做个特殊兼容
+	 */
+	const depImgTag = [...node.children]?.[0]?.tagName
+	return (
+		fadeInLeftElement.includes(node.tagName) ||
+		fadeInLeftElement.includes(depImgTag)
+	)
 }
 
 /**
@@ -45,7 +53,7 @@ function isNeedFadeInLeft(node) {
 export function addAnimate(node, isInit) {
 	if (isNeedFadeInLeft(node)) {
 		node.classList.add('animate__animated')
-		node.classList.add('animate__fadeInDown')
+		node.classList.add('animate__fadeInLeft')
 		return
 	}
 	if (isInit) {
