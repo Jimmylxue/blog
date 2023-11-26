@@ -17,6 +17,14 @@ hero:
       link: https://github.com/Jimmylxue/blog
 
 features:
+  - icon: 🙈
+    title: 小技巧分享
+    details: 分享前端一些小技巧&周边内容
+    link: /front-end/工程/pnpm打补丁
+  - icon: 🧱
+    title: 前端效果case
+    details: 前端效果case
+    link: /front-end-case/UI效果/滚动时文字渐入效果
   - icon: 📝
     title: 读书分享
     details: 读书分享&感悟
@@ -64,10 +72,6 @@ features:
     title: TDD
     details: 测试驱动开发
     link: /TDD/1-介绍/关于TDD
-  - icon: 🧱
-    title: 前端效果case
-    details: 前端效果case
-    link: /front-end-case/UI效果/滚动时文字渐入效果
 ---
 
 <script setup>
