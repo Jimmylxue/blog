@@ -12,4 +12,5 @@ export default {
 	'/job/': scanDir('job'),
 	'/TDD/': scanDir('TDD'),
 	'/front-end-case/': scanDir('front-end-case'),
+	'/front-end/': scanDir('front-end'),
 }
