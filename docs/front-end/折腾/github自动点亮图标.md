@@ -12,7 +12,7 @@ ps：大家还是不要过度最求这个，自己的实际代码提交量才是
 
 是不是很绿，还挺好看的，最近的几天都是有使用这个脚本
 
-> 虽然有使用脚本，但是实则我也是有真正提交内容哈😁
+> 虽然有使用脚本，但是实则我也是有真正提交内容哈 😁
 
 ![image-20231126202419583](https://image.jimmyxuexue.top/img/202311262024645.png)
 
@@ -26,17 +26,17 @@ ps：大家还是不要过度最求这个，自己的实际代码提交量才是
 
 - Github-action
 
-  需要会一些基础的github-action的配置，不会也没关系，后面我会提供一个基本配置信息附上每行的注释。大家自行修改即可。
+  需要会一些基础的 github-action 的配置，不会也没关系，后面我会提供一个基本配置信息附上每行的注释。大家自行修改即可。
 
 - Github-token
 
-  我们需要token，这个token主要是为了能够让自动化脚本push代码用的，且需要给这个token提交代码的权限。
+  我们需要 token，这个 token 主要是为了能够让自动化脚本 push 代码用的，且需要给这个 token 提交代码的权限。
 
 下面我们一个个来讲：
 
 ### 有一个仓库
 
-我们需要给github仓库根目录下加上一个.github/workflows文件夹。在这个文件夹下就可以创建一个个`.yml`文件，这个文件就是用来写action脚本的。
+我们需要给 github 仓库根目录下加上一个.github/workflows 文件夹。在这个文件夹下就可以创建一个个`.yml`文件，这个文件就是用来写 action 脚本的。
 
 ![image-20231126203303246](https://image.jimmyxuexue.top/img/202311262033266.png)
 
@@ -44,7 +44,7 @@ ps：大家还是不要过度最求这个，自己的实际代码提交量才是
 
 下面我们在`.github/workflows`创建一个`signin.yml`文件。
 
-> 名字可自行修改，不一定要signin，只要保证结尾为 .yml 结尾接口
+> 名字可自行修改，不一定要 signin，只要保证结尾为 .yml 结尾接口
 
 ```yaml
 name: 掘金自动签到 # 脚本名称
@@ -86,7 +86,7 @@ jobs:
 
       # 执行签到脚本 -> 打包执行结束之后，我们的代码会有更新，目标是将这部分代码提交到仓库
       - name: 打包
-        run: pnpm run juejin userId=${{ secrets.userId }}
+        run: pnpm run juejin
 
         # 推送信息到微信
       - name: 推送信息到微信
@@ -97,32 +97,31 @@ jobs:
 
       - name: Display Git status
         run: git status
-				
-				# 配置你的 git 信息
+
+      # 配置你的 git 信息
       - name: Commit changes
         run: |
           git config --local user.email "1002661758@qq.com"
           git config --local user.name "jimmyxuexue"
           git add .
           git commit -m "action commit : auto commit"
-				
-				# 提交 git 代码
+
+      # 提交 git 代码
       - name: push code to master
         run: git push origin master
-
 ```
 
 关键配置：
 
 - schedule
 
-  配置它的cron，则每日github会自动帮我们执行这个yml脚本，这个也就是自动点亮图标的关键
+  配置它的 cron，则每日 github 会自动帮我们执行这个 yml 脚本，这个也就是自动点亮图标的关键
 
-  > 注意：配置的cron时间为美国时间，且会有延迟。
+  > 注意：配置的 cron 时间为美国时间，且会有延迟。
 
 - workflow_dispatch
 
-  手动执行脚本，类似与Jenkins，方便我们自行配置
+  手动执行脚本，类似与 Jenkins，方便我们自行配置
 
   ![image-20231126210252859](https://image.jimmyxuexue.top/img/202311262102900.png)
 
@@ -132,21 +131,21 @@ jobs:
 
 以上的最核心的部分`git commit` 和 `git push`操作，核心要有代码的变更。
 
-上面能够实现的核心操作是，在我的仓库，执行`pnpm run juejin userId=${{ secrets.userId }}`之后会有文件变动，有文件变动是核心，因为有文件变动，才能提交代码。
+上面能够实现的核心操作是，在我的仓库，执行`pnpm run juejin`之后会有文件变动，有文件变动是核心，因为有文件变动，才能提交代码。
 
-> 我的文件变动是会更新cookies，实现cookie永久有效。
+> 我的文件变动是会更新 cookies，实现 cookie 永久有效。
 
-如果是单纯想刷图标的同学，可以自行利用node写一个如`fs`的脚本，修改一下某个文件的内容，之后再提交即可。
+如果是单纯想刷图标的同学，可以自行利用 node 写一个如`fs`的脚本，修改一下某个文件的内容，之后再提交即可。
 
 相信看完上面的注释，兄弟们能够了解这个脚本的执行的内容和方式了。下面讲另外一个关键的：Githun-token
 
 ### Githun-token
 
-这个token主要是为了能够让自动化脚本push代码用的。所以我们去github的个人中心生成一个即可。
+这个 token 主要是为了能够让自动化脚本 push 代码用的。所以我们去 github 的个人中心生成一个即可。
 
 **创建**
 
-这个过程还比较长，这里放一个知乎的图片，按照上面的步骤生成一个即可：[github访问令牌token的创建方法](https://zhuanlan.zhihu.com/p/501872439)
+这个过程还比较长，这里放一个知乎的图片，按照上面的步骤生成一个即可：[github 访问令牌 token 的创建方法](https://zhuanlan.zhihu.com/p/501872439)
 
 **给权限足**
 
@@ -168,7 +167,7 @@ jobs:
 
 ## 总结
 
-这个就是自动点亮图标的所有内容，我用它主要是为了保存token，实现登录态的持久化。
+这个就是自动点亮图标的所有内容，我用它主要是为了保存 token，实现登录态的持久化。
 
 不过好像他更大一方面可以帮助我们点亮小绿表，达到一个装酷的效果。
 
