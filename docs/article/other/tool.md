@@ -58,6 +58,23 @@
 
   > 非常好看的手绘风格动画。主要针对文本
 
+## JS
+
+- [hotkeys-js](https://github.com/jaywcjlove/hotkeys-js)
+
+  > 快速实现监听键盘按键事件、组合键事件
+
+  ```ts
+  useEffect(() => {
+  	hotkeys('ctrl+j', e => {
+  		e.preventDefault()
+  	})
+  	hotkeys('escape', function (e) {
+  		e.preventDefault()
+  	})
+  }, [])
+  ```
+
 ## Git
 
 - [gitmoji.dev](https://gitmoji.dev/)
