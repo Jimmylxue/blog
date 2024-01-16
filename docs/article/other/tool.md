@@ -140,3 +140,9 @@
 - [tesseract.js](https://www.npmjs.com/package/tesseract.js)
 
 > 帮助我们识别图片中的文字，但是对图片要求比较高，需要图片文字比较干净，没法用于破解图片验证码
+
+## 语言
+
+- [pi.ai](https://pi.ai/talk)
+
+> ai 语音平台，能够实现口语与文字交流。
