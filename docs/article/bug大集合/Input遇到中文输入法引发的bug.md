@@ -83,11 +83,11 @@ export function Demo() {
   import { SearchOutlined } from '@ant-design/icons'
   import { Input } from 'antd'
   import { useEffect, useState } from 'react'
-  
+
   export function Demo() {
   	const [searchText, setSearchText] = useState<string>('')
   	const inputLock = useRef<boolean>(false) /* 输入框的锁 */
-  
+
   	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
   		if (inputLock.current) {
   			// 当匹配锁锁上时，不进行输入内容的更新
@@ -95,11 +95,11 @@ export function Demo() {
   		}
   		setSearchText(e.target.value)
   	}
-  
+
   	useEffect(() => {
   		// 这里 监听到 searchText变化 触发网络请求
   	}, [searchText])
-  
+
   	return (
   		<div>
   			<Input
@@ -127,11 +127,11 @@ export function Demo() {
   	)
   }
   ```
-  
+
   通过上面的两个事件配合和引入的匹配锁的概念，我们就能够很好的解决这个问题了，效果如下：
-  
+
   ![3](https://image.jimmyxuexue.top/img/202402291439037.gif)
 
 ## 总结
 
-Input作为我们日常业务开发中最常用的一个Input，实际上也是有比较多的细节的。需要我们比较细致的做一些优化，否则很容易造成一些性能损耗与浪费资源。
+Input 作为我们日常业务开发中最常用的一个 Input，实际上也是有比较多的细节的。需要我们比较细致的做一些优化，否则很容易造成一些性能损耗与浪费资源。
