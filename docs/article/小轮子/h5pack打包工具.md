@@ -2,7 +2,7 @@
 
 ## 前言
 
-大家好我是吉米，这回跟大家分享一个我最新完成的一个小工具 [h5pack](https://github.com/Jimmylxue/h5pack-core) 。
+大家好我是吉米，这回跟大家分享一个我最新完成的一个小工具 [h5pack](https://github.com/Jimmylxue/h5pack-core) 。已经它背后的原理。
 
 [视频介绍](https://www.bilibili.com/video/BV1fm421g7Ux/?spm_id_from=333.999.0.0)
 
@@ -23,6 +23,14 @@ h5pack 是一个跨平台(支持 mac/windows)的 app 打包工具，只需简单
 起因是最近在学习 [expo](https://expo.nodejs.cn/get-started/expo-go/) 这个新的 cli，我发现它对比与传统的`React-native-cli`相比很神奇，它居然没有了`android`和`ios`文件夹，那它是如何打包的呢？
 
 我执行本地打包时发现它会在我系统中创建一个临时文件夹，然后再进行打包。临时文件夹下是有这两个文件夹的，收到这个就大致会有思路了。于是就天马行空的想到我们可以用这个机制来做点东西，于是就有了这个`h5pack`
+
+### 项目价值
+
+可能会有人说你这东西网上有 xxx、有什么价值？我能想到的价值大致有如下几点：
+
+- 对于个人来说，毕竟自己写的，意义非凡。
+- 如果你在接外包，客户点名要商城 app，但是你有商城的 h5，就可以通过它快读打包 app，帮助你变现。
+- ...实在编不下去了 😄
 
 ## 基本使用
 
