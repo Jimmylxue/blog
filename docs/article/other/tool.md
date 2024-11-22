@@ -146,3 +146,9 @@
 - [pi.ai](https://pi.ai/talk)
 
 > ai 语音平台，能够实现口语与文字交流。
+
+## AI 工具
+
+- [文本转图片 AI 免费生成器](https://monica.im/zh_CN/image-tools/ai-image-generator-from-text)
+
+> Monica 出品的文本转图片生成器，可以生成一些好看的图片
