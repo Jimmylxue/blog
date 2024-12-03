@@ -152,3 +152,9 @@
 - [文本转图片 AI 免费生成器](https://monica.im/zh_CN/image-tools/ai-image-generator-from-text)
 
 > Monica 出品的文本转图片生成器，可以生成一些好看的图片
+
+## UI 组件库
+
+- [shadcn](https://ui.shadcn.com/)
+
+> React 的 C 端组件库，原生支持 tailwindCSS
