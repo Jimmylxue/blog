@@ -33,6 +33,10 @@ features:
     title: work life balance
     details: 生活记录
     link: /life/other/base
+  - icon: 🧐
+    title: 跟着吉米学后端
+    details: 跟着吉米学后端
+    link: /back-end/mysql/前端程序员——你可能不知道的表命名知识
   - icon: ✨
     title: snow-todoList
     details: todolist 基于monorepo架构下 react + nest.js 全栈项目，麻雀虽小五脏俱全

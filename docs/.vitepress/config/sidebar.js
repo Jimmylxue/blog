@@ -14,4 +14,5 @@ export default {
 	'/front-end-case/': scanDir('front-end-case'),
 	'/front-end/': scanDir('front-end'),
 	'/aboutMe/': scanDir('aboutMe'),
+	'/back-end/': scanDir('back-end'),
 }
