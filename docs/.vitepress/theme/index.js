@@ -9,6 +9,7 @@ import {
 	destructionObserver,
 	animateFn,
 } from '../plugin/sliding'
+import { inject } from '@vercel/analytics'
 import './global.css'
 
 export default {
@@ -27,6 +28,7 @@ export default {
 			initZoom()
 			initFirstScreen()
 			animateFn(true)
+			inject()
 		})
 
 		watch(

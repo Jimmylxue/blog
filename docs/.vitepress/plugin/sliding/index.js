@@ -16,7 +16,7 @@ const checkHasAttribute = element => {
 }
 
 export function initFirstScreen() {
-	console.log('comming')
+	console.log('comming~~')
 	const main = document.querySelector('.vp-doc>div') || []
 	const paragraphs = getChildNodes(main)
 	paragraphs.forEach(item => {
