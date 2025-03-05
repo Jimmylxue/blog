@@ -158,3 +158,9 @@
 - [shadcn](https://ui.shadcn.com/)
 
 > React 的 C 端组件库，原生支持 tailwindCSS
+
+## React
+
+- [motion](https://motion.dev/)
+
+> 一个 React 动画库，能够实现非常多的动画效果
