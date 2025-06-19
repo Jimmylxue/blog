@@ -119,6 +119,10 @@
 
   > 线上 ps，做一些简单的图很方便
 
+- [logo-fast](https://shipfa.st/tools/logo-fast)
+
+  > LogoFast | Make Beautiful Logos Fast and Free 快速制作网站 logo
+
 ## 数据库
 
 - [planetscale](https://app.planetscale.com/)
