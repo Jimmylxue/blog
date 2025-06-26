@@ -123,6 +123,10 @@
 
   > LogoFast | Make Beautiful Logos Fast and Free 快速制作网站 logo
 
+- [Logo.surf](https://www.logo.surf/)
+
+  > Free Text-to-Logo and Text-to-Favicon Generator
+
 ## 数据库
 
 - [planetscale](https://app.planetscale.com/)
