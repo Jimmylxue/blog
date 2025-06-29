@@ -15,4 +15,5 @@ export default {
 	'/front-end/': scanDir('front-end'),
 	'/aboutMe/': scanDir('aboutMe'),
 	'/back-end/': scanDir('back-end'),
+	'/toss/': scanDir('toss'),
 }

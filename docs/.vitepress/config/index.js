@@ -30,6 +30,4 @@ const config = {
 	// appearance: 'dark', // dark theme
 }
 
-console.log('ssss')
-
 export default config
