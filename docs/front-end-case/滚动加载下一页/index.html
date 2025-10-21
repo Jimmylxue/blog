@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>滚动下一页</title>
+		<style>
+			#container {
+				width: 200px;
+				height: 800px;
+				border: 1px solid #ccc;
+				overflow: scroll;
+			}
+			.item {
+				width: 100%;
+				height: 50px;
+				background-color: skyblue;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<div class="item">111</div>
+			<div class="item">111</div>
+			<div class="item">111</div>
+			<div class="item">111</div>
+			<div class="item">111</div>
+			<div class="item">111</div>
+			<div class="item">111</div>
+			<div class="item">111</div>
+			<div class="item">111</div>
+			<div class="item">111</div>
+			<div class="item">111</div>
+			<div class="item">111</div>
+			<div class="item">111</div>
+			<div class="item">111</div>
+			<div class="item">111</div>
+			<div class="item">111</div>
+			<div class="item">111</div>
+			<div class="item">111</div>
+		</div>
+	</body>
+	<script src="https://cdn.jsdelivr.net/npm/simple-infinite-scroll"></script>
+	<script src="./InfiniteScroll.js"></script>
+
+	<script>
+		const scroll = new InfiniteScroll({
+			container: document.getElementById('container'),
+			onLoadMore: async () => {
+				console.log('loadMoreFn')
+				// 你的加载逻辑 这里判断是否有下一页数据 去执行请求
+			},
+			onError: () => {},
+			onSettle: () => {},
+		})
+	</script>
+</html>
