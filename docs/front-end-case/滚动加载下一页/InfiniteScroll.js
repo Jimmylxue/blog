@@ -17,8 +17,6 @@ class InfiniteScroll {
 	constructor(domId, options) {
 		this.dom = document.getElementById(domId)
 		this.options = options
-		this.isLoading = false
-		this.hasMore = true
 		this.init()
 	}
 
@@ -47,10 +45,12 @@ class InfiniteScroll {
 	async loadMore() {
 		try {
 			await this.options.onLoadMore()
+			this.destroy()
+			this.init()
 		} catch (error) {
 			this.options.onError?.(error)
 		} finally {
-			this.options.onSettle?.(error)
+			this.options.onSettle?.()
 		}
 	}
 

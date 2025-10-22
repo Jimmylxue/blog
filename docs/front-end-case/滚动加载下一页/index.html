@@ -44,14 +44,29 @@
 	<script src="./InfiniteScroll.js"></script>
 
 	<script>
-		const scroll = new InfiniteScroll({
-			container: document.getElementById('container'),
+		let i = 2
+		const fetchNext = () => {
+			return new Promise(resolve => {
+				const list = document.createDocumentFragment()
+				for (let i = 1; i <= 10; i++) {
+					const div = document.createElement('div')
+					div.classList.add('item')
+					div.textContent = i
+					document.getElementById('container').appendChild(div)
+				}
+				resolve()
+			})
+		}
+
+		const scroll = new InfiniteScroll('container', {
 			onLoadMore: async () => {
 				console.log('loadMoreFn')
+				await fetchNext()
 				// 你的加载逻辑 这里判断是否有下一页数据 去执行请求
 			},
 			onError: () => {},
 			onSettle: () => {},
 		})
+		console.log('scroll', scroll)
 	</script>
 </html>
