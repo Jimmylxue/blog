@@ -172,3 +172,9 @@
 - [motion](https://motion.dev/)
 
 > 一个 React 动画库，能够实现非常多的动画效果
+
+## Mac 清理磁盘工具
+
+- [Mole](https://github.com/tw93/Mole)
+
+> 一款非常好用的命令行形式的 清理 Mac 电脑磁盘的工具
