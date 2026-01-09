@@ -3,9 +3,9 @@
 ```ts
 const person = {
   name: '叶思豪',
-  age: 26,
+  age: 28,
   school: '泉州师范学院',
-  workExperience: 4
+  workExperience: 7
   blog: 'https://blog.jimmyxuexue.top'
   github: 'https://github.com/Jimmylxue'
 }
@@ -13,6 +13,7 @@ const person = {
 
 ## 知识&技能
 
+- 有大型项目开发经验
 - 熟练使用 JavaScript、TypeScript、了解 Node.js。
 - 熟练使用 React 全家桶，以及周边生态。
 - 熟练跨端应用开发，如 React-Native、Electron、Taro
@@ -33,7 +34,7 @@ const person = {
 
     项目挑战：
 
-    - 拥有超 **800w** 用户使用的点餐的访问量。这是一个**高流量、高负载**的项目，任何小的失误都可能导致用户体验的下降，甚至会影响业务的收入，对代码的质量要求极高。
+    - 拥有超 **2.8 亿** 用户使用的点餐的访问量。这是一个**高流量、高负载**的项目，任何小的失误都可能导致用户体验的下降，甚至会影响业务的收入，对代码的质量要求极高。
 
     主要成果：
 
@@ -82,19 +83,25 @@ const person = {
 
   - 参与公司部分小程序功能的开发
 
+- 2019.06 - 2021.04 福州盈科云商网络有限公司
+
+  技术栈：**Vue2 + JavaScript + Taro**
+
+  - 参与 H5 项目的开发，并迭代维护
+
 ## 个人&开源
 
 - [VitePress](https://github.com/vuejs/vitepress) - Contributors
 
-  跟随 Vue3 一起发布的开源库，目前 **github 12.8k star⭐️**
+  跟随 Vue3 一起发布的开源库，目前 **github 16.8k star⭐️**
 
 - [Vue2-elm](https://github.com/bailicangdu/vue2-elm) - Contributors
 
   **41k star ⭐️** 的大型的项目
 
-- [h5pack-core](https://github.com/Jimmylxue/h5pack-core)
+- [h5pack](https://github.com/Jimmylxue/h5pack-core) - Owner
 
-  只需简单的配置和一个指令，即可将 **H5 直接打包成 Android APK**
+  h5pack 是一个跨平台(支持 mac/windows)的 app 打包工具，只需简单的配置和一个指令，即可将 H5 直接打包成 Android APK. 且拥有直接调用原生的能力！
 
 - [Snow-todoList](https://github.com/Jimmylxue/snow-todolist)
 
@@ -102,5 +109,5 @@ const person = {
 
 ## 其他
 
-- 热爱技术、坚持技术分享，是一名 B 站技术 up 主，目前拥有**2000+**粉丝
+- 热爱技术、坚持技术分享，是一名 B 站技术 up 主，目前拥有**2300+**粉丝
 - 坚持运动，热爱跑步，骑车。
